@@ -20,7 +20,7 @@
                 <a class="pure-menu-link" id="welcome">Welcome, <?php echo $_SESSION['username'];?></a>
             </li>
             <li class="pure-menu-item">
-                <a class="pure-menu-link" href="../../model/logout.php">Logout</a>
+                <a class="pure-menu-link" href="../../controller/logout.php">Logout</a>
             </li>
             <!-- If user is not logged in display Login and Register-->
             <?php } else { ?>

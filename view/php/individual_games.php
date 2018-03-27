@@ -8,26 +8,20 @@
 <?php
     $gamedetails = get_one_game($_GET['gameID']);
 ?>
-<div class="container game-page">
-    <h1><?php echo $gamedetails['gameName'];?></h1>
-    <div class="gamevote">
-        <p>Does this game give you motion sickness?</p>
-        <!--        
-        Need to finish the onclick functions for adding +1 to thumbsup and thumbsdown using ajax
-        -->
-        <span>
-            <button id="yes" onclick="thumbsup($_GET['gameID'])">
-                Yes <i class="fas fa-thumbs-up"></i>
-            </button>
-            <?php echo $gamedetails['gameThUp'];?> | 
-            <button id="no" onclick="thumbsdown($_GET['gameID'])">
-                No <i class="fas fa-thumbs-down"></i>
-            </button>
-            <?php echo $gamedetails['gameThDown'];?>
-        </span>
-    </div>
-    <div class="game-button"> 
-        <button type="button" class="pure-button pure-button-primary" data-toggle="modal" data-target="#myModal">Add a fix</button>
+<script>
+    var x = parseInt(<?php echo $gamedetails['gameThUp']; ?>);
+    var y = parseInt(<?php echo $gamedetails['gameThDown']; ?>);
+</script>
+<div class="container game-page"> 
+    <div class="game-button">
+        <h1 class="inline"><?php echo $gamedetails['gameName'];?></h1>
+        <?php 
+            if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) { 
+        ?>
+        <button type="button" class="pure-button inline" data-toggle="modal" data-target="#myModal">Add a fix</button>
+        <?php
+            };
+        ?>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
@@ -42,7 +36,7 @@
                     <form class="pure-form pure-form-stacked">
                         <p>Add as much detail as possible</p>
                         <fieldset>
-                            <textarea id="fix" rows="10" cols="60">
+                            <textarea id="fix" rows="10" cols="50">
                             </textarea>
                             <button type="submit" class="pure-button pure-button-primary">Add fix</button>
                         </fieldset>
@@ -54,6 +48,20 @@
             </div>  
         </div>
     </div>
+    <div class="gamevote">
+        <p>Does this game give you motion sickness?</p>
+        <span>
+            <button id="game_yes" class="pure-button thumbs" onclick="updatethumbsup(<?php echo $_GET['gameID']; ?>)">
+                Yes <i class="fas fa-thumbs-up"></i>
+            </button>
+            <span id="thup"><?php echo $gamedetails['gameThUp'];?></span>    
+            <button id="game_no" class="pure-button thumbs" onclick="updatethumbsdown(<?php echo $_GET['gameID']; ?>)">
+                No <i class="fas fa-thumbs-down"></i>
+            </button>
+            <span id="thdown"><?php echo $gamedetails['gameThDown'];?></span>
+        </span>
+    </div>
+    
     <div class="comment-container">
         <div class="pure-button-group" role="group" aria-label="...">
             <button class="tab" onclick="tabOne()">Game Comments</button>

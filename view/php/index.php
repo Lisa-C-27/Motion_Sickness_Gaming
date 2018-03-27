@@ -60,7 +60,7 @@
 
     <div class="ribbon l-box-lrg pure-g">
         <div class="l-box-lrg is-center pure-u-1 pure-u-md-1-2 pure-u-lg-2-5">
-            <img width="300" alt="File Icons" class="pure-img-responsive" src= "css/layouts/img/arrows.png">
+            <img width="300" alt="File Icons" class="pure-img-responsive" src= "../img/arrows.png">
         </div>
         <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-3-5">
             <h2 class="content-head content-head-ribbon">Most recently added game</h2>
