@@ -1,5 +1,6 @@
 <?php
 
+//This process is called from the checkgame() function within the 'view/js/script.js' file
 if(isset($_POST['user_email'])) {
     $gamename=$_POST['user_email'];
 

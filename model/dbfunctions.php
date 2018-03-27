@@ -1,5 +1,5 @@
 <?php
-
+//This function is called within view/php/games.php to generate the library list of games
 function gamelist() {
     $selectgames = "SELECT * from game ORDER BY gameName;";
     include 'connect.php';
@@ -8,6 +8,7 @@ function gamelist() {
     return $staticresult = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+//This function is called from 'view/php/individual_games.php'
 function get_one_game($gameID) {
     $selectonegame = "SELECT * FROM game WHERE gameID='" . $_GET['gameID'] . "'";
     include 'connect.php';
@@ -16,6 +17,7 @@ function get_one_game($gameID) {
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+//This function is called from 'view/php/individual_games.php'
 function updatethumbsup($gameid) {
     $thumbsup = "UPDATE game SET gameThUp = gameThUp + 1 WHERE gameID ='" . $gameid . "'";
     include 'connect.php';
@@ -28,6 +30,7 @@ function updatethumbsup($gameid) {
     }
 }
 
+//This function is called from 'view/php/individual_games.php'
 function updatethumbsdown($gameid) {
     $thumbsdown = "UPDATE game SET gameThDown = gameThDown + 1 WHERE gameID ='" . $gameid . "'";
     include 'connect.php';

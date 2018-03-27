@@ -1,4 +1,11 @@
 <?php
+//This page is incomplete. Still need to do the following:
+//  Show/Hide needs to work for the game comment / fix comment tabs
+//  'Add a fix' inserting to database
+//  'Fix' thumbs up/down reading from database and updating database 
+//  Comments for both 'game' and 'game fix' reading from the database and       inserting new comments
+//  Comments thumbs up/down both 'game' and 'game fix' reading from             database and updating database 
+//  Registered users reputation to be calculated based on thumbs up/down
     session_start();
     include 'header.php';
     include 'nav.php';
@@ -6,9 +13,11 @@
     include '../../model/dbfunctions.php';
 ?>
 <?php
+//This function is located in 'model/dbfunctions.php'
     $gamedetails = get_one_game($_GET['gameID']);
 ?>
 <script>
+    //These variables are used in the functions updatethumbsup() and updatethumbsdown() within 'js/script.js'
     var x = parseInt(<?php echo $gamedetails['gameThUp']; ?>);
     var y = parseInt(<?php echo $gamedetails['gameThDown']; ?>);
 </script>
@@ -16,6 +25,7 @@
     <div class="game-button">
         <h1 class="inline"><?php echo $gamedetails['gameName'];?></h1>
         <?php 
+        // This checks if the user is logged in. If true then the Add Fix button will be displayed
             if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) { 
         ?>
         <button type="button" class="pure-button inline" data-toggle="modal" data-target="#myModal">Add a fix</button>
@@ -23,7 +33,7 @@
             };
         ?>
     </div>
-    <!-- Modal -->
+    <!-- Add Fix Modal -->
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
         <!-- Modal content-->

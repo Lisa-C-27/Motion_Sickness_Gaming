@@ -1,5 +1,5 @@
 <?php
-
+// This process is called from 'view/php/games.php' Add game modal as part of the form action 
 session_start();
 
     if( isset( $_POST['submit_game'] ) ) {

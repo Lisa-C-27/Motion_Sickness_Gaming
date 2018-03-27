@@ -1,4 +1,5 @@
 <?php
+//This process is called from 'view/php/register.php' registration form
     session_start();
 
     if( isset( $_POST['registration_form'] ) ) {

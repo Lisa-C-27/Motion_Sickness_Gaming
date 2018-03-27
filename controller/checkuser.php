@@ -1,5 +1,5 @@
 <?php
-
+//This process is called from the checkuser() function within the 'view/js/script.js' file
 if(isset($_POST['user_name'])) {
     $usernameId=$_POST['user_name'];
 

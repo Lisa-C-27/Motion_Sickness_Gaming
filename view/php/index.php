@@ -1,4 +1,7 @@
 <?php
+//This page not complete. Need to do the following:
+//  Finish registration section (will be the same process as                    register.php)
+//  Most recently added game and fix needs to be displayed from the             database
     session_start();
     include 'header.php';
     include 'nav.php';

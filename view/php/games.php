@@ -10,13 +10,14 @@
     <div class="game-button"> 
         <h1 class="inline">Games Library</h1>  
         <?php 
+        // This checks if the user is logged in. If true then the Add Game button will be displayed
             if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) { 
         ?>   
         <button type="button" class="pure-button inline" data-toggle="modal" data-target="#myModal2">Add a game</button> 
         <?php
             }; ?>
     </div>
-  <!-- Modal -->
+  <!-- Add Game Modal -->
     <div class="modal fade" id="myModal2" role="dialog">
         <div class="modal-dialog">     
         <!-- Modal content-->
@@ -31,6 +32,7 @@
                             <p>Before adding a game, please check that it isn't already in the library</p>
                             <label for="gamename">Name of game </label>
                             <input id="gamename" type="text" placeholder="Type name of game here" name="gameName" onchange="checkgame();">
+                            <!-- checkgame() function is located in js/script.js file -->
                             <div id="game_status"></div>
                             <button type="submit" class="pure-button pure-button-primary" name="submit_game">Add game</button>
                         </fieldset>
@@ -72,7 +74,7 @@ Would like headings of A,B,C etc with the relevant games within each div
 -->
     <ul>
         <?php
-            $allgames = gamelist();
+            $allgames = gamelist(); //This function is located in model/dbfunctions.php
 
             foreach($allgames as $row) {
                 echo '<li><a href="individual_games.php?gameID='. $row['gameID'] . '">' . $row['gameName'] . '</a></li>';

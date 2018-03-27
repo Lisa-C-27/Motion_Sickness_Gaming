@@ -8,7 +8,8 @@
     <form class="pure-form pure-form-stacked" method="POST" action="../../controller/registration_process.php">
         <legend>Register</legend>
         <label for="usernamereg">Username</label>
-        <input id="usernamereg" type="text" placeholder="Username" name="username" onkeyup="checkuser();">      
+        <input id="usernamereg" type="text" placeholder="Username" name="username" onkeyup="checkuser();">
+<!--        checkuser() function is located in js/script.js-->
         <label for="password">Password</label>
         <input id="password" type="password" placeholder="Password" name="userpass"> <span id="username_status"></span>
         <div id='errorsection'> 

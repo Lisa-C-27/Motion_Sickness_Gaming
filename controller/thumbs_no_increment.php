@@ -1,5 +1,5 @@
 <?php
-//The below code is not finished yet
+//This process is called from 'view/php/individual_games.php' thumbs down button on game motion sickness
 session_start();
 header('Content-Type: application/json');
 include '../model/connect.php';
