@@ -55,8 +55,8 @@
 .gamevote {
     padding: 1%;
 }
-.game-button {
-    padding-left: 1%;
+.inline {
+    display: inline-block;
 }
 .game-button a {
     color: white;
@@ -173,4 +173,26 @@ div#fixcomment {
 #welcome, #welcome:hover {
     text-decoration: none;
     color: #FCE54A;
+}
+.pure-button.thumbs {
+    background-color: #054135;
+    padding: 0.15em;
+}
+#game_thumbs {
+    margin-bottom: 1em;
+}
+.game-button button {
+    margin-top: -20px;
+    padding: 0.5em 1em;
+}
+.game-button {
+    min-height: 80px;
+}
+.games_message {
+    background-color: #FCE54A;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+    margin-left: 1%;
+    margin-right: 1%;
+    text-align: center;
+    border-radius: 15px;
 }
