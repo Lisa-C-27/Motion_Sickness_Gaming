@@ -1,6 +1,6 @@
 # msg
 Motion Sickness Gaming<br>
-This project is for my assignment for a Diploma in Website Development.
+This project is for my assignment for a Diploma in Website Development.<br>
 The website is to build a community for gamers who experience motion sickness with certain games. 
 It will need to be able to do the following:
   - New users can create/register an account
