@@ -9,13 +9,29 @@
     $stmt->execute();
     $result = $stmt->fetch();
 
-    if ($stmt->rowCount() == 0){
-        $_SESSION['error'] = "Incorrect username or password";
-        header("location: ../view/php/login.php");
+    if ($stmt->rowCount() == 1){
+        
+        if ($result['acctStatus'] == '3') {
+            $_SESSION['loggedin'] = true;
+            $_SESSION['username'] = $result['username'];
+            $_SESSION['userid'] = $result['userID'];
+            $_SESSION['account'] = "admin";
+            header('location: ../view/php/index.php');
+            
+        } else if ($result['acctStatus'] == '1') {
+            $_SESSION['loggedin'] = true;
+            $_SESSION['username'] = $result['username'];
+            $_SESSION['userid'] = $result['userID'];
+            $_SESSION['account'] = "active";
+            header('location: ../view/php/index.php');
+            
+        } else if ($result['acctStatus'] == '2') {
+           $_SESSION['message'] = "Login Error: Account has been disabled";
+            header('location: ../view/php/login.php');
+        }
     } else {
-        $_SESSION['loggedin'] = true;
-        $_SESSION['username'] = $result['username'];
-        $_SESSION['userid'] = $result['user_ID'];
-        header('location: ../view/php/index.php');
+        $_SESSION['message'] = "Login Error: Incorrect username or password";
+        header("location: ../view/php/login.php");      
     }
+
 ?>
