@@ -12,7 +12,7 @@ body {
     line-height: 1.7em;
     color: #002921;
     font-size: 13px;
-    background-image: url(img/background.jpg);
+    background-image: url(../../img/background.jpg);
 }
 
 h1,
@@ -133,7 +133,7 @@ a.pure-button-primary {
  */
 
 .splash-container {
-    background-image: url(img/background.jpg);
+    background-image: url(../../img/background.jpg);
     z-index: 1;
     overflow: hidden;
     /* The following styles are required for the "scroll-over" effect */
