@@ -14,7 +14,7 @@
             $username = $_POST['username'];
             $password = $_POST['userpass'];
 
-            $insertuser = "INSERT INTO user (username, password, acctStatus) VALUES( '$username','$password','2' )";
+            $insertuser = "INSERT INTO user (username, password, acctStatus) VALUES( '$username','$password','1' )";
             include '../model/connect.php';
             $stmt = $conn->prepare($insertuser);
             $stmt->execute();
