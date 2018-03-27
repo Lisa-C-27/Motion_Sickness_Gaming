@@ -11,37 +11,36 @@ function tabTwo() {
     gamecomment.style.display = "none";
 }
 
-function checkuser() {
-    var email=document.getElementById( "username_reg" ).value;
-    if(email) {
+function checkuser()
+{
+    var username=document.getElementById( "usernamereg" ).value;
+    if(username)
+    {
         $.ajax({
             type: 'post',
-            url: 'checkuser.php',
+            url: '../../controller/checkuser.php',
             data: {
-                user_email:email,
+                user_name:username,
             },
             success: function (response) {
                 $( '#username_status' ).html(response);
-                if(response=="Username is available")	{
-                    return true;	
+                
+                if(response=="Username is available")
+                {
+                    
+                    return true;     
                 } else {
-                    return false;	
+                    console.log(response);
+                    return false;	  
                 }
             }
         });
-     } else {
+     } 
+    else 
+    {
         $( '#username_status' ).html("");
         return false;
-     }
-}
-
-function checkall() {
-    var unamehtml=document.getElementById( "username_status" ).innerHTML;
-    if((unamehtml)=="Username is available") {
-      return true;
-     } else {
-      return false;
-     }
+    }
 }
 
 function checkgame() {
@@ -49,7 +48,7 @@ function checkgame() {
     if(game) {
         $.ajax({
             type: 'post',
-            url: 'checkgame.php',
+            url: '../../controller/checkgame.php',
             data: {
                 user_email:game,
             },
@@ -68,49 +67,67 @@ function checkgame() {
      }
 }
 
-function checkallgame() {
-    var gamehtml=document.getElementById("game_status").innerHTML;
-    if((gamehtml)=="Game is not in library, please add") {
-      return true;
+
+function addgame() {
+    var game = document.getElementById( "gamename" ).value;
+    if(game) {
+        $.ajax({
+            type: 'post',
+            url: '../../controller/insertgame.php',
+            data: {
+                submit_game:game,
+            },
+            success: function (response) {
+                $( '#errorsection' ).html(response.msg);
+                console.log(response);
+                if(response=="Game is not in library, please add")	{
+                    return true;	
+                } else {
+                    return false;	
+                }
+            },
+            error: function(err) {
+                console.log('bad?');
+            }
+        });
      } else {
-      return false;
+        $( '#errorsection' ).html("");
+        return false;
      }
 }
-function thumbsup() {
-   
-    
+
+function updatethumbsup(thumb_id) { 
+    $.ajax( {
+        url: '../../controller/thumbs_yes_increment.php?gameID=' + thumb_id,
+        method: 'post',
+        data: $('#game_yes').serialize(),
+        datatype: 'json',
+        success: function(res) {
+            console.log(res);
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    });
+    document.getElementById("thup").innerHTML = (x+1);
+    document.getElementById("game_yes").disabled = true;
+    document.getElementById("game_no").disabled = true;
 }
 
-// Code below is not finished - attempting to get thumbs up / down working
-
-//$(function (){
-//    $('#yes').click(function(){
-//        var request = $.ajax({
-//            type: "POST",
-//            url: "../../model/thumbs_increment.php"
-//        });
-//        request.done(function( msg ) {
-//            alert('Success');
-//            return;
-//        });
-//        request.fail(function(jqXHR, textStatus) {
-//            alert( "Request failed: " + textStatus );
-//        });
-//    });
-//});
-//
-//$(function (){
-//    $('#no').click(function(){
-//        var request = $.ajax({
-//            type: "POST",
-//            url: "../../model/thumbs_increment.php"
-//        });
-//        request.done(function( msg ) {
-//            alert('Success');
-//            return;
-//        });
-//        request.fail(function(jqXHR, textStatus) {
-//            alert( "Request failed: " + textStatus );
-//        });
-//    });
-//});
+function updatethumbsdown(thumb_id) { 
+    $.ajax( {
+        url: '../../controller/thumbs_no_increment.php?gameID=' + thumb_id,
+        method: 'post',
+        data: $('#game_no').serialize(),
+        datatype: 'json',
+        success: function(res) {
+            console.log(res);
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    });
+    document.getElementById("thdown").innerHTML = (y+1);
+    document.getElementById("game_yes").disabled = true;
+    document.getElementById("game_no").disabled = true;
+}
