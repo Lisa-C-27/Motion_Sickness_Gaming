@@ -14,7 +14,7 @@
             $username = $_POST['username'];
             $password = $_POST['userpass'];
 
-            $insertuser = "INSERT INTO user (username, password) VALUES( '$username','$password' )";
+            $insertuser = "INSERT INTO user (username, password, acctStatus) VALUES( '$username','$password','2' )";
             include '../model/connect.php';
             $stmt = $conn->prepare($insertuser);
             $stmt->execute();
@@ -22,6 +22,7 @@
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $_POST['username'];
             $_SESSION['userid'] = $result['user_ID'];
+            $_SESSION['account'] = 'active';
             header('location: ../view/php/index.php');
             } else {
             $_SESSION['message'] = "Username already exists";   
