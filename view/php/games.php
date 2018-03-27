@@ -7,9 +7,14 @@
 ?>
 
 <div class="container game-page">
-    <h1>Games Library</h1>
-    <div class="game-button">  
-        <button type="button" class="pure-button pure-button-primary" data-toggle="modal" data-target="#myModal2">Add a game</button>
+    <div class="game-button"> 
+        <h1 class="inline">Games Library</h1>  
+        <?php 
+            if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) { 
+        ?>   
+        <button type="button" class="pure-button inline" data-toggle="modal" data-target="#myModal2">Add a game</button> 
+        <?php
+            }; ?>
     </div>
   <!-- Modal -->
     <div class="modal fade" id="myModal2" role="dialog">
@@ -21,13 +26,13 @@
                     <h4 class="modal-title">Add a game to the library</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="pure-form pure-form-stacked" method="post" action="../../model/insertgame.php" onsubmit="checkallgame();">
+                    <form class="pure-form pure-form-stacked" method="post" action="../../controller/insertgame.php">
                         <fieldset>
                             <p>Before adding a game, please check that it isn't already in the library</p>
                             <label for="gamename">Name of game </label>
-                            <input id="gamename" type="text" placeholder="Type name of game here" name="gameName" onkeyup="checkgame();">
-                            <span id="game_status"></span>
-                            <input type="submit" class="pure-button pure-button-primary" name="submit_game" value="Add game">
+                            <input id="gamename" type="text" placeholder="Type name of game here" name="gameName" onchange="checkgame();">
+                            <div id="game_status"></div>
+                            <button type="submit" class="pure-button pure-button-primary" name="submit_game">Add game</button>
                         </fieldset>
                     </form>
                 </div>
@@ -37,6 +42,16 @@
             </div>  
         </div>
     </div>  
+    <div id='errorsection' class="games_message"> 
+        <?php
+            //if $_SESSION['message'] is not set then set it as nothing to eliminate an undeclared variable error
+            if (!isset($_SESSION['message'])){
+                $_SESSION['message'] = "";
+            }
+            echo $_SESSION['message'];       
+            unset ($_SESSION['message']); //this line clears what is set in the session variable['message']
+        ?>
+    </div>
     <h2><a href="#">A</a>|<a href="#">B</a>|<a href="#">C</a>|<a href="#">D</a>|<a href="#">E</a>|<a href="#">F</a>|<a href="#">G</a>|<a href="#">H</a>|<a href="#">I</a>|<a href="#">J</a>|<a href="#">K</a>|<a href="#">L</a>|<a href="#">M</a>|<a href="#">N</a>|<a href="#">O</a>|<a href="#">P</a>|<a href="#">Q</a>|<a href="#">R</a>|<a href="#">S</a>|<a href="#">T</a>|<a href="#">U</a>|<a href="#">V</a>|<a href="#">W</a>|<a href="#">X</a>|<a href="#">Y</a>|<a href="#">Z</a></h2>
 <!-- 
 Would like headings of A,B,C etc with the relevant games within each div
