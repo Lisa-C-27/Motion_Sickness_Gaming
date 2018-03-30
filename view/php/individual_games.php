@@ -61,11 +61,11 @@
     <div class="gamevote">
         <p>Does this game give you motion sickness?</p>
         <span>
-            <button id="game_yes" class="pure-button thumbs" onclick="updatethumbsup(<?php echo $_GET['gameID']; ?>)">
+            <button type="button" id="game_yes" class="pure-button thumbs" onclick="updatethumbsup(<?php echo $_GET['gameID']; ?>)">
                 Yes <i class="fas fa-thumbs-up"></i>
             </button>
             <span id="thup"><?php echo $gamedetails['gameThUp'];?></span>    
-            <button id="game_no" class="pure-button thumbs" onclick="updatethumbsdown(<?php echo $_GET['gameID']; ?>)">
+            <button type="button" id="game_no" class="pure-button thumbs" onclick="updatethumbsdown(<?php echo $_GET['gameID']; ?>)">
                 No <i class="fas fa-thumbs-down"></i>
             </button>
             <span id="thdown"><?php echo $gamedetails['gameThDown'];?></span>

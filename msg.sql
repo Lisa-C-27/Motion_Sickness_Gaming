@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2018 at 04:31 AM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.2.1
+-- Generation Time: Mar 30, 2018 at 01:47 AM
+-- Server version: 10.1.25-MariaDB
+-- PHP Version: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -38,13 +38,6 @@ CREATE TABLE `fix` (
   `gameID` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `fix`
---
-
-INSERT INTO `fix` (`fixID`, `fixInfo`, `fixDateTime`, `fixThUp`, `fixThDown`, `userID`, `gameID`) VALUES
-(1, 'In options change field of view to 100', '2018-03-19 02:20:43', 1, 0, 2, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -60,13 +53,6 @@ CREATE TABLE `fixcomm` (
   `userID` int(10) UNSIGNED NOT NULL,
   `fixID` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `fixcomm`
---
-
-INSERT INTO `fixcomm` (`fixCommID`, `fixComment`, `fixCommDateTime`, `fixCommThUp`, `fixCommThDown`, `userID`, `fixID`) VALUES
-(1, 'Yes this worked for me', '2018-03-19 02:21:08', 1, 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -87,8 +73,10 @@ CREATE TABLE `game` (
 --
 
 INSERT INTO `game` (`gameID`, `gameName`, `gameThUp`, `gameThDown`, `gameDate`) VALUES
-(1, 'Portal', 42, 5, '2018-03-19 00:00:00'),
-(2, 'Half Life', 14, 3, '2018-03-19 00:00:00');
+(2, 'Portal', 4, 2, '2018-03-23 12:56:59'),
+(5, 'Portal 2', 0, 0, '2018-03-23 16:18:48'),
+(6, 'Half Life', 0, 0, '2018-03-30 09:27:41'),
+(7, 'Half Life 2', 0, 0, '2018-03-30 09:31:57');
 
 -- --------------------------------------------------------
 
@@ -105,14 +93,6 @@ CREATE TABLE `gamecomm` (
   `userID` int(10) UNSIGNED NOT NULL,
   `gameID` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `gamecomm`
---
-
-INSERT INTO `gamecomm` (`gameCommID`, `gameComment`, `gameCommDateTime`, `gameCommThUp`, `gameCommThDown`, `userID`, `gameID`) VALUES
-(1, 'I love this game but it makes me feel sick and dizzy', '2018-03-19 02:08:45', 1, 0, 1, 1),
-(2, 'I love this game but it makes me feel sick and dizzy', '2018-03-19 02:08:45', 1, 0, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -133,10 +113,12 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`userID`, `username`, `password`, `userCreateDate`, `acctStatus`) VALUES
-(1, 'kandi_galaxy', 'password', '2018-03-19 00:00:00', 3),
-(2, 'sickgamer', 'password', '2018-03-19 00:00:00', 1),
-(4, 'test', 'test', '2018-03-19 16:25:52', 2),
-(19, 'test2', 'password', '2018-03-27 12:19:49', 1);
+(1, 'Admin', 'password', '2018-03-23 00:00:00', 3),
+(2, 'Active', 'password', '2018-03-23 00:00:00', 1),
+(3, 'Disabled', 'password', '2018-03-23 10:57:09', 2),
+(4, 'test', 'password', '2018-03-23 10:58:10', 1),
+(11, 'test5', 'password', '2018-03-23 11:57:01', 1),
+(12, 'test6', 'password', '2018-03-24 11:05:59', 1);
 
 --
 -- Indexes for dumped tables
@@ -155,14 +137,15 @@ ALTER TABLE `fix`
 --
 ALTER TABLE `fixcomm`
   ADD PRIMARY KEY (`fixCommID`),
-  ADD KEY `fk_userID_3` (`userID`),
-  ADD KEY `fk_fixID` (`fixID`);
+  ADD KEY `fk_fixID_1` (`fixID`),
+  ADD KEY `fk_userID_3` (`userID`);
 
 --
 -- Indexes for table `game`
 --
 ALTER TABLE `game`
-  ADD PRIMARY KEY (`gameID`);
+  ADD PRIMARY KEY (`gameID`),
+  ADD UNIQUE KEY `gameName` (`gameName`);
 
 --
 -- Indexes for table `gamecomm`
@@ -187,32 +170,27 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `fix`
 --
 ALTER TABLE `fix`
-  MODIFY `fixID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `fixID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `fixcomm`
 --
 ALTER TABLE `fixcomm`
-  MODIFY `fixCommID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `fixCommID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `game`
 --
 ALTER TABLE `game`
-  MODIFY `gameID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
+  MODIFY `gameID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `gamecomm`
 --
 ALTER TABLE `gamecomm`
-  MODIFY `gameCommID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+  MODIFY `gameCommID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
+  MODIFY `userID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- Constraints for dumped tables
 --

@@ -9,5 +9,4 @@
     unset($_SESSION['account']);
     $_SESSION['message'] = "Successfully logged out";
     header("location: ../view/php/login.php");
-    unset($_SESSION['message']);
 ?>
