@@ -5,12 +5,12 @@ function addgamemodal() {
 
 //These functions are called from 'php/individual_games.php' to switch between game comments and fix comments. Currently not working properly. Needs fixing  
 function tabOne() {
-    gamecomment.style.display = "block";
-    fixcomment.style.display = "none";
+    document.getElementById("gamecomment").style.display = "block";
+    document.getElementById("fixcomment").style.display = "none";
 }
 function tabTwo() {
-    fixcomment.style.display = "block";
-    gamecomment.style.display = "none";
+    document.getElementById("fixcomment").style.display = "block";
+    document.getElementById("gamecomment").style.display = "none";
 }
 
 //This function is called from the 'php/register.php' registration form
@@ -110,6 +110,38 @@ function updatethumbsdown(thumb_id) {
     document.getElementById("game_yes").disabled = true;
     document.getElementById("game_no").disabled = true;
 }
+
+//function getThumbsforRep() {
+//   
+//                        
+//    window.onload = function() {
+//
+//        //For debugging
+//            console.log(first);
+//            console.log(second);
+//
+//    if (first <= 50) {
+//    document.getElementById('<?php echo $getrep['username']; ?>_comm').innerHTML = "Newbie";
+//    } else if (first > 50 && a <= 100) {
+//    document.getElementById('<?php echo $getrep['username']; ?>_comm').innerHTML = "Community";
+//    } else {
+//        document.getElementById('<?php echo $getrep['username']; ?>_comm').innerHTML = "The Best";
+//    }
+//    if (second <= 50) {
+//    document.getElementById('<?php echo $getrep['username']; ?>_fix').innerHTML = "Newbie fixer";
+//    } else if (second > 50 && a <= 100) {
+//    document.getElementById('<?php echo $getrep['username']; ?>_fix').innerHTML = "Community Fixer";
+//    } else {
+//        document.getElementById('<?php echo $getrep['username']; ?>_fix').innerHTML = "Best Fixer";
+//    }
+//        }
+//                         
+//}
+//Trying to calculate the reputation and display
+//function calcRep() {
+//    var first = number('name: gameCommThUp');
+//    
+//}
 
 
 //function addgame() {

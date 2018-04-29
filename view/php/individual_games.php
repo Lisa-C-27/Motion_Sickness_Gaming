@@ -15,6 +15,7 @@
 <?php
 //This function is located in 'model/dbfunctions.php'
     $gamedetails = get_one_game($_GET['gameID']);
+    
 ?>
 <script>
     //These variables are used in the functions updatethumbsup() and updatethumbsdown() within 'js/script.js'
@@ -74,18 +75,137 @@
     
     <div class="comment-container">
         <div class="pure-button-group" role="group" aria-label="...">
-            <button class="tab" onclick="tabOne()">Game Comments</button>
-            <button class="tab" onclick="tabTwo()">Fixes and comments</button>
+            <button class="tab" onclick="tabOne();">Game Comments</button>
+            <button class="tab" onclick="tabTwo();">Fixes and comments</button>
         </div>
         <div class="comment-inner">
             <div id="gamecomment">
+                <?php
+                $getcomments = getGameComments($_GET['gameID']);
+                
+                foreach($getcomments as $row) {
+                   
+                    echo
+                '<div class="databaseComments">';
+                    echo
+                    '<div class="userinfo">';
+                    echo
+                        '<p>' . $row['username'] . '</p>';
+                    
+                   $getrep = getThumbs($row['userID']);
+                    
+//                    print_r($getrep); //For debugging
+                    ?>
+                
+                    <script>
+                    var first = parseInt(<?php echo $getrep['commthumbs']; ?>);
+                    var second = parseInt(<?php echo $getrep['fixthumbs']; ?>);
+                    
+                        
+                    window.onload = function() {
+                
+                        //For debugging
+                            console.log(first);
+                            console.log(second);
+                        
+                    
+                    
+                    if (first <= 50) {
+                    document.getElementById('<?php echo $getrep['username']; ?>_comm').innerHTML = "Newbie";
+                    } else if (first > 50 && a <= 100) {
+                    document.getElementById('<?php echo $getrep['username']; ?>_comm').innerHTML = "Community";
+                    } else {
+                        document.getElementById('<?php echo $getrep['username']; ?>_comm').innerHTML = "The Best";
+                    }
+                    if (second <= 50) {
+                    document.getElementById('<?php echo $getrep['username']; ?>_fix').innerHTML = "Newbie fixer";
+                    } else if (second > 50 && a <= 100) {
+                    document.getElementById('<?php echo $getrep['username']; ?>_fix').innerHTML = "Community Fixer";
+                    } else {
+                        document.getElementById('<?php echo $getrep['username']; ?>_fix').innerHTML = "Best Fixer";
+                    }
+                        }
+                         
+                    </script>
+                <?php
+//                    print_r($getrep);
+//                    foreach($getrep as $new) {
+//                        echo '<form id="' . $new['username'] . '_thumbcount">';
+//                        echo '<input type="hidden" name="commthumbs" value="' . $new['commthumbs'] . '">';
+//                        echo '<input type="hidden" name="fixthumbs" value="' . $new['fixthumbs'] . '">';
+//                        echo '</form>';
+//                    }
+                    echo
+                        '<p id="' . $getrep['username'] . '_comm"></p>';
+                    echo
+                        '<p id="' . $getrep['username'] . '_fix"></p>';
+                    echo
+                        '<p>' . $row['gameCommDateTime'] . '</p>';
+                    echo
+                    '</div>';
+                    echo
+                    '<div class="actualcomment">' . $row['gameComment'] . '</div>';
+                    echo
+                    '<div class="vote">';
+                    echo
+                        '<i class="fas fa-thumbs-up"></i>';
+                    echo
+                        '<span>' . $row['gameCommThUp'] . '</span>';
+                    echo
+                        '<i class="fas fa-thumbs-down"></i>';
+                    echo
+                        '<span>' . $row['gameCommThDown'] . '</span>';
+                    echo
+                    '</div>';
+                    echo
+                    '<div class="reply">';
+                    echo
+                        '<a href="#">Reply</a>';
+                    echo
+                    '</div>';
+//                    echo
+//                    '<div class="userinfo">';
+//                    $getreply = getGameReply($row['gameCommID']);
+//                    foreach($getreply as $row2) {
+//                    echo
+//                        '<p>' . $row2['username'] . '</p>';
+//                    echo
+//                        '<p id="' . $getrep['username'] . '_comm"></p>';
+//                    echo
+//                        '<p id="' . $getrep['username'] . '_fix"></p>';
+//                    echo
+//                        '<p>' . $row2['replyCommDateTime'] . '</p>';
+//                    echo
+//                    '</div>';
+//                    echo
+//                    '<div class="actualcomment">' . $row['gameComment'] . '</div>';
+//                    echo
+//                    '<div class="vote">';
+//                    echo
+//                        '<i class="fas fa-thumbs-up"></i>';
+//                    echo
+//                        '<span>' . $row2['replyCommThUp'] . '</span>';
+//                    echo
+//                        '<i class="fas fa-thumbs-down"></i>';
+//                    echo
+//                        '<span>' . $row2['replyCommThDown'] . '</span>';
+//                    echo
+//                    '</div>';
+//                    }
+                    echo
+                '</div>';
+                }
+                ?>
+            </div>
+            
+            <div id="fixcomment">
                 <div class="databaseComments">
                     <div class="userinfo">
                         <p>username</p>
                         <p>rep</p>
                         <p>Date/time</p>
                     </div>
-                    <div class="actualcomment">Users comment from database goes here
+                    <div class="actualcomment">Users fixes go here - need to ensure highest rated fix is at the top
                     </div>
                     <div class="vote">
                         <i class="fas fa-thumbs-up"></i>
@@ -101,7 +221,7 @@
                         <p>rep</p>
                         <p>Date/time</p>
                     </div>
-                    <div class="actualcomment2">Users reply comment from database goes here
+                    <div class="actualcomment2">Users fix reply comment from database goes here
                     </div>
                     <div class="vote2">
                         <i class="fas fa-thumbs-up"></i>
@@ -113,22 +233,23 @@
                         <a href="#">Reply</a>
                     </div>        
                 </div>
-                <div class="addcomment">
-                    <form class="pure-form pure-form-stacked">
-                        <fieldset>
-                            <textarea id="gamecomment" rows="3" cols="60"></textarea>
-                            <button type="submit" class="pure-button pure-button-primary">Comment</button>
-                        </fieldset> 
-                    </form>
-                </div>
             </div>
-            <div id="fixcomment">
-                Fix comments
+            
+            <div class="addcomment">
+                <form class="pure-form pure-form-stacked">
+                    <fieldset>
+                        <textarea id="gamecomment" rows="3" cols="60"></textarea>
+                        <button type="submit" class="pure-button pure-button-primary">Comment</button>
+                    </fieldset> 
+                </form>
             </div>
+            
         </div>
     </div>
 </div>
+<script>
 
+</script>
 <?php
     include 'footer.php';
 ?>
