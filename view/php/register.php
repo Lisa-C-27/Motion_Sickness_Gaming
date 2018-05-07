@@ -4,14 +4,27 @@
     include 'nav.php';
     include '../../model/connect.php';
 ?>
+<!--
+<div id="loader">
+    <div class="loading"></div>
+</div>
+<div id="pageloader">
+    <div class="loading"></div>
+</div>
+-->
 <div class="content-center">
-    <form class="pure-form pure-form-stacked" method="POST" action="../../controller/registration_process.php">
+    <form class="pure-form pure-form-stacked" method="POST" action="../../controller/registration_process.php" name="registration">
         <legend>Register</legend>
-        <label for="usernamereg">Username</label>
-        <input id="usernamereg" type="text" placeholder="Username" name="username" onkeyup="checkuser();">
+        <label for="username">Username</label>
+        <input id="username" type="text" placeholder="Username" name="username" onchange="checkuser();" pattern="[a-zA-Z0-9_]{5,30}">
+        <div id="error_register_user" class="red"></div>
+        <div id="username_status"></div>
 <!--        checkuser() function is located in js/script.js-->
         <label for="password">Password</label>
-        <input id="password" type="password" placeholder="Password" name="userpass"> <span id="username_status"></span>
+        <input id="password" type="password" placeholder="Password" name="userpass" pattern=".{7,30}" onchange="validateForm();"> 
+        
+        <div id="error_register_pass" class="red"></div>
+        <button type="submit" class="pure-button pure-button-primary" name="registration_form">Register</button>
         <div id='errorsection'> 
             <?php
                 //if $_SESSION['message'] is not set then set it as nothing to eliminate an undeclared variable error
@@ -22,8 +35,6 @@
                 unset ($_SESSION['message']); //this line clears what is set in the session variable['message']
             ?>
         </div>
-        <button type="submit" class="pure-button pure-button-primary" name="registration_form">Register</button>
-        
     </form>
 </div>
 <?php

@@ -6,12 +6,21 @@
     include 'header.php';
     include 'nav.php';
 ?>
+<!--
+<div id="loader">
+<div class="loading"></div>
+</div>
+<div id="pageloader">
+    <div class="loading"></div>
+</div>
+-->
 <div class="splash-container">
     <div class="splash">
         <h1 class="splash-head">Got motion sickness?</h1>
-        <p class="splash-subhead">
+        <p class="splash-subhead" id="text">
             The community is here to help!
         </p>
+
         <p>
             <a href="games.php" class="pure-button pure-button-primary">View Game Library</a>
         </p>
@@ -80,14 +89,25 @@
         <h2 class="content-head is-center">Be a part of the community</h2>
         <div class="pure-g">
             <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
-                <form class="pure-form pure-form-stacked" method="post" action="../../controller/registration_process.php" onsubmit="checkall();">
-                    <fieldset>
-                        <label for="username_reg">Username</label>
-                        <input id="username_reg" type="text" placeholder="Username" name="username">
-                        <label for="password">Password</label>
-                        <input id="password" type="password" placeholder="Password" name="password">
-                        <button type="submit" class="pure-button" name="registration">Register</button>
-                    </fieldset>
+                <form class="pure-form pure-form-stacked" method="post" action="../../controller/registration_process.php" name="registration">
+                    <label for="username">Username</label>
+                    <input id="username" type="text" placeholder="Username" name="username" onchange="checkuser();" pattern="[a-zA-Z0-9_]{5,30}">
+                    <div id="error_register_user" class="red"></div>
+                    <div id="username_status"></div>
+                    <label for="password">Password</label>
+                    <input id="password" type="password" placeholder="Password" name="userpass" pattern=".{7,30}" onchange="validateForm();">
+                    <div id="error_register_pass" class="red"></div>
+                    <button type="submit" class="pure-button" name="registration_form">Register</button>
+                    <div id='errorsection'> 
+                        <?php
+                            //if $_SESSION['message'] is not set then set it as nothing to eliminate an undeclared variable error
+                            if (!isset($_SESSION['message'])){
+                                $_SESSION['message'] = "";
+                            }
+                            echo $_SESSION['message'];       
+                            unset ($_SESSION['message']); //this line clears what is set in the session variable['message']
+                        ?>
+                    </div>
                 </form>
             </div>
             <div class="l-box-lrg pure-u-1 pure-u-md-3-5">

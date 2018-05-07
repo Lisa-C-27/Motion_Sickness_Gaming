@@ -13,6 +13,7 @@ body {
     color: #002921;
     font-size: 13px;
     background-image: url(../../img/background.jpg);
+    background-attachment: fixed;
 }
 
 h1,
@@ -275,6 +276,10 @@ a.pure-button-primary {
     /* We remove the border-separator assigned to .l-box-lrg */
     .l-box-lrg {
         border: none;
+    }
+    
+    .pure-menu-disabled, .pure-menu-heading, .pure-menu-link {
+        padding: .3em .8em;
     }
 
 }

@@ -1,6 +1,7 @@
 <?php
 //This process is called from 'view/php/register.php' registration form
     session_start();
+    include '../model/dbfunctions.php';
 
     if( isset( $_POST['registration_form'] ) ) {
         
@@ -12,12 +13,20 @@
 
         if ($stmt->rowCount() == 0){
 
-            $username = $_POST['username'];
-            $password = $_POST['userpass'];
+            $username = !empty($_POST['username'])? sanitise_input(($_POST['username'])): null;
+            $password2 = !empty($_POST['userpass'])? sanitise_input(($_POST['userpass'])): null;
+            $password = password_hash($password2, PASSWORD_DEFAULT);
+            
+            if ($username === null || $password2 === null) {
+                $_SESSION['message'] = "Username and password cannot be blank";   
+                header('Location: ../view/php/register.php');
+            } else {
 
-            $insertuser = "INSERT INTO user (username, password, acctStatus) VALUES( '$username','$password','1' )";
+            $insertuser = "INSERT INTO user (username, password, acctStatus) VALUES (:username, :password, '1')";
             include '../model/connect.php';
             $stmt = $conn->prepare($insertuser);
+            $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+            $stmt->bindParam(':password', $password, PDO::PARAM_STR);
             $stmt->execute();
             
             $_SESSION['loggedin'] = true;
@@ -25,9 +34,10 @@
             $_SESSION['userid'] = $result['user_ID'];
             $_SESSION['account'] = 'active';
             header('location: ../view/php/index.php');
-            } else {
+        }
+        }else {
             $_SESSION['message'] = "Username already exists";   
             header('Location: ../view/php/register.php');        
-            }     
+        }     
     }
 ?>

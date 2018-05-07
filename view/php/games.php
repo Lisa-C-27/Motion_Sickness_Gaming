@@ -4,8 +4,17 @@
     include 'nav.php';
     include '../../model/connect.php';
     include '../../model/dbfunctions.php';
-?>
 
+    if(isset($_GET['addfail']) && $_GET['addfail'] == 'true') {
+?>
+        <script>
+            $(function() {
+                document.getElementById('modal').click();
+            });
+        </script>
+    <?php
+    }
+    ?>
 <div class="container game-page">
     <div class="game-button"> 
         <h1 class="inline">Games Library</h1>  
@@ -13,7 +22,7 @@
         // This checks if the user is logged in. If true then the Add Game button will be displayed
             if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) { 
         ?>   
-        <button type="button" class="pure-button inline" data-toggle="modal" data-target="#myModal2">Add a game</button> 
+        <button type="button" class="pure-button inline" data-toggle="modal" data-target="#myModal2" id="modal">Add a game</button> 
         <?php
             }; ?>
     </div>
@@ -31,11 +40,21 @@
                         <fieldset>
                             <p>Before adding a game, please check that it isn't already in the library</p>
                             <label for="gamename">Name of game </label>
-                            <input id="gamename" type="text" placeholder="Type name of game here" name="gameName" onchange="checkgame();">
+                            <input id="gamename" type="text" placeholder="Type name of game here" name="gameName" onchange="checkgame();" value="<?php if(isset($_SESSION["gamename"])) { echo $_SESSION["gamename"]; unset ($_SESSION["gamename"]); } ?>">
                             <!-- checkgame() function is located in js/script.js file -->
                             <div id="game_status"></div>
                             <button type="submit" class="pure-button pure-button-primary" name="submit_game">Add game</button>
                         </fieldset>
+                        <div class="games_message"> 
+                            <?php
+                                //if $_SESSION['message'] is not set then set it as nothing to eliminate an undeclared variable error
+                                if (!isset($_SESSION['message'])){
+                                    $_SESSION['message'] = "";
+                                }
+                                echo $_SESSION['message'];       
+//                                unset ($_SESSION['message']); //this line clears what is set in the session variable['message']
+                            ?>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -44,7 +63,7 @@
             </div>  
         </div>
     </div>  
-    <div id='errorsection' class="games_message"> 
+    <div class="games_message"> 
         <?php
             //if $_SESSION['message'] is not set then set it as nothing to eliminate an undeclared variable error
             if (!isset($_SESSION['message'])){

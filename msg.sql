@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2018 at 11:48 AM
+-- Generation Time: May 07, 2018 at 07:58 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -35,16 +35,16 @@ CREATE TABLE `fix` (
   `fixThUp` int(10) UNSIGNED NOT NULL,
   `fixThDown` int(10) UNSIGNED NOT NULL,
   `userID` int(10) UNSIGNED NOT NULL,
-  `gameID` int(10) UNSIGNED NOT NULL
+  `gameID` int(10) UNSIGNED NOT NULL,
+  `deleted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `fix`
 --
 
-INSERT INTO `fix` (`fixID`, `fixInfo`, `fixDateTime`, `fixThUp`, `fixThDown`, `userID`, `gameID`) VALUES
-(1, 'This is a fix for the game Portal added by Admin', '2018-04-24 21:54:27', 5, 1, 1, 2),
-(2, 'This is a fix for the game Portal added by Active', '2018-04-24 21:54:27', 10, 2, 2, 2);
+INSERT INTO `fix` (`fixID`, `fixInfo`, `fixDateTime`, `fixThUp`, `fixThDown`, `userID`, `gameID`, `deleted`) VALUES
+(1, 'Go into options and change FOV setting to 90', '2018-05-07 04:28:55', 0, 0, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -59,16 +59,9 @@ CREATE TABLE `fixcomm` (
   `fixCommThUp` int(10) UNSIGNED NOT NULL,
   `fixCommThDown` int(10) UNSIGNED NOT NULL,
   `userID` int(10) UNSIGNED NOT NULL,
-  `fixID` int(10) UNSIGNED NOT NULL
+  `fixID` int(10) UNSIGNED NOT NULL,
+  `deleted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `fixcomm`
---
-
-INSERT INTO `fixcomm` (`fixCommID`, `fixComment`, `fixCommDateTime`, `fixCommThUp`, `fixCommThDown`, `userID`, `fixID`) VALUES
-(1, 'This is a comment from Active on the fix added by Admin', '2018-04-24 21:55:26', 2, 1, 2, 1),
-(2, 'This is a comment from Admin on the fix created by Active', '2018-04-25 00:00:14', 11, 2, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -83,15 +76,9 @@ CREATE TABLE `fixreply` (
   `fixReplyThUp` int(10) UNSIGNED NOT NULL,
   `fixReplyThDown` int(10) UNSIGNED NOT NULL,
   `userID` int(10) UNSIGNED NOT NULL,
-  `fixcommID` int(10) UNSIGNED NOT NULL
+  `fixcommID` int(10) UNSIGNED NOT NULL,
+  `deleted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `fixreply`
---
-
-INSERT INTO `fixreply` (`fixReplyID`, `fixReply`, `fixReplyDateTime`, `fixReplyThUp`, `fixReplyThDown`, `userID`, `fixcommID`) VALUES
-(1, 'This is a reply comment for a fix comment', '2018-04-25 07:31:37', 2, 1, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -112,10 +99,9 @@ CREATE TABLE `game` (
 --
 
 INSERT INTO `game` (`gameID`, `gameName`, `gameThUp`, `gameThDown`, `gameDate`) VALUES
-(2, 'Portal', 4, 2, '2018-03-23 12:56:59'),
-(5, 'Portal 2', 0, 0, '2018-03-23 16:18:48'),
-(6, 'Half Life', 1, 0, '2018-03-30 09:27:41'),
-(7, 'Half Life 2', 0, 0, '2018-03-30 09:31:57');
+(1, 'Portal', 0, 0, '2018-05-07 14:12:47'),
+(2, 'Portal 2', 0, 0, '2018-05-07 14:12:59'),
+(3, 'Half Life', 0, 0, '2018-05-07 14:13:12');
 
 -- --------------------------------------------------------
 
@@ -130,17 +116,16 @@ CREATE TABLE `gamecomm` (
   `gameCommThUp` int(10) UNSIGNED NOT NULL,
   `gameCommThDown` int(10) UNSIGNED NOT NULL,
   `userID` int(10) UNSIGNED NOT NULL,
-  `gameID` int(10) UNSIGNED NOT NULL
+  `gameID` int(10) UNSIGNED NOT NULL,
+  `deleted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `gamecomm`
 --
 
-INSERT INTO `gamecomm` (`gameCommID`, `gameComment`, `gameCommDateTime`, `gameCommThUp`, `gameCommThDown`, `userID`, `gameID`) VALUES
-(1, 'This is a comment on a game by Admin on the game Portal', '2018-04-24 21:52:52', 10, 1, 1, 2),
-(2, 'This is comment on a game by Active on the game Portal', '2018-04-24 21:52:52', 0, 0, 2, 2),
-(3, 'Comment by Admin for game Portal 2', '2018-04-24 23:41:36', 15, 3, 1, 5);
+INSERT INTO `gamecomm` (`gameCommID`, `gameComment`, `gameCommDateTime`, `gameCommThUp`, `gameCommThDown`, `userID`, `gameID`, `deleted`) VALUES
+(1, 'This is a comment on the game Portal by user Admin', '2018-05-07 05:34:16', 0, 0, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -155,15 +140,9 @@ CREATE TABLE `gamereply` (
   `replyCommThUp` int(10) UNSIGNED NOT NULL,
   `replyCommThDown` int(10) UNSIGNED NOT NULL,
   `userID` int(10) UNSIGNED NOT NULL,
-  `gameCommID` int(10) UNSIGNED NOT NULL
+  `gameCommID` int(10) UNSIGNED NOT NULL,
+  `deleted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `gamereply`
---
-
-INSERT INTO `gamereply` (`gameReplyID`, `replyComment`, `replyCommDateTime`, `replyCommThUp`, `replyCommThDown`, `userID`, `gameCommID`) VALUES
-(1, 'This is a reply comment to a game comment', '2018-04-25 07:30:39', 1, 1, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -173,8 +152,8 @@ INSERT INTO `gamereply` (`gameReplyID`, `replyComment`, `replyCommDateTime`, `re
 
 CREATE TABLE `user` (
   `userID` int(10) UNSIGNED NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `password` varchar(512) NOT NULL,
   `userCreateDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `acctStatus` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -184,12 +163,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`userID`, `username`, `password`, `userCreateDate`, `acctStatus`) VALUES
-(1, 'Admin', 'password', '2018-03-23 00:00:00', 3),
-(2, 'Active', 'password', '2018-03-23 00:00:00', 1),
-(3, 'Disabled', 'password', '2018-03-23 10:57:09', 2),
-(4, 'test', 'password', '2018-03-23 10:58:10', 1),
-(11, 'test5', 'password', '2018-03-23 11:57:01', 1),
-(12, 'test6', 'password', '2018-03-24 11:05:59', 1);
+(1, 'Admin', '$2y$10$trkkHLSlGpO0v6cVjA1IPuF.kohc8SZ4zGpuPlfoQrTybsHndPLBe', '2018-05-06 14:53:47', 3),
+(2, 'Active', '$2y$10$3iEh/LXBqGh2T2ivqUBYx.lw.BxxGKs3M9o31ugB.xo5dw6tZAxn2', '2018-05-06 15:06:53', 1),
+(3, 'Disabled', '$2y$10$2vpM/NyD3bKC5YxwlHQEQ.iiPlt7j1gM5lTOwZIJlVbHr/FwgTPsK', '2018-05-06 15:07:19', 2),
+(4, 'abc123', '$2y$10$8uC9HypnLqn.PksdbsvLi.CgVtntHGl3y4n1jT5/Pymm5pQbbUiHe', '2018-05-07 12:39:06', 1);
 
 --
 -- Indexes for dumped tables
@@ -257,37 +234,37 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `fix`
 --
 ALTER TABLE `fix`
-  MODIFY `fixID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `fixID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `fixcomm`
 --
 ALTER TABLE `fixcomm`
-  MODIFY `fixCommID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `fixCommID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `fixreply`
 --
 ALTER TABLE `fixreply`
-  MODIFY `fixReplyID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `fixReplyID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `game`
 --
 ALTER TABLE `game`
-  MODIFY `gameID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `gameID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `gamecomm`
 --
 ALTER TABLE `gamecomm`
-  MODIFY `gameCommID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `gameCommID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `gamereply`
 --
 ALTER TABLE `gamereply`
-  MODIFY `gameReplyID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `gameReplyID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `userID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --

@@ -21,11 +21,23 @@
     <![endif]-->
     <!--[if gt IE 8]><!-->   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
-    
+<!--    <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.12.0/validate.min.js"></script>-->
     <link rel="stylesheet" href="../css/layouts/marketing.css">
     <link rel="stylesheet" href="../css/style.css">
+    <!-- Checking if user is browsing from a mobile device -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+		var isMobile = /iPhone|iPad|iPod|Android|Windows Phone/i.test(navigator.userAgent);
+		
+		if (isMobile) {
+  			console.log("You are using Mobile");
+		} else {
+			console.log("You are using Desktop");
+		}
+        });
+	</script>
     <!--<![endif]-->
 </head>
 <body>
