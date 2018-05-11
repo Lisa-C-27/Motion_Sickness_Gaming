@@ -40,7 +40,7 @@
                         <fieldset>
                             <p>Before adding a game, please check that it isn't already in the library</p>
                             <label for="gamename">Name of game </label>
-                            <input id="gamename" type="text" placeholder="Type name of game here" name="gameName" onchange="checkgame();" value="<?php if(isset($_SESSION["gamename"])) { echo $_SESSION["gamename"]; unset ($_SESSION["gamename"]); } ?>">
+                            <input id="gamename" type="text" placeholder="Type name of game here" name="gameName" onchange="checkgame();" value="<?php if(isset($_SESSION["gamename"])) { echo $_SESSION["gamename"];  } ?>">
                             <!-- checkgame() function is located in js/script.js file -->
                             <div id="game_status"></div>
                             <button type="submit" class="pure-button pure-button-primary" name="submit_game">Add game</button>
@@ -73,7 +73,7 @@
             unset ($_SESSION['message']); //this line clears what is set in the session variable['message']
         ?>
     </div>
-    <h2><a href="#">A</a>|<a href="#">B</a>|<a href="#">C</a>|<a href="#">D</a>|<a href="#">E</a>|<a href="#">F</a>|<a href="#">G</a>|<a href="#">H</a>|<a href="#">I</a>|<a href="#">J</a>|<a href="#">K</a>|<a href="#">L</a>|<a href="#">M</a>|<a href="#">N</a>|<a href="#">O</a>|<a href="#">P</a>|<a href="#">Q</a>|<a href="#">R</a>|<a href="#">S</a>|<a href="#">T</a>|<a href="#">U</a>|<a href="#">V</a>|<a href="#">W</a>|<a href="#">X</a>|<a href="#">Y</a>|<a href="#">Z</a></h2>
+<!--    <h2><a href="#">A</a>|<a href="#">B</a>|<a href="#">C</a>|<a href="#">D</a>|<a href="#">E</a>|<a href="#">F</a>|<a href="#">G</a>|<a href="#">H</a>|<a href="#">I</a>|<a href="#">J</a>|<a href="#">K</a>|<a href="#">L</a>|<a href="#">M</a>|<a href="#">N</a>|<a href="#">O</a>|<a href="#">P</a>|<a href="#">Q</a>|<a href="#">R</a>|<a href="#">S</a>|<a href="#">T</a>|<a href="#">U</a>|<a href="#">V</a>|<a href="#">W</a>|<a href="#">X</a>|<a href="#">Y</a>|<a href="#">Z</a></h2>-->
 <!-- 
 Would like headings of A,B,C etc with the relevant games within each div
     <ul>
@@ -91,7 +91,7 @@ Would like headings of A,B,C etc with the relevant games within each div
         </div>
     </ul>
 -->
-    <ul>
+    <ul id="gamelist">
         <?php
             $allgames = gamelist(); //This function is located in model/dbfunctions.php
 

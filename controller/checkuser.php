@@ -1,7 +1,7 @@
 <?php
 //This process is called from the checkuser() function within the 'view/js/script.js' file
-if(isset($_POST['user_name'])) {
-    $usernameId=$_POST['user_name'];
+if(isset($_GET['user_name'])) {
+    $usernameId=$_GET['user_name'];
 
     $checkuser= "SELECT username FROM user WHERE username='$usernameId'";
     include '../model/connect.php';

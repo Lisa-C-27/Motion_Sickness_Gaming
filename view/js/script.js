@@ -7,14 +7,14 @@ function addgamemodal() {
 function tabOne() {
     document.getElementById("gamecomment").style.display = "block";
     document.getElementById("fixcomment").style.display = "none";
-    document.getElementById("tabone").style.background = "yellow";
+    document.getElementById("tabone").style.background = "#FCE54A";
     document.getElementById("tabtwo").style.background = "#EEAC4E";
 }
 function tabTwo() {
     document.getElementById("fixcomment").style.display = "grid";
     document.getElementById("gamecomment").style.display = "none";
     document.getElementById("tabone").style.background = "#EEAC4E";
-    document.getElementById("tabtwo").style.background = "yellow";
+    document.getElementById("tabtwo").style.background = "#FCE54A";
 }
 
 //These toggle functions are called to toggle reply and view replies on the game comments and fixes
@@ -38,7 +38,7 @@ function toggleviewreply($replyID) {
 function togglefixreply($replyID) {
     var x = document.getElementById("fixreply_" + $replyID);
     if (!x.style.display || x.style.display === "none") {
-        x.style.display = "grid";
+        x.style.display = "block";
     } else {
         x.style.display = "none";
     }
@@ -56,7 +56,7 @@ function toggleviewfixcomm($replyID) {
 function toggleaddfixcomment($replyID) {
     var x = document.getElementById("fixcomment_" + $replyID);
     if (!x.style.display || x.style.display === "none") {
-        x.style.display = "grid";
+        x.style.display = "block";
     } else {
         x.style.display = "none";
     } 
@@ -86,11 +86,8 @@ function checkuser()
     } else if(username)
     {
         $.ajax({
-            type: 'post',
-            url: '../../controller/checkuser.php',
-            data: {
-                user_name:username,
-            },
+            type: 'get',
+            url: '../../controller/checkuser.php?user_name=' + username,
             success: function (response) {
                 $( '#username_status' ).html(response);
                 
@@ -146,7 +143,6 @@ function checkgame() {
 
 //This function is called from the 'php/individual_games.php' thumbs up for motion sickness
 function updatethumbsup(thumb_id) {
-    document.getElementById("loader").style.display = "block";
     $.ajax( {
         url: '../../controller/thumbs_yes_increment.php?gameID=' + thumb_id,
         method: 'post',
@@ -213,7 +209,7 @@ $(document)
 //        usernamereg: {
 //            presence: true,
 ////            format: {
-////                pattern: "[a-zA-Z0-9\_]{5,30}",
+////                pattern: "[a-zA-Z0-9_]{5,30}",
 ////                message: "Can only contain lowercase, uppercase, numbers and underscores"
 ////            }
 //            length: {
@@ -225,9 +221,6 @@ $(document)
 //    };
 //    validate({usernamereg}, constraints);
 //}
-
-
-
 
 function validateForm() {
     
@@ -241,8 +234,25 @@ function validateForm() {
         password.style.borderColor = "red";
         document.getElementById("error_register_pass").innerHTML = "Password must be between 7 and 30 characters";
         return false;
-    } 
+    }
+    var comment = document.getElementById("gamecomment");
+    if (comment.value === '' || comment.value === '<div><br></div>') {
+        comment.style.borderColor = "red";
+        document.getElementById("gamecomment_error").innerHTML = "This field cannot be empty";
+        return false;
+    }
     return true;
+}
+
+function viewuserbutton() {
+    document.getElementById("viewUsers").style.display = "grid";
+    document.getElementById("hide").style.display = "block";
+    document.getElementById("view").style.display = "none";
+}
+function hideuserbutton() {
+    document.getElementById("viewUsers").style.display = "none";
+    document.getElementById("view").style.display = "block";
+    document.getElementById("hide").style.display = "none";
 }
 
 

@@ -4,6 +4,8 @@
 <!--        This is temporary for debugging -->
         <p><?php print_r($_SESSION); ?></p>
     </div>
+
+
 <script src="../js/script.js" type="text/javascript"></script>
 </div> <!-- Closes 'content-wrapper' -->
 

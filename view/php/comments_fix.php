@@ -11,44 +11,58 @@
                 <?php $getrep = getThumbs($row['userID']); ?>
                 <span class="fixrep">
                     <?php 
-                        if($getrep['fixthumbs'] < 1) {  
-                            //display nothing
-                        } else if($getrep['fixthumbs'] <= 100) {
-                            echo 'Beginner Fixer';
-                        } else if($getrep['fixthumbs'] > 100 && $getrep['fixthumbs'] <= 500) {
-                            echo 'Intermediate Fixer';
-                        } else if($getrep['fixthumbs'] > 500) {
-                            echo 'Ultimate Fixer';
-                        }
+                        include 'rep_fix.php'; 
                     ?>
                 </span>
-                <span class="date"><?php echo $row['fixDateTime']; ?></span>
+                <span class="date"><?php 
+                        $phpdate = strtotime( $row['fixDateTime'] );
+                        $mysqldate = date( 'd-m-Y g:i A', $phpdate );
+                        echo $mysqldate
+//                      echo $row['fixDateTime']; 
+                    ?></span>
             </div>
             <div class="votefix">
                 <span class="green">
                     <i class="fas fa-thumbs-up"></i>
                     <span><?php echo $row['fixThUp']; ?></span>
                 </span>
-                <span class="red">
+                <span class="orange">
                     <i class="fas fa-thumbs-down"></i>
                     <span><?php echo $row['fixThDown']; ?></span>
                 </span>
+                <p>
+                    <?php
+                    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) { 
+                    ?>
+                    <a href="#fixcomment_<?php echo $row['fixID'] ?>" onclick="toggleaddfixcomment(<?php echo $row['fixID'] ?>)">Comment</a>
+                    <?php
+                    }
+                    $getreplies = getFixCommentNumber($row['fixID']);
+                    ?>
+                </p>
+                <!-- Displays number of comments as a link-->
+                <p>
+                    <a href="#fixcomments_<?php echo $row['fixID'] ?>"  onclick="togglefixcomment(<?php echo $row['fixID'] ?>)">
+                        <?php
+                        if($getreplies['replies'] == 0) {
+                            echo "No comments";
+                        } else if ($getreplies['replies'] == 1) {
+                            ?>
+                        View <?php echo $getreplies['replies']; ?> comment <i class="fas fa-chevron-down"></i>
+                        <?php
+                        }else {
+                        ?>
+                         View <?php echo $getreplies['replies']; ?> comments <i class="fas fa-chevron-down"></i>
+                        <?php
+                        }
+                        ?>
+                    </a>
+                </p>
             </div>
             <div class="actualfix">
                 <?php echo $row['fixInfo']; ?>
             </div>
-            <div class="replyfix">
-                <?php
-                if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) { 
-                ?>
-                <a href="#fixcomment_<?php echo $row['fixID'] ?>" onclick="toggleaddfixcomment(<?php echo $row['fixID'] ?>)">Comment</a>
-                <?php
-                }
-                $getreplies = getFixCommentNumber($row['fixID']);
-                ?>
-                <!-- Displays number of comments as a link-->
-                <a href="#fixcomments_<?php echo $row['fixID'] ?>" class="view" onclick="togglefixcomment(<?php echo $row['fixID'] ?>)">View <?php echo $getreplies['replies']; ?> comments</a>
-            </div>
+            
         </div>
         <div class="databaseComments">
 
@@ -57,7 +71,7 @@
             <div class="togglereplycomment left" id="fixcomment_<?php echo $row['fixID'] ?>">
                 <form class="pure-form pure-form-stacked" id="fixComment" method="post" action="../../controller/addcomment.php">
                     <fieldset>
-                        <textarea name="fixcomment" rows="3" cols="60"></textarea>
+                        <textarea name="fixcomment" class="comments"></textarea>
                         <input type="hidden" name="userID" value="<?php echo $_SESSION['userid'] ?>"/>
                         <input type="hidden" name="fixID" value="<?php echo $row['fixID'] ?>"/>
                         <input type="hidden" name="gameID" value="<?php echo $_GET['gameID'] ?>"/>
@@ -80,29 +94,20 @@
                     <?php $getrep = getThumbs($row1['userID']); ?>
                     <p class="commrep">
                         <?php
-                            if($getrep['commthumbs'] <= 50) {
-                                echo 'Newbie';
-                            } else if($getrep['commthumbs'] > 50 && $getrep['commthumbs'] <= 500) {
-                                echo 'Partially Sick Member';
-                            } else if($getrep['commthumbs'] > 500) {
-                                echo 'Fully Sick Member';
-                            }
+                            include 'rep_comments.php';
                         ?>
                     </p>
                     <p class="fixrep">
                         <?php
-                            if($getrep['fixthumbs'] < 1) {
-                                //Display nothing
-                            } else if($getrep['fixthumbs'] <= 100) {
-                                echo 'Beginner Fixer';
-                            } else if($getrep['fixthumbs'] > 100 && $getrep['fixthumbs'] <= 500) {
-                                echo 'Intermediate Fixer';
-                            } else if($getrep['fixthumbs'] > 500) {
-                                echo 'Ultimate Fixer';
-                            }
+                            include 'rep_fix.php';
                         ?>
                     </p>
-                    <p class="date"><?php echo $row1['fixCommDateTime']; ?></p>
+                    <p class="date"><?php
+                        $phpdate = strtotime( $row1['fixCommDateTime'] );
+                        $mysqldate = date( 'd-m-Y g:i A', $phpdate );
+                        echo $mysqldate
+//                    echo $row1['fixCommDateTime']; 
+                        ?></p>
                 </div>
                 <div class="actualcomment3">
                     <?php echo $row1['fixComment']; ?>
@@ -112,14 +117,16 @@
                         <i class="fas fa-thumbs-up"></i>
                         <span><?php echo $row1['fixCommThUp']; ?></span>
                     </span>
-                    <span class="red">
+                    <span class="orange">
                         <i class="fas fa-thumbs-down"></i>
                         <span><?php echo $row1['fixCommThDown']; ?></span>
                     </span>
                     <?php
                     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) { 
                         ?>
+                    <div>
                     <a href="#fixreply_<?php echo $row1['fixCommID'] ?>" onclick="togglefixreply(<?php echo $row1['fixCommID'] ?>);">Reply</a>
+                    </div>
                     <?php
                     }
                     $getreplies = getFixCommReplyNumber($row1['fixCommID']);
@@ -127,7 +134,18 @@
                     <p>
                     <!--    //displays number of replies as link-->
                         <a href="#replyfixview_<?php echo $row1['fixCommID'] ?>" onclick="toggleviewfixcomm(<?php echo $row1['fixCommID'] ?>);">
-                            View <?php echo $getreplies['replies'] ?> replies
+                            <?php
+                        if($getreplies['replies'] == 0) {
+                            echo "No replies";
+                        } else if ($getreplies['replies'] == 1) {
+                            echo "View 1 reply ";
+                            echo '<i class="fas fa-chevron-down"></i>';
+                        } else {
+                            ?>
+                            View <?php echo $getreplies['replies'] ?> replies <i class="fas fa-chevron-down"></i>
+                            <?php
+                            }
+                            ?>
                         </a>
                     </p>
                 </div>
@@ -136,7 +154,7 @@
                 <div class="togglereplycomment" id="fixreply_<?php echo $row1['fixCommID'] ?>">
                     <form class="pure-form pure-form-stacked" id="replyGameComment" method="post" action="../../controller/addcomment.php">
                         <fieldset>
-                            <textarea name="fixreplycomment" rows="3" cols="60"></textarea>
+                            <textarea name="fixreplycomment" class="comments"></textarea>
                             <input type="hidden" name="userID" value="<?php echo $_SESSION['userid'] ?>"/>
                             <input type="hidden" name="fixcommID" value="<?php echo $row1['fixCommID'] ?>"/>
                             <input type="hidden" name="gameID" value="<?php echo $_GET['gameID'] ?>"/>
@@ -158,29 +176,20 @@
                         <?php $getrep = getThumbs($row2['userID']); ?>
                         <p class="commrep">
                             <?php
-                                if($getrep['commthumbs'] <= 50) {
-                                    echo 'Newbie';
-                                } else if($getrep['commthumbs'] > 50 && $getrep['commthumbs'] <= 500) {
-                                    echo 'Partially Sick Member';
-                                } else if($getrep['commthumbs'] > 500) {
-                                    echo 'Fully Sick Member';
-                                }
+                                include 'rep_comments.php';
                             ?>
                         </p>
                         <p class="fixrep">
                             <?php
-                                if($getrep['fixthumbs'] < 1) {
-                                    //Display nothing
-                                } else if($getrep['fixthumbs'] <= 100) {
-                                    echo 'Beginner Fixer';
-                                } else if($getrep['fixthumbs'] > 100 && $getrep['fixthumbs'] <= 500) {
-                                    echo 'Intermediate Fixer';
-                                } else if($getrep['fixthumbs'] > 500) {
-                                    echo 'Ultimate Fixer';
-                                }
+                                include 'rep_fix.php';
                             ?>
                         </p>
-                        <p class="date"><?php echo $row2['fixReplyDateTime']; ?></p>
+                        <p class="date"><?php 
+                        $phpdate = strtotime( $row2['fixReplyDateTime'] );
+                        $mysqldate = date( 'd-m-Y g:i A', $phpdate );
+                        echo $mysqldate
+//                        echo $row2['fixReplyDateTime']; 
+                            ?></p>
                     </div>
                     <div class="actualcomment2">
                         <?php echo $row2['fixReply']; ?>
@@ -190,7 +199,7 @@
                             <i class="fas fa-thumbs-up"></i>
                             <span><?php echo $row2['fixReplyThUp']; ?></span>
                         </span>
-                        <span class="red">
+                        <span class="orange">
                             <i class="fas fa-thumbs-down"></i>
                             <span><?php echo $row2['fixReplyThDown']; ?></span>
                         </span>
@@ -221,7 +230,7 @@
         } else {
     ?>
     <div class="addcomment">
-        <p>To add a game fix, comment or reply, please <a href="login.php">Login</a> or <a href="register.php">Register</a></p>
+        <p>To add a game fix, comment or reply, please <a class="yellow"  href="login.php">Login</a> or <a class="yellow" href="register.php">Register</a></p>
     </div>
     <?php
         }

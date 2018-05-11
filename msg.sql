@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2018 at 07:58 AM
+-- Generation Time: May 11, 2018 at 03:10 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -44,7 +44,7 @@ CREATE TABLE `fix` (
 --
 
 INSERT INTO `fix` (`fixID`, `fixInfo`, `fixDateTime`, `fixThUp`, `fixThDown`, `userID`, `gameID`, `deleted`) VALUES
-(1, 'Go into options and change FOV setting to 90', '2018-05-07 04:28:55', 0, 0, 1, 1, 0);
+(1, 'Go into options and change FOV setting to 90', '2018-05-07 04:28:55', 10, 1, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -63,6 +63,13 @@ CREATE TABLE `fixcomm` (
   `deleted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `fixcomm`
+--
+
+INSERT INTO `fixcomm` (`fixCommID`, `fixComment`, `fixCommDateTime`, `fixCommThUp`, `fixCommThDown`, `userID`, `fixID`, `deleted`) VALUES
+(1, 'This is a comment on a fix', '2018-05-07 06:03:54', 4, 1, 4, 1, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -79,6 +86,13 @@ CREATE TABLE `fixreply` (
   `fixcommID` int(10) UNSIGNED NOT NULL,
   `deleted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fixreply`
+--
+
+INSERT INTO `fixreply` (`fixReplyID`, `fixReply`, `fixReplyDateTime`, `fixReplyThUp`, `fixReplyThDown`, `userID`, `fixcommID`, `deleted`) VALUES
+(1, 'This is a reply to a comment on a fix', '2018-05-07 06:04:26', 1, 0, 2, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -99,9 +113,9 @@ CREATE TABLE `game` (
 --
 
 INSERT INTO `game` (`gameID`, `gameName`, `gameThUp`, `gameThDown`, `gameDate`) VALUES
-(1, 'Portal', 0, 0, '2018-05-07 14:12:47'),
-(2, 'Portal 2', 0, 0, '2018-05-07 14:12:59'),
-(3, 'Half Life', 0, 0, '2018-05-07 14:13:12');
+(1, 'Portal', 10, 1, '2018-05-07 14:12:47'),
+(2, 'Portal 2', 5, 1, '2018-05-07 14:12:59'),
+(3, 'Half Life', 12, 1, '2018-05-07 14:13:12');
 
 -- --------------------------------------------------------
 
@@ -125,7 +139,8 @@ CREATE TABLE `gamecomm` (
 --
 
 INSERT INTO `gamecomm` (`gameCommID`, `gameComment`, `gameCommDateTime`, `gameCommThUp`, `gameCommThDown`, `userID`, `gameID`, `deleted`) VALUES
-(1, 'This is a comment on the game Portal by user Admin', '2018-05-07 05:34:16', 0, 0, 1, 1, 0);
+(1, 'This is a comment on the game Portal by user Admin', '2018-05-07 05:34:16', 5, 1, 1, 1, 0),
+(2, '<div><b><u><font color=\"#e36c09\"><h3><font color=\"#e36c09\">Test comment with text editor</font></h3><span style=\"font-size:18px;\"></span><span style=\"font-size:24px;\"><font face=\"Comic Sans MS\"></font></span></font></u></b></div><div><font face=\"Comic Sans MS\">This comment was added with the text editor, however sanitisation makes it not work properly, so after this is inputted into database, I will remove the sanitised input to show how it WOULD have displayed</font></div>', '2018-05-11 00:02:05', 0, 0, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -143,6 +158,14 @@ CREATE TABLE `gamereply` (
   `gameCommID` int(10) UNSIGNED NOT NULL,
   `deleted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `gamereply`
+--
+
+INSERT INTO `gamereply` (`gameReplyID`, `replyComment`, `replyCommDateTime`, `replyCommThUp`, `replyCommThDown`, `userID`, `gameCommID`, `deleted`) VALUES
+(1, 'This is a reply comment', '2018-05-07 06:02:21', 2, 0, 2, 1, 0),
+(2, 'Another reply !!', '2018-05-11 00:07:27', 0, 0, 2, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -239,12 +262,12 @@ ALTER TABLE `fix`
 -- AUTO_INCREMENT for table `fixcomm`
 --
 ALTER TABLE `fixcomm`
-  MODIFY `fixCommID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `fixCommID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `fixreply`
 --
 ALTER TABLE `fixreply`
-  MODIFY `fixReplyID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `fixReplyID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `game`
 --
@@ -254,12 +277,12 @@ ALTER TABLE `game`
 -- AUTO_INCREMENT for table `gamecomm`
 --
 ALTER TABLE `gamecomm`
-  MODIFY `gameCommID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `gameCommID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `gamereply`
 --
 ALTER TABLE `gamereply`
-  MODIFY `gameReplyID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `gameReplyID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `user`
 --

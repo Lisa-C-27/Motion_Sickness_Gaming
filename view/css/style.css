@@ -67,22 +67,36 @@
     width: 100%;
     margin: 1%;
 }
+.comments {
+    width: 100%;
+}
 .tabs {
     display: grid;
     grid-template-columns: 19.5% 19.5% 61%;
 }
 .tab {
-    border-radius: 20px 20px 0px 0px; 
+    border-radius: 15px 15px 0px 0px; 
 /*    background: #EEAC4E;*/
     color: black;
 /*    padding: : 0.5em;*/
 /*    padding: 0.5em 1.9em;*/
     border: none;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid lightgrey;
 }
-
+a {
+    color: #054135;
+}
+a:hover {
+    color: #0B8D73;
+}
+a.yellow {
+    color: #FCE54A;
+}
+a.yellow:hover {
+    color: #EEAC4E;
+}
 #tabone {
-    background: yellow;
+    background: #FCE54A;
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 1;
@@ -90,8 +104,8 @@
 }
 .tab:hover {
     font-size: 16.5px;
-    border-left: 1px solid grey;
-    border-right: 1px solid grey;
+    border-left: 1px groove grey;
+    border-right: 1px groove grey;
     text-shadow: 1px 2px 2px rgba(0,0,0,0.1);
 }
 
@@ -118,10 +132,9 @@
     padding: 0;
 /*    min-height: 100px;*/
     display: grid;
-    grid-template-columns: 20% 20% 45% 15%;
+    grid-template-columns: 20% 20% 43% 17%;
 /*    border: 1px solid grey;*/
-    margin-bottom: 5px;
-    
+    margin-bottom: 5px;   
 }
 .userinfo {
     grid-column-start: 1;
@@ -129,13 +142,18 @@
     grid-row-start: 1;
     grid-row-end: 3;
     padding-left: 1%;
-    border-bottom: 1px solid grey;
-    border-right: 1px solid grey;
-    background-color: rgba(216, 159, 80, 0.8);
+    border-bottom: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
+    background-color: #F7FBF5;
+/*    background-color: rgba(216, 159, 80, 0.8);*/
 /*    background-color: rgba(251, 233, 73, 0.8);*/
-    border-bottom-left-radius: 10px;
-    border-top-left-radius: 10px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
     margin-bottom: 2px;
+}
+
+.entry1 {
+    border-top-left-radius: 0px;
 }
 .actualcomment {
     grid-column-start: 2;
@@ -144,8 +162,8 @@
     grid-row-end: 3;
     padding-left: 1%;
     padding-right: 1%;
-    border-bottom: 1px solid grey;
-    border-right: 1px solid grey;
+    border-bottom: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
     background: white;
     margin-bottom: 2px;
 }
@@ -156,7 +174,7 @@
     grid-row-end: 2;
     padding-left: 5px;
     background: white;
-    border-top-right-radius: 10px;
+    border-top-right-radius: 5px;
 }
 .reply {
     grid-column-start: 4;
@@ -164,9 +182,9 @@
     grid-row-start: 2;
     grid-row-end: 3;
     padding-left: 5px;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid lightgrey;
     background: white;
-    border-bottom-right-radius: 10px;
+    border-bottom-right-radius: 5px;
     margin-bottom: 2px;
 }
 .togglereplycomment {
@@ -182,25 +200,26 @@
     grid-column-start: 1;
     grid-column-end: 5;
     display: none;
-    grid-template-columns: 20% 20% 45% 15%;
+    grid-template-columns: 20% 20% 43% 17%;
     
 }
 .fixcomment {
     grid-column-start: 1;
     grid-column-end: 5;
     display: none;
-    grid-template-columns: 20% 20% 45% 15%;
+    grid-template-columns: 20% 20% 43% 17%;
 /*    grid-area: auto; */
 }
 .userinfo2 {
     grid-column-start: 2;
     grid-column-end: 3;
     padding-left: 1%;
-    border-right: 1px solid grey;
-    border-bottom: 1px solid grey;
-    background-color: rgba(251, 233, 73, 0.8);
-    border-bottom-left-radius: 10px;
-    border-top-left-radius: 10px;
+    border-right: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+    background-color: #F7FBF5;
+/*    background-color: rgba(251, 233, 73, 0.8);*/
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
     margin-bottom: 2px;
 }
 .actualcomment2 {
@@ -208,8 +227,8 @@
     grid-column-end: 4;
     padding-left: 1%;
     padding-right: 1%;
-    border-right: 1px solid grey;
-    border-bottom: 1px solid grey;
+    border-right: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
     background: white;
     margin-bottom: 2px;
     
@@ -219,20 +238,20 @@
     grid-column-end: 5;
     padding-left: 1%;
     background: white;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-bottom: 1px solid grey;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom: 1px solid lightgrey;
     margin-bottom: 2px;
 }
 .userinfo3 {
     grid-column-start: 1;
     grid-column-end: 2;
     padding-left: 1%;
-    border-bottom: 1px solid grey;
-    border-right: 1px solid grey;
-    background-color: rgba(216, 159, 80, 0.8);
-    border-bottom-left-radius: 10px;
-    border-top-left-radius: 10px;
+    border-bottom: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
+    background-color: #F7FBF5;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
     margin-bottom: 2px;
 }
 .actualcomment3 {
@@ -240,8 +259,8 @@
     grid-column-end: 4;
     padding-left: 1%;
     padding-right: 1%;
-    border-bottom: 1px solid grey;
-    border-right: 1px solid grey;
+    border-bottom: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
     background: white;
     margin-bottom: 2px;
 }
@@ -250,16 +269,17 @@
     grid-column-end: 5;
     padding-left: 5px;
     background: white;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-bottom: 1px solid grey;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom: 1px solid lightgrey;
     margin-bottom: 2px;
 }
 .fix {
     display: grid;
-    grid-template-columns: 85% 15%;
-    border-bottom: 1px solid grey;
+    grid-template-columns: 83% 17%;
+    border-bottom: 1px solid lightgrey;
     margin-bottom: 2px;
+    background-color: white;
     
 }
 .userinfofix {
@@ -267,36 +287,35 @@
     grid-column-end: 2;
     grid-row-start: 1;
     grid-row-end: 2;
-    background-color: white;
+/*    background-color: white;*/
     font-weight: bold;
-    border-top-left-radius: 10px;
+    border-top-left-radius: 5px;
 }
 .votefix {
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 1;
-    grid-row-end: 2;
-    background-color: white;
-    font-weight: bold;
-    border-top-right-radius: 10px;
+    grid-row-end: 3;
+/*    background-color: white;*/
+    border-top-right-radius: 5px;
 /*    text-align: right;*/
 }
 .actualfix {
     grid-column-start: 1;
-    grid-column-end: 3;
+    grid-column-end: 2;
     grid-row-start: 2;
     grid-row-end: 3;
-    background-color: white;
+/*    background-color: white;*/
     padding-left: 10px;
 }
 .replyfix {
     grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-end: 2;
     grid-row-start: 3;
     grid-row-end: 4;
-    background-color: white;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+/*    background-color: white;*/
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     padding-left: 10px;
 }
 #welcome, #welcome:hover {
@@ -306,6 +325,9 @@
 .pure-button.thumbs {
     background-color: #054135;
     padding: 0.15em;
+}
+.pure-button.thumbs:hover {
+    background-color: #EEAC4E;
 }
 #game_thumbs {
     margin-bottom: 1em;
@@ -326,7 +348,7 @@
     border-radius: 15px;
 }
 .commrep {
-    color: yellow;
+    color: #EEAC4E;
     font-size: 12px;
     margin: 0;
     padding-top: 0;
@@ -358,12 +380,15 @@
     margin-bottom: 200px;
 }
 .green {
-    color: green;
+    color: #054135;
+    padding-right: 2px;
+}
+.orange {
+    color: #EEAC4E;
     padding-right: 2px;
 }
 .red {
     color: red;
-    padding-right: 2px;
 }
 span.green {
     padding-right: 10px;
@@ -405,5 +430,49 @@ span.green {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-}
 
+div#viewUsers {
+    display: none;
+    grid-template-columns: 30% 40% 30%;
+    background-color: white;
+}
+.col1 {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    border: 1px solid darkgrey;
+}
+.col2 {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    border-top: 1px solid darkgrey;
+    border-bottom: 1px solid darkgrey;
+}
+.col3 {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    border: 1px solid darkgrey;
+}
+.col1 p, .col2 p, .col3 p {
+    padding-left: 1%;
+    border-bottom: 1px solid darkgrey;
+    margin: 0;
+}
+.tablehead {
+    border-bottom: 1px solid darkgrey;
+    background-color: #EEAC4E;
+}
+.tablehead h3 {
+    padding: 0;
+    margin: 0;
+    padding-left: 1%;
+}
+#hide {
+    display: none;
+}
+.richText .richText-editor {
+    height: 150px;
+}
+#stats {
+    background-color: white;
+    width: 15%;
+}

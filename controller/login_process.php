@@ -8,16 +8,23 @@
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    if(!empty($_POST["remember"])) {
-        setcookie ("username",$_POST["username"],time()+ 3600);
-        setcookie ("password",$_POST["password"],time()+ 3600);
-//	echo "Cookies Set Successfuly";
-    } else {
-        setcookie("username","");
-        setcookie("password","");
-//	echo "Cookies Not Set";
-    }
-    
+//    if(isset($_POST['remember'])) {
+        ?>
+<!--
+<script>
+        if (typeof(Storage) !== "undefined") {
+            localStorage.setItem("username1", "test");
+            localStorage.setItem("password1", "test");
+            
+            
+        } else {
+            document.getElementById("username").value = "not support";
+        }
+</script> 
+-->
+<?php
+//    } 
+ 
     $username = !empty($_POST['username'])? sanitise_input(($_POST['username'])): null;
     $password = !empty($_POST['password'])? sanitise_input(($_POST['password'])): null;
 try{

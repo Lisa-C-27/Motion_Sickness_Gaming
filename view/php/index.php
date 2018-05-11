@@ -5,6 +5,8 @@
     session_start();
     include 'header.php';
     include 'nav.php';
+    include '../../model/connect.php';
+    include '../../model/dbfunctions.php';
 ?>
 <!--
 <div id="loader">
@@ -76,8 +78,13 @@
         </div>
         <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-3-5">
             <h2 class="content-head content-head-ribbon">Most recently added game</h2>
+            <?php 
+            $getgame = mostRecentGame();
+            ?>
             <a href="#">
-                Name of game will go here
+                <?php 
+                echo $getgame['gameName'];
+            ?>
             </a>
             <h2 class="content-head content-head-ribbon">Most recently added fix</h2>
             <a href="#">
@@ -98,16 +105,9 @@
                     <input id="password" type="password" placeholder="Password" name="userpass" pattern=".{7,30}" onchange="validateForm();">
                     <div id="error_register_pass" class="red"></div>
                     <button type="submit" class="pure-button" name="registration_form">Register</button>
-                    <div id='errorsection'> 
-                        <?php
-                            //if $_SESSION['message'] is not set then set it as nothing to eliminate an undeclared variable error
-                            if (!isset($_SESSION['message'])){
-                                $_SESSION['message'] = "";
-                            }
-                            echo $_SESSION['message'];       
-                            unset ($_SESSION['message']); //this line clears what is set in the session variable['message']
-                        ?>
-                    </div>
+                    <?php
+                        include 'error_section.php';
+                    ?>
                 </form>
             </div>
             <div class="l-box-lrg pure-u-1 pure-u-md-3-5">

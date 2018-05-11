@@ -28,10 +28,11 @@
             $stmt->bindParam(':username', $username, PDO::PARAM_STR);
             $stmt->bindParam(':password', $password, PDO::PARAM_STR);
             $stmt->execute();
+            $userID = $conn->lastInsertID();
             
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $_POST['username'];
-            $_SESSION['userid'] = $result['user_ID'];
+            $_SESSION['userid'] = $userID;
             $_SESSION['account'] = 'active';
             header('location: ../view/php/index.php');
         }

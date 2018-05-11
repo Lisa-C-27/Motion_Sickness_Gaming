@@ -19,6 +19,7 @@ include '../model/dbfunctions.php';
             $stmt->execute();
 
             $_SESSION['message'] = "Game added successfully";
+            $_SESSION['gamename'] = $_POST['gameName'];
             header ('location: ../view/php/games.php');  
             
         } else {

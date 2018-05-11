@@ -9,6 +9,14 @@ function gamelist() {
     return $staticresult = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function mostRecentGame() {
+    $selectgames = "SELECT * FROM game ORDER BY gameDate DESC LIMIT 1;";
+    include 'connect.php';
+    $stmt = $conn->prepare($selectgames);
+    $stmt->execute();
+    return $result = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 //This function is called from 'view/php/individual_games.php'
 function get_one_game($gameID) {
     $selectonegame = "SELECT * FROM game WHERE gameID='" . $_GET['gameID'] . "'";
@@ -188,6 +196,59 @@ function getFixReplies($fixCommID) {
     $stmt = $conn->prepare($comment);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getUsers() {
+    $users = "SELECT count(*) as 'users' FROM user;";
+    include 'connect.php';
+    $stmt = $conn->prepare($users);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+function getGames() {
+    $game = "SELECT count(*) as 'games' FROM game;";
+    include 'connect.php';
+    $stmt = $conn->prepare($game);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);  
+}
+
+function getFixesNo() {
+    $fix = "SELECT count(*) as 'fixes' FROM fix;";
+    include 'connect.php';
+    $stmt = $conn->prepare($fix);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);  
+}
+
+function getComments() {
+    $fix = "SELECT 
+        (select count(*) from fixcomm)
+        +
+        (select count(*) from gamecomm)
+        AS 'comms';";
+    include 'connect.php';
+    $stmt = $conn->prepare($fix);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);  
+}
+
+function getReplies() {
+    $replies = "SELECT (select count(*) from fixreply)+(select count(*) from gamereply)
+    AS 'replies';";
+    include 'connect.php';
+    $stmt = $conn->prepare($replies);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);  
+}
+
+function getAllUsers() {
+    $users = "SELECT * FROM user ORDER BY username;";
+    include 'connect.php';
+    $stmt = $conn->prepare($users);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC); 
 }
 
 //This function sanitises input

@@ -4,7 +4,7 @@ include '../model/dbfunctions.php';
 //header('Content-Type: application/json');
 
 if($_REQUEST['action_type'] == 'addgamecomment') {
-    if(!empty($_POST['gamecomment'])){
+    if(!empty($_POST['gamecomment']) && $_POST['gamecomment'] != '<div><br></div>') {
     $gamecomment = sanitise_input($_POST['gamecomment']);
     $userID = sanitise_input($_POST['userID']);
     $gameID = sanitise_input($_POST['gameID']);
@@ -18,8 +18,8 @@ if($_REQUEST['action_type'] == 'addgamecomment') {
     //function call from db_functions.php
     insertComment($table,$data);
     header('Location: ../view/php/individual_games.php?gameID='. $gameID . '');
-} else {
-    $_SESSION['message'] = "Please enter a comment";
+} else if(empty($_POST['gamecomment']) || $_POST['gamecomment'] === '<div><br></div>'){
+    $_SESSION['message'] = 'Please enter a comment';
     header('Location: ../view/php/individual_games.php?gameID='. $_POST['gameID'] . '');
 }
 }

@@ -2,10 +2,12 @@
 <?php
 $getcomments = getGameComments($_GET['gameID']);
 if (!empty($getcomments)) {
+    $counter = 0; 
     foreach($getcomments as $row) {
+    $counter++;
     ?>
         <div class="databaseComments" id="#comment_<?php echo $row['gameCommID'] ?>">
-            <div class="userinfo">
+            <div class="userinfo entry<?php echo $counter ?>">
                 <p class="username"><?php echo $row['username'] ?></p>
                 <?php
                     $getrep = getThumbs($row['userID']);
@@ -21,30 +23,22 @@ if (!empty($getcomments)) {
     -->   
                 <p class="commrep">
                     <?php
-                        if($getrep['commthumbs'] <= 50) {
-                            echo 'Newbie';
-                        } else if($getrep['commthumbs'] > 50 && $getrep['commthumbs'] <= 500) {
-                            echo 'Partially Sick Member';
-                        } else if($getrep['commthumbs'] > 500) {
-                            echo 'Fully Sick Member';
-                        }
+                        include 'rep_comments.php';
                     ?>
                 </p>
     <!--    //Checking fix reputation and adding a rep name based on the rep number-->
                 <p class="fixrep">
                     <?php
-                        if($getrep['fixthumbs'] < 1) {
-                            //Display nothing
-                        } else if($getrep['fixthumbs'] <= 100) {
-                            echo 'Beginner Fixer';
-                        } else if($getrep['fixthumbs'] > 100 && $getrep['fixthumbs'] <= 500) {
-                            echo 'Intermediate Fixer';
-                        } else if($getrep['fixthumbs'] > 500) {
-                            echo 'Ultimate Fixer';
-                        }
+                        include 'rep_fix.php';
                     ?>
                 </p>
-                <p class="date"><?php echo $row['gameCommDateTime'] ?></p>
+                <p class="date">
+                    <?php 
+                        $phpdate = strtotime( $row['gameCommDateTime'] );
+                        $mysqldate = date( 'd-m-Y g:i A', $phpdate );
+//                        echo $row['gameCommDateTime'] 
+                        echo $mysqldate
+                    ?></p>
             </div>
             <div class="actualcomment"><?php echo $row['gameComment'] ?></div>
             <div class="vote">
@@ -52,7 +46,7 @@ if (!empty($getcomments)) {
                     <i class="fas fa-thumbs-up"></i>
                     <span><?php echo $row['gameCommThUp'] ?></span>
                 </span>
-                <span class="red">
+                <span class="orange">
                     <i class="fas fa-thumbs-down"></i>
                     <span><?php echo $row['gameCommThDown'] ?></span>
                 </span>
@@ -72,7 +66,23 @@ if (!empty($getcomments)) {
                 <p>
     <!--    //displays number of replies as link-->
                     <a href="#comment_<?php echo $row['gameCommID'] ?>" onclick="toggleviewreply(<?php echo $row['gameCommID'] ?>);">
-                        View <?php echo $getreplies['replies'] ?> replies
+                        <?php
+                    if ($getreplies['replies'] == 0) {
+                        echo "No replies";
+                    } else if ($getreplies['replies'] == 1) {
+                        ?>
+                        View
+                        <?php
+                         echo $getreplies['replies'] ?> reply <i class="fas fa-chevron-down"></i>
+                        <?php
+                    } else {
+                        ?>
+                        View
+                        <?php
+                    echo $getreplies['replies'] ?> replies <i class="fas fa-chevron-down"></i>
+                        <?php
+                    }
+                    ?>
                     </a>
                 </p>
             </div>
@@ -80,7 +90,7 @@ if (!empty($getcomments)) {
             <div class="togglereplycomment" id="reply_<?php echo $row['gameCommID'] ?>">
                 <form class="pure-form pure-form-stacked" id="replyGameComment" method="post" action="../../controller/addcomment.php">
                     <fieldset>
-                        <textarea name="replygamecomment" rows="3" cols="60"></textarea>
+                        <textarea name="replygamecomment" class="comments"></textarea>
                         <input type="hidden" name="userID" value="<?php echo $_SESSION['userid'] ?>"/>
                         <input type="hidden" name="gamecommID" value="<?php echo $row['gameCommID'] ?>"/>
                         <input type="hidden" name="gameID" value="<?php echo $_GET['gameID'] ?>"/>
@@ -102,30 +112,22 @@ if (!empty($getcomments)) {
     <!--    //Checking comment reputation and adding a rep name based on the rep number-->
                     <p class="commrep">
                         <?php
-                            if($getrep['commthumbs'] <= 50) {
-                                echo 'Newbie';
-                            } else if($getrep['commthumbs'] > 50 && $getrep['commthumbs'] <= 500) {
-                                echo 'Partially Sick Member';
-                            } else if($getrep['commthumbs'] > 500) {
-                                echo 'Fully Sick Member';
-                            }
+                            include 'rep_comments.php';
                         ?>
                     </p>
     <!--    //Checking fix reputation and adding a rep name based on the rep number-->
                     <p class="fixrep">
                         <?php
-                            if($getrep['fixthumbs'] < 1) {
-                                //Display nothing
-                            } else if($getrep['fixthumbs'] <= 100) {
-                                echo 'Beginner Fixer';
-                            } else if($getrep['fixthumbs'] > 100 && $getrep['fixthumbs'] <= 500) {
-                                echo 'Intermediate Fixer';
-                            } else if($getrep['fixthumbs'] > 500) {
-                                echo 'Ultimate Fixer';
-                            }
+                            include 'rep_fix.php';
                         ?>
                     </p>
-                    <p class="date"><?php echo $row2['replyCommDateTime'] ?></p>
+                    <p class="date"><?php
+                        $phpdate = strtotime( $row2['replyCommDateTime'] );
+                        $mysqldate = date( 'd-m-Y g:i A', $phpdate );
+//                        echo $row['gameCommDateTime'] 
+                        echo $mysqldate
+//                        echo $row2['replyCommDateTime'] 
+                        ?></p>
                 </div>
                 <div class="actualcomment2">
                     <?php echo $row2['replyComment'] ?>
@@ -135,7 +137,7 @@ if (!empty($getcomments)) {
                         <i class="fas fa-thumbs-up"></i>
                         <span><?php echo $row2['replyCommThUp'] ?></span>
                     </span>
-                    <span class="red">
+                    <span class="orange">
                         <i class="fas fa-thumbs-down"></i>
                         <span><?php echo $row2['replyCommThDown'] ?></span>
                     </span>
@@ -155,24 +157,34 @@ if (!empty($getcomments)) {
     //If user is logged in then display comment container else display login ore register
     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) { 
 ?>
-    <div class="addcomment">
+<div class="addcomment">
         <form class="pure-form pure-form-stacked" id="gameComment" method="post" action="../../controller/addcomment.php">
             <fieldset>
-                <textarea name="gamecomment" rows="3" cols="60"></textarea>
+
+                <textarea name="gamecomment" class="comment" id="gamecomment" onchange="validateForm();"></textarea>
                 <input type="hidden" name="userID" value="<?php echo $_SESSION['userid'] ?>"/>
                 <input type="hidden" name="gameID" value="<?php echo $_GET['gameID'] ?>"/>
                 <input type="hidden" name="action_type" value="addgamecomment"/>
                 <button type="submit" class="pure-button pure-button-primary">Comment</button>
-            </fieldset> 
+            </fieldset>
+                    <?php
+        include 'error_section.php';
+    ?>            
+            <div id="gamecomment_error"></div>
         </form>
     </div>
     <?php
         } else {
     ?>
     <div class="addcomment">
-        <p>To add a comment or reply, please <a href="login.php">Login</a> or <a href="register.php">Register</a></p>
+        <p>To add a comment or reply, please <a class="yellow" href="login.php">Login</a> or <a class="yellow" href="register.php">Register</a></p>
     </div>
     <?php
         }
     ?>
+<script>             
+    $(document).ready(function() {
+        $('.comment').richText();
+    });       
+</script>
 </div>

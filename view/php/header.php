@@ -23,6 +23,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--    The text editor for comments section-->
+    <link rel="stylesheet" href="../js/jquery.richtext.min.js">
+    <link rel="stylesheet" href="../css/richtext.min.css">
+    <script src="../js/jquery.richtext.js"></script>
+    <!--    The datepicker-->
+<link rel="stylesheet" href="https://unpkg.com/js-datepicker/datepicker.css">
+
 <!--    <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.12.0/validate.min.js"></script>-->
     <link rel="stylesheet" href="../css/layouts/marketing.css">
     <link rel="stylesheet" href="../css/style.css">
