@@ -38,7 +38,7 @@
         const picker = datepicker('#date');
     });
 </script>
-<script src="https://unpkg.com/js-datepicker"></script>
+<script src="https://unpkg.com/js-datepicker@2.3.2/datepicker.min.js"></script>
 </div>
 <?php
     include 'footer.php';
