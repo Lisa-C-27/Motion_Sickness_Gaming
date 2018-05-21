@@ -17,6 +17,16 @@ function mostRecentGame() {
     return $result = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+function mostRecentFix() {
+    $selectfix = "SELECT game.gameName, game.gameID, fixDateTime FROM fix 
+    INNER JOIN game ON game.gameID = fix.gameID
+    ORDER BY fixDateTime DESC LIMIT 1;";
+    include 'connect.php';
+    $stmt = $conn->prepare($selectfix);
+    $stmt->execute();
+    return $result = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 //This function is called from 'view/php/individual_games.php'
 function get_one_game($gameID) {
     $selectonegame = "SELECT * FROM game WHERE gameID='" . $_GET['gameID'] . "'";
@@ -44,6 +54,126 @@ function updatethumbsdown($gameid) {
     $thumbsdown = "UPDATE game SET gameThDown = gameThDown + 1 WHERE gameID ='" . $gameid . "'";
     include 'connect.php';
     $stmt = $conn->prepare($thumbsdown);
+    $stmt->execute();
+    if ($stmt->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function updatethumbsup_gamecomm($commID){
+    $update = "UPDATE gamecomm SET gameCommThUp = gameCommThUp + 1 WHERE gamecommID ='" . $commID . "'";
+    include 'connect.php';
+    $stmt = $conn->prepare($update);
+    $stmt->execute();
+    if ($stmt->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function updatethumbsdown_gamecomm($commID){
+    $update = "UPDATE gamecomm SET gameCommThDown = gameCommThDown + 1 WHERE gamecommID ='" . $commID . "'";
+    include 'connect.php';
+    $stmt = $conn->prepare($update);
+    $stmt->execute();
+    if ($stmt->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function updatethumbsup_gamereply($commID){
+    $update = "UPDATE gamereply SET replyCommThUp = replyCommThUp + 1 WHERE gameReplyID ='" . $commID . "'";
+    include 'connect.php';
+    $stmt = $conn->prepare($update);
+    $stmt->execute();
+    if ($stmt->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function updatethumbsdown_gamereply($commID) {
+    $update = "UPDATE gamereply SET replyCommThDown = replyCommThDown + 1 WHERE gameReplyID ='" . $commID . "'";
+    include 'connect.php';
+    $stmt = $conn->prepare($update);
+    $stmt->execute();
+    if ($stmt->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function updatethumbsup_fix($commID){
+    $update = "UPDATE fix SET fixThUp = fixThUp + 1 WHERE fixID ='" . $commID . "'";
+    include 'connect.php';
+    $stmt = $conn->prepare($update);
+    $stmt->execute();
+    if ($stmt->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function updatethumbsdown_fix($commID) {
+    $update = "UPDATE fix SET fixThDown = fixThDown + 1 WHERE fixID ='" . $commID . "'";
+    include 'connect.php';
+    $stmt = $conn->prepare($update);
+    $stmt->execute();
+    if ($stmt->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function updatethumbsup_fixcomm($commID){
+    $update = "UPDATE fixcomm SET fixCommThUp = fixCommThUp + 1 WHERE fixCommID ='" . $commID . "'";
+    include 'connect.php';
+    $stmt = $conn->prepare($update);
+    $stmt->execute();
+    if ($stmt->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function updatethumbsdown_fixcomm($commID) {
+    $update = "UPDATE fixcomm SET fixCommThDown = fixCommThDown + 1 WHERE fixCommID ='" . $commID . "'";
+    include 'connect.php';
+    $stmt = $conn->prepare($update);
+    $stmt->execute();
+    if ($stmt->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function updatethumbsup_fixreply($commID){
+    $update = "UPDATE fixreply SET fixReplyThUp = fixReplyThUp + 1 WHERE fixReplyID ='" . $commID . "'";
+    include 'connect.php';
+    $stmt = $conn->prepare($update);
+    $stmt->execute();
+    if ($stmt->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function updatethumbsdown_fixreply($commID) {
+    $update = "UPDATE fixreply SET fixReplyThDown = fixReplyThDown + 1 WHERE fixReplyID ='" . $commID . "'";
+    include 'connect.php';
+    $stmt = $conn->prepare($update);
     $stmt->execute();
     if ($stmt->rowCount() > 0) {
         return true;

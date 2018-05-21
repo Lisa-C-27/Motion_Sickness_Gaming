@@ -390,9 +390,6 @@ a.yellow:hover {
 .red {
     color: red;
 }
-span.green {
-    padding-right: 10px;
-}
 .view {
     margin-left: 10px;
 }
@@ -475,4 +472,13 @@ div#viewUsers {
 #stats {
     background-color: white;
     width: 15%;
+}
+.index {
+    font-size: 25px;
+}
+
+input[type=number] {
+    border: none;
+    width: 50px;
+    background-color: white;
 }

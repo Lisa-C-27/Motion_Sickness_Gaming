@@ -42,14 +42,14 @@ if (!empty($getcomments)) {
             </div>
             <div class="actualcomment"><?php echo $row['gameComment'] ?></div>
             <div class="vote">
-                <span class="green">
+                <p class="green" onclick="updatethumb_gamecomm('up', <?php echo $row['gameCommID'] ?>)">
                     <i class="fas fa-thumbs-up"></i>
-                    <span><?php echo $row['gameCommThUp'] ?></span>
-                </span>
-                <span class="orange">
+                    <input type="number" disabled value="<?php echo $row['gameCommThUp'] ?>" id="up_<?php echo $row['gameCommID'] ?>"/>
+                </p>
+                <p class="orange" onclick="updatethumb_gamecomm('down', <?php echo $row['gameCommID'] ?>)">
                     <i class="fas fa-thumbs-down"></i>
-                    <span><?php echo $row['gameCommThDown'] ?></span>
-                </span>
+                    <input type="number" disabled value="<?php echo $row['gameCommThDown'] ?>" id="down_<?php echo $row['gameCommID'] ?>"/>
+                </p>
             </div>
             <div class="reply">
                 <?php
@@ -133,14 +133,16 @@ if (!empty($getcomments)) {
                     <?php echo $row2['replyComment'] ?>
                 </div>
                 <div class="vote2">
-                    <span class="green">
+                    <p class="green" onclick="updatethumb_gamereply('up', <?php echo $row2['gameReplyID'] ?>)">
                         <i class="fas fa-thumbs-up"></i>
-                        <span><?php echo $row2['replyCommThUp'] ?></span>
-                    </span>
-                    <span class="orange">
+                        <input type="number" disabled value="<?php echo $row2['replyCommThUp'] ?>" id="replyup_<?php echo $row2['gameReplyID'] ?>"/>
+                       
+                    </p>
+                    <p class="orange" onclick="updatethumb_gamereply('down', <?php echo $row2['gameReplyID'] ?>)">
                         <i class="fas fa-thumbs-down"></i>
-                        <span><?php echo $row2['replyCommThDown'] ?></span>
-                    </span>
+                        <input type="number" disabled value="<?php echo $row2['replyCommThDown'] ?>" id="replydown_<?php echo $row2['gameReplyID'] ?>"/>
+                        
+                    </p>
                 </div>
                 <?php
                 }
@@ -161,7 +163,7 @@ if (!empty($getcomments)) {
         <form class="pure-form pure-form-stacked" id="gameComment" method="post" action="../../controller/addcomment.php">
             <fieldset>
 
-                <textarea name="gamecomment" class="comment" id="gamecomment" onchange="validateForm();"></textarea>
+                <textarea name="gamecomment" class="comment" id="gamecomment" onchange="validateForm();" rows="3" cols="70"></textarea>
                 <input type="hidden" name="userID" value="<?php echo $_SESSION['userid'] ?>"/>
                 <input type="hidden" name="gameID" value="<?php echo $_GET['gameID'] ?>"/>
                 <input type="hidden" name="action_type" value="addgamecomment"/>
@@ -182,9 +184,11 @@ if (!empty($getcomments)) {
     <?php
         }
     ?>
+<!--
 <script>             
     $(document).ready(function() {
         $('.comment').richText();
     });       
 </script>
+-->
 </div>

@@ -80,15 +80,18 @@
             <h2 class="content-head content-head-ribbon">Most recently added game</h2>
             <?php 
             $getgame = mostRecentGame();
+            $getfix = mostRecentFix();
             ?>
-            <a href="#">
+            <a class="index" href="individual_games.php?gameID=<?php echo $getgame['gameID']; ?>">
                 <?php 
                 echo $getgame['gameName'];
             ?>
             </a>
             <h2 class="content-head content-head-ribbon">Most recently added fix</h2>
-            <a href="#">
-                Details of this fix will go here
+            <a class="index" href="individual_games.php?gameID=<?php echo $getfix['gameID']; ?>">
+                <?php 
+                    echo $getfix['gameName'];
+                ?>
             </a>
         </div>
     </div>

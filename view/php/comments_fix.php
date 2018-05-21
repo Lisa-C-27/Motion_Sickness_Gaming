@@ -18,18 +18,17 @@
                         $phpdate = strtotime( $row['fixDateTime'] );
                         $mysqldate = date( 'd-m-Y g:i A', $phpdate );
                         echo $mysqldate
-//                      echo $row['fixDateTime']; 
                     ?></span>
             </div>
             <div class="votefix">
-                <span class="green">
+                <p class="green" onclick="updatethumb_fix('up', <?php echo $row['fixID'] ?>);">
                     <i class="fas fa-thumbs-up"></i>
-                    <span><?php echo $row['fixThUp']; ?></span>
-                </span>
-                <span class="orange">
+                    <input type="number" disabled value="<?php echo $row['fixThUp'] ?>" id="fixup_<?php echo $row['fixID'] ?>"/>
+                </p>
+                <p class="orange" onclick="updatethumb_fix('down', <?php echo $row['fixID'] ?>);">
                     <i class="fas fa-thumbs-down"></i>
-                    <span><?php echo $row['fixThDown']; ?></span>
-                </span>
+                    <input type="number" disabled value="<?php echo $row['fixThDown'] ?>" id="fixdown_<?php echo $row['fixID'] ?>"/>
+                </p>
                 <p>
                     <?php
                     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) { 
@@ -113,14 +112,14 @@
                     <?php echo $row1['fixComment']; ?>
                 </div>                 
                 <div class="vote3">
-                    <span class="green">
+                    <p class="green" onclick="updatethumb_fixcomm('up', <?php echo $row1['fixCommID'] ?>);">
                         <i class="fas fa-thumbs-up"></i>
-                        <span><?php echo $row1['fixCommThUp']; ?></span>
-                    </span>
-                    <span class="orange">
+                        <input type="number" disabled value="<?php echo $row1['fixCommThUp'] ?>" id="fixcommup_<?php echo $row1['fixCommID'] ?>"/>
+                    </p>
+                    <p class="orange" onclick="updatethumb_fixcomm('down', <?php echo $row1['fixCommID'] ?>);">
                         <i class="fas fa-thumbs-down"></i>
-                        <span><?php echo $row1['fixCommThDown']; ?></span>
-                    </span>
+                        <input type="number" disabled value="<?php echo $row1['fixCommThDown'] ?>" id="fixcommdown_<?php echo $row1['fixCommID'] ?>"/>
+                    </p>
                     <?php
                     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) { 
                         ?>
@@ -195,14 +194,14 @@
                         <?php echo $row2['fixReply']; ?>
                     </div>
                     <div class="vote2">
-                        <span class="green">
+                        <p class="green" onclick="updatethumb_fixreply('up', <?php echo $row2['fixReplyID'] ?>);">
                             <i class="fas fa-thumbs-up"></i>
-                            <span><?php echo $row2['fixReplyThUp']; ?></span>
-                        </span>
-                        <span class="orange">
+                            <input type="number" disabled value="<?php echo $row2['fixReplyThUp'] ?>" id="fixreplyup_<?php echo $row2['fixReplyID'] ?>"/>
+                        </p>
+                        <p class="orange" onclick="updatethumb_fixreply('down', <?php echo $row2['fixReplyID'] ?>);">
                             <i class="fas fa-thumbs-down"></i>
-                            <span><?php echo $row2['fixReplyThDown']; ?></span>
-                        </span>
+                            <input type="number" disabled value="<?php echo $row2['fixReplyThDown'] ?>" id="fixreplydown_<?php echo $row2['fixReplyID'] ?>"/>
+                        </p>
                     </div>
 
                     <?php
