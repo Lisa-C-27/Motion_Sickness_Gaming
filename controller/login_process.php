@@ -45,12 +45,17 @@ try{
 
             //This sets session as active. Active/registered users can add games/fixes/comments
             } else if ($result['acctStatus'] == '1') {
+                
                 $_SESSION['loggedin'] = true;
                 $_SESSION['username'] = $result['username'];
                 $_SESSION['userid'] = $result['userID'];
                 $_SESSION['account'] = "active";
-                header('location: ../view/php/index.php');
-
+                if(!empty($_POST['gameID'])) {
+                    $gameID = $_POST['gameID'];
+                    header('location: ../view/php/individual_games.php?gameID='.$gameID);
+                } else {
+                    header('location: ../view/php/index.php');
+                }
             //If a disabled account tries to login it will display that the account is disabled
             } else if ($result['acctStatus'] == '2') {
                $_SESSION['message'] = "Login Error: Account has been disabled";

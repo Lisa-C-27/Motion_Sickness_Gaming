@@ -52,6 +52,13 @@
             <label for="remember" class="pure-checkbox">
                 <input id="remember" type="checkbox" name="remember"> Remember me
             </label>
+            <?php
+                if(isset($_GET['gameID'])) { 
+            ?>
+            <input type="hidden" name="gameID" value="<?php echo $_GET['gameID']; ?>"/>
+            <?php
+                }
+            ?>
             <button type="submit" class="pure-button pure-button-primary" name="login">Sign in</button>
         <?php
             include 'error_section.php';

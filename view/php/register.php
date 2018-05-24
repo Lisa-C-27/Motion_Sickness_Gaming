@@ -4,15 +4,6 @@
     include 'nav.php';
     include '../../model/connect.php';
 ?>
-<!--
-<div id="loader">
-    <div class="loading"></div>
-</div>
-<div id="pageloader">
-    <div class="loading"></div>
-</div>
--->
-
 <div class="content-center">
     
     <form class="pure-form pure-form-stacked" method="POST" action="../../controller/registration_process.php" name="registration">
@@ -25,20 +16,31 @@
         <label for="password">Password</label>
         <input id="password" type="password" placeholder="Password" name="userpass" pattern=".{7,30}" onchange="validateForm();"> 
         <div id="error_register_pass" class="red"></div>
+<!--
         <label for="date">Birth Date</label>
         <input placeholder="Date of Birth" type="text" id="date"/>
+-->
+        <?php
+            if(isset($_GET['gameID'])) { 
+        ?>
+        <input type="hidden" name="gameID" value="<?php echo $_GET['gameID']; ?>"/>
+        <?php
+            }
+        ?>
         <button type="submit" class="pure-button pure-button-primary" name="registration_form">Register</button>
         <?php
             include 'error_section.php';
         ?>
     </form>
 <!--The datepicker-->
+<!--
 <script>
     $(document).ready(function() {
         const picker = datepicker('#date');
     });
 </script>
-<script src="https://unpkg.com/js-datepicker"></script>
+<script src="https://unpkg.com/js-datepicker@2.3.2/datepicker.min.js"></script>
+-->
 </div>
 <?php
     include 'footer.php';

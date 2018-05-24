@@ -7,6 +7,9 @@
 <!-- GAME FIXES ---------------------------------------------------->
         <div class="fix">
             <div class="userinfofix"> 
+                <span>
+                    <img class="avatar" src="<?php echo $row['url']; ?>"/>
+                </span>
                 <span class="username"><?php echo $row['username']; ?></span>
                 <?php $getrep = getThumbs($row['userID']); ?>
                 <span class="fixrep">
@@ -21,11 +24,11 @@
                     ?></span>
             </div>
             <div class="votefix">
-                <p class="green" onclick="updatethumb_fix('up', <?php echo $row['fixID'] ?>);">
+                <p class="green" onclick="updatethumb_fix('up', <?php echo $row['fixID'] ?>, <?php echo $row['userID'] ?>);">
                     <i class="fas fa-thumbs-up"></i>
                     <input type="number" disabled value="<?php echo $row['fixThUp'] ?>" id="fixup_<?php echo $row['fixID'] ?>"/>
                 </p>
-                <p class="orange" onclick="updatethumb_fix('down', <?php echo $row['fixID'] ?>);">
+                <p class="orange" onclick="updatethumb_fix('down', <?php echo $row['fixID'] ?>, <?php echo $row['userID'] ?>);">
                     <i class="fas fa-thumbs-down"></i>
                     <input type="number" disabled value="<?php echo $row['fixThDown'] ?>" id="fixdown_<?php echo $row['fixID'] ?>"/>
                 </p>
@@ -89,7 +92,10 @@
                 ?>    
 
                 <div class="userinfo3">
-                    <p class="username"><?php echo $row1['username']; ?></p>
+                    <p>
+                        <img class="avatar" src="<?php echo $row1['url']; ?>"/>
+                        <span class="username"><?php echo $row1['username'] ?></span>
+                    </p>
                     <?php $getrep = getThumbs($row1['userID']); ?>
                     <p class="commrep">
                         <?php
@@ -112,11 +118,11 @@
                     <?php echo $row1['fixComment']; ?>
                 </div>                 
                 <div class="vote3">
-                    <p class="green" onclick="updatethumb_fixcomm('up', <?php echo $row1['fixCommID'] ?>);">
+                    <p class="green" onclick="updatethumb_fixcomm('up', <?php echo $row1['fixCommID'] ?>, <?php echo $row1['userID'] ?>);">
                         <i class="fas fa-thumbs-up"></i>
                         <input type="number" disabled value="<?php echo $row1['fixCommThUp'] ?>" id="fixcommup_<?php echo $row1['fixCommID'] ?>"/>
                     </p>
-                    <p class="orange" onclick="updatethumb_fixcomm('down', <?php echo $row1['fixCommID'] ?>);">
+                    <p class="orange" onclick="updatethumb_fixcomm('down', <?php echo $row1['fixCommID'] ?>, <?php echo $row1['userID'] ?>);">
                         <i class="fas fa-thumbs-down"></i>
                         <input type="number" disabled value="<?php echo $row1['fixCommThDown'] ?>" id="fixcommdown_<?php echo $row1['fixCommID'] ?>"/>
                     </p>
@@ -171,7 +177,10 @@
 
 
                     <div class="userinfo2">
-                        <p class="username"><?php echo $row2['username']; ?></p>
+                        <p>
+                            <img class="avatar" src="<?php echo $row2['url']; ?>"/>
+                            <span class="username"><?php echo $row2['username'] ?></span>
+                        </p>
                         <?php $getrep = getThumbs($row2['userID']); ?>
                         <p class="commrep">
                             <?php
@@ -194,11 +203,11 @@
                         <?php echo $row2['fixReply']; ?>
                     </div>
                     <div class="vote2">
-                        <p class="green" onclick="updatethumb_fixreply('up', <?php echo $row2['fixReplyID'] ?>);">
+                        <p class="green" onclick="updatethumb_fixreply('up', <?php echo $row2['fixReplyID'] ?>, <?php echo $row2['userID'] ?>);">
                             <i class="fas fa-thumbs-up"></i>
                             <input type="number" disabled value="<?php echo $row2['fixReplyThUp'] ?>" id="fixreplyup_<?php echo $row2['fixReplyID'] ?>"/>
                         </p>
-                        <p class="orange" onclick="updatethumb_fixreply('down', <?php echo $row2['fixReplyID'] ?>);">
+                        <p class="orange" onclick="updatethumb_fixreply('down', <?php echo $row2['fixReplyID'] ?>, <?php echo $row2['userID'] ?>);">
                             <i class="fas fa-thumbs-down"></i>
                             <input type="number" disabled value="<?php echo $row2['fixReplyThDown'] ?>" id="fixreplydown_<?php echo $row2['fixReplyID'] ?>"/>
                         </p>
@@ -229,7 +238,7 @@
         } else {
     ?>
     <div class="addcomment">
-        <p>To add a game fix, comment or reply, please <a class="yellow"  href="login.php">Login</a> or <a class="yellow" href="register.php">Register</a></p>
+        <p>To add a game fix, comment or reply, please <a class="yellow" href="login.php?gameID=<?php echo $_GET['gameID'] ?>">Login</a> or <a class="yellow" href="register.php?gameID=<?php echo $_GET['gameID'] ?>">Register</a></p>
     </div>
     <?php
         }

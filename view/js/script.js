@@ -255,8 +255,8 @@ function hideuserbutton() {
     document.getElementById("hide").style.display = "none";
 }
 
-function updatethumb_gamecomm(direction, id) {
-    $url = "../../controller/thumbs_increment.php?type=comment&direction="+direction+ "&commID="+id;
+function updatethumb_gamecomm(direction, id, userID) {
+    $url = "../../controller/thumbs_increment.php?type=comment&direction="+direction+ "&commID="+id+ "&userID="+userID;
     if(direction == "up") {
         $.ajax( {
         url: $url,
@@ -287,8 +287,8 @@ function updatethumb_gamecomm(direction, id) {
     }
 }
 
-function updatethumb_gamereply(direction, id) {
-    $url = "../../controller/thumbs_increment.php?type=reply&direction="+direction+ "&commID="+id;
+function updatethumb_gamereply(direction, id, userID) {
+    $url = "../../controller/thumbs_increment.php?type=reply&direction="+direction+ "&commID="+id+ "&userID="+userID;
     if(direction == "up") {
         $.ajax( {
         url: $url,
@@ -319,8 +319,8 @@ function updatethumb_gamereply(direction, id) {
     }
 }
 
-function updatethumb_fix(direction, id) {
-    $url = "../../controller/thumbs_increment.php?type=fix&direction="+direction+ "&commID="+id;
+function updatethumb_fix(direction, id, userID) {
+    $url = "../../controller/thumbs_increment.php?type=fix&direction="+direction+ "&commID="+id+ "&userID="+userID;
     if(direction == "up") {
         $.ajax( {
         url: $url,
@@ -351,8 +351,8 @@ function updatethumb_fix(direction, id) {
     }
 }
 
-function updatethumb_fixcomm(direction, id) {
-    $url = "../../controller/thumbs_increment.php?type=fixcomment&direction="+direction+ "&commID="+id;
+function updatethumb_fixcomm(direction, id, userID) {
+    $url = "../../controller/thumbs_increment.php?type=fixcomment&direction="+direction+ "&commID="+id+ "&userID="+userID;
     if(direction == "up") {
         $.ajax( {
         url: $url,
@@ -383,8 +383,8 @@ function updatethumb_fixcomm(direction, id) {
     }
 }
 
-function updatethumb_fixreply(direction, id) {
-    $url = "../../controller/thumbs_increment.php?type=fixreply&direction="+direction+ "&commID="+id;
+function updatethumb_fixreply(direction, id, userID) {
+    $url = "../../controller/thumbs_increment.php?type=fixreply&direction="+direction+ "&commID="+id+ "&userID="+userID;
     if(direction == "up") {
         $.ajax( {
         url: $url,
@@ -413,6 +413,17 @@ function updatethumb_fixreply(direction, id) {
         }
     });
     }
+}
+
+function selectAvatar() {
+    var x = document.getElementById("newAvatar");
+    if (!x.style.display || x.style.display === "none") {
+        x.style.display = "block";
+        x.style.padding = "5px";
+    } else {
+        x.style.display = "none";
+        x.style.padding = "0";
+    } 
 }
 
 //function addComment() {

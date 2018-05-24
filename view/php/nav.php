@@ -32,14 +32,25 @@
                 <a class="pure-menu-link" href="../../controller/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </li>
             <!-- If user is not logged in display Login and Register-->
-            <?php } else { ?>
+            <?php } else { 
+                if(isset($_GET['gameID'])) {
+            ?>
+            <li class="pure-menu-item"> 
+                <a href="login.php?gameID=<?php echo $_GET['gameID'] ?>" class="pure-menu-link">Sign In</a>
+            </li>
             <li class="pure-menu-item">
+                <a href="register.php?gameID=<?php echo $_GET['gameID'] ?>" class="pure-menu-link">Register</a>
+            </li>
+                <?php
+                } else {
+                ?>
+            <li class="pure-menu-item"> 
                 <a href="login.php" class="pure-menu-link">Sign In</a>
             </li>    
             <li class="pure-menu-item">
                 <a href="register.php" class="pure-menu-link">Register</a>
             </li>
-            <?php }; ?>
+            <?php }}; ?>
         </ul>
     </div>
 </div>

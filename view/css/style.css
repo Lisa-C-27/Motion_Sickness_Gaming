@@ -56,6 +56,9 @@
 .gamevote {
     padding: 1%;
 }
+.gamevote p {
+    font-family: 'Source Sans Pro', sans-serif;
+}
 .inline {
     display: inline-block;
 }
@@ -66,6 +69,9 @@
 .comment-container {
     width: 100%;
     margin: 1%;
+    font-family: 'Source Sans Pro', sans-serif;
+/*    font-family: 'Roboto Condensed', sans-serif;*/
+/*    letter-spacing: 1px;*/
 }
 .comments {
     width: 100%;
@@ -164,7 +170,7 @@ a.yellow:hover {
     padding-right: 1%;
     border-bottom: 1px solid lightgrey;
     border-right: 1px solid lightgrey;
-    background: white;
+    background-color: #fbfbfb;
     margin-bottom: 2px;
 }
 .vote {
@@ -173,7 +179,7 @@ a.yellow:hover {
     grid-row-start: 1;
     grid-row-end: 2;
     padding-left: 5px;
-    background: white;
+    background-color: #fbfbfb;
     border-top-right-radius: 5px;
 }
 .reply {
@@ -183,7 +189,7 @@ a.yellow:hover {
     grid-row-end: 3;
     padding-left: 5px;
     border-bottom: 1px solid lightgrey;
-    background: white;
+    background-color: #fbfbfb;
     border-bottom-right-radius: 5px;
     margin-bottom: 2px;
 }
@@ -229,7 +235,7 @@ a.yellow:hover {
     padding-right: 1%;
     border-right: 1px solid lightgrey;
     border-bottom: 1px solid lightgrey;
-    background: white;
+    background-color: #fbfbfb;
     margin-bottom: 2px;
     
 }
@@ -237,7 +243,7 @@ a.yellow:hover {
     grid-column-start: 4;
     grid-column-end: 5;
     padding-left: 1%;
-    background: white;
+    background-color: #fbfbfb;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border-bottom: 1px solid lightgrey;
@@ -261,14 +267,14 @@ a.yellow:hover {
     padding-right: 1%;
     border-bottom: 1px solid lightgrey;
     border-right: 1px solid lightgrey;
-    background: white;
+    background-color: #fbfbfb;
     margin-bottom: 2px;
 }
 .vote3 {
     grid-column-start: 4;
     grid-column-end: 5;
     padding-left: 5px;
-    background: white;
+    background-color: #fbfbfb;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border-bottom: 1px solid lightgrey;
@@ -279,7 +285,7 @@ a.yellow:hover {
     grid-template-columns: 83% 17%;
     border-bottom: 1px solid lightgrey;
     margin-bottom: 2px;
-    background-color: white;
+    background-color: #fbfbfb;
     
 }
 .userinfofix {
@@ -295,7 +301,7 @@ a.yellow:hover {
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 1;
-    grid-row-end: 3;
+    grid-row-end: 4;
 /*    background-color: white;*/
     border-top-right-radius: 5px;
 /*    text-align: right;*/
@@ -307,6 +313,8 @@ a.yellow:hover {
     grid-row-end: 3;
 /*    background-color: white;*/
     padding-left: 10px;
+    font-size: 20px;
+    
 }
 .replyfix {
     grid-column-start: 1;
@@ -324,7 +332,8 @@ a.yellow:hover {
 }
 .pure-button.thumbs {
     background-color: #054135;
-    padding: 0.15em;
+    padding: 2px 5px;
+    margin-left: 5px;
 }
 .pure-button.thumbs:hover {
     background-color: #EEAC4E;
@@ -337,7 +346,7 @@ a.yellow:hover {
     padding: 0.5em 1em;
 }
 .game-button {
-    min-height: 80px;
+    margin-top: -20px;
 }
 .games_message {
     background-color: #FCE54A;
@@ -364,12 +373,13 @@ a.yellow:hover {
     padding-left: 15px;
 }
 .username {
-/*    color: coral;*/
     padding-bottom: 0;
     margin-bottom: 0;
     font-size: 18px;
     font-weight: bold;
-    padding-left: 10px;
+    padding-left: 3px;
+    vertical-align: bottom;
+    letter-spacing: 0.5px;
 }
 .date {
     font-size: 12px;
@@ -480,5 +490,45 @@ div#viewUsers {
 input[type=number] {
     border: none;
     width: 50px;
-    background-color: white;
+    background-color: #fbfbfb;
+}
+.avatar-profile {
+    width: 50px;
+    height: 50px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+.avatar {
+    width: 25px;
+    height: 25px;
+    padding: 2px;
+    border: 1px solid grey;
+    margin: 2px 0px 2px 2px;
+}
+#newAvatar {
+    display: none;
+    background: rgba(255,255,255,0.5) 
+}
+#avatar-profile-container {
+    width: 160px;
+    height: 130px;
+    text-align: center;
+    align-content: center;
+    border: 1px solid #EEAC4E;
+    padding: 5px;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+    margin-bottom: 5px;
+}
+.avatar-button {
+    background-color: #EEAC4E;
+    border: none;
+    color: white;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}
+.avatar-button:hover {
+    background-color:  #FCE54A;
+    color: #002921;
 }

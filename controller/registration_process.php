@@ -22,7 +22,7 @@
                 header('Location: ../view/php/register.php');
             } else {
 
-            $insertuser = "INSERT INTO user (username, password, acctStatus) VALUES (:username, :password, '1')";
+            $insertuser = "INSERT INTO user (username, password, acctStatus, avatarID) VALUES (:username, :password, '1', '1')";
             include '../model/connect.php';
             $stmt = $conn->prepare($insertuser);
             $stmt->bindParam(':username', $username, PDO::PARAM_STR);
@@ -30,11 +30,22 @@
             $stmt->execute();
             $userID = $conn->lastInsertID();
             
+            $insertrep = "INSERT INTO rep_calcs (userID) VALUES (:userID)";
+            include '../model/connect.php';
+            $stmt = $conn->prepare($insertrep);
+            $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+            $stmt->execute();
+            
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $_POST['username'];
             $_SESSION['userid'] = $userID;
             $_SESSION['account'] = 'active';
-            header('location: ../view/php/index.php');
+            if(!empty($_POST['gameID'])) {
+                $gameID = $_POST['gameID'];
+                header('location: ../view/php/individual_games.php?gameID='.$gameID);
+            } else {
+                header('location: ../view/php/index.php');
+            }
         }
         }else {
             $_SESSION['message'] = "Username already exists";   

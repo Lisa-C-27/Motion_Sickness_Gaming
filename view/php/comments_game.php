@@ -8,7 +8,11 @@ if (!empty($getcomments)) {
     ?>
         <div class="databaseComments" id="#comment_<?php echo $row['gameCommID'] ?>">
             <div class="userinfo entry<?php echo $counter ?>">
-                <p class="username"><?php echo $row['username'] ?></p>
+                
+                <p>
+                    <img class="avatar" src="<?php echo $row['url']; ?>"/>
+                    <span class="username"><?php echo $row['username'] ?></span>
+                </p>
                 <?php
                     $getrep = getThumbs($row['userID']);
                     $getreply = getGameReply($row['gameCommID']);
@@ -42,11 +46,11 @@ if (!empty($getcomments)) {
             </div>
             <div class="actualcomment"><?php echo $row['gameComment'] ?></div>
             <div class="vote">
-                <p class="green" onclick="updatethumb_gamecomm('up', <?php echo $row['gameCommID'] ?>)">
+                <p class="green" onclick="updatethumb_gamecomm('up', <?php echo $row['gameCommID']; ?>, <?php echo $row['userID'] ?>);">
                     <i class="fas fa-thumbs-up"></i>
-                    <input type="number" disabled value="<?php echo $row['gameCommThUp'] ?>" id="up_<?php echo $row['gameCommID'] ?>"/>
+                    <input type="number" disabled value="<?php echo $row['gameCommThUp']; ?>" id="up_<?php echo $row['gameCommID']; ?>"/>
                 </p>
-                <p class="orange" onclick="updatethumb_gamecomm('down', <?php echo $row['gameCommID'] ?>)">
+                <p class="orange" onclick="updatethumb_gamecomm('down', <?php echo $row['gameCommID'] ?>, <?php echo $row['userID'] ?>);">
                     <i class="fas fa-thumbs-down"></i>
                     <input type="number" disabled value="<?php echo $row['gameCommThDown'] ?>" id="down_<?php echo $row['gameCommID'] ?>"/>
                 </p>
@@ -105,7 +109,10 @@ if (!empty($getcomments)) {
                     foreach($getreply as $row2) {
                 ?>
                 <div class="userinfo2">
-                    <p class="username"><?php echo $row2['username'] ?></p>
+                    <p>
+                        <img class="avatar" src="<?php echo $row2['url']; ?>"/>
+                        <span class="username"><?php echo $row2['username'] ?></span>
+                    </p>
                     <?php
                         $getrep = getThumbs($row2['userID']);
                     ?>
@@ -133,12 +140,12 @@ if (!empty($getcomments)) {
                     <?php echo $row2['replyComment'] ?>
                 </div>
                 <div class="vote2">
-                    <p class="green" onclick="updatethumb_gamereply('up', <?php echo $row2['gameReplyID'] ?>)">
+                    <p class="green" onclick="updatethumb_gamereply('up', <?php echo $row2['gameReplyID'] ?>, <?php echo $row2['userID'] ?>)">
                         <i class="fas fa-thumbs-up"></i>
                         <input type="number" disabled value="<?php echo $row2['replyCommThUp'] ?>" id="replyup_<?php echo $row2['gameReplyID'] ?>"/>
                        
                     </p>
-                    <p class="orange" onclick="updatethumb_gamereply('down', <?php echo $row2['gameReplyID'] ?>)">
+                    <p class="orange" onclick="updatethumb_gamereply('down', <?php echo $row2['gameReplyID'] ?>, <?php echo $row2['userID'] ?>)">
                         <i class="fas fa-thumbs-down"></i>
                         <input type="number" disabled value="<?php echo $row2['replyCommThDown'] ?>" id="replydown_<?php echo $row2['gameReplyID'] ?>"/>
                         
@@ -179,7 +186,7 @@ if (!empty($getcomments)) {
         } else {
     ?>
     <div class="addcomment">
-        <p>To add a comment or reply, please <a class="yellow" href="login.php">Login</a> or <a class="yellow" href="register.php">Register</a></p>
+        <p>To add a comment or reply, please <a class="yellow" href="login.php?gameID=<?php echo $_GET['gameID'] ?>">Login</a> or <a class="yellow" href="register.php?gameID=<?php echo $_GET['gameID'] ?>">Register</a></p>
     </div>
     <?php
         }

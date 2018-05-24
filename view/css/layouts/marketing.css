@@ -84,8 +84,14 @@ a.pure-button-primary {
     color: black;
     border-radius: 5px;
     font-size: 120%;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
 }
 
+a.pure-button-primary:hover {
+    background: #FCE54A;
+    text-decoration: none;
+}
 
 /*
  * -- MENU STYLES --

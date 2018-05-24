@@ -36,6 +36,44 @@ function get_one_game($gameID) {
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+function updateRep($userID) {
+    $update = "UPDATE rep_calcs SET 
+    gameCommRep = (SELECT SUM(IFNULL(gameCommThUp,0)-IFNULL(gameCommThDown,0)) FROM gamecomm WHERE userID ='" . $userID . "'),
+    gameReplyRep = (SELECT SUM(IFNULL(replyCommThUp,0)-IFNULL(replyCommThDown,0)) FROM gamereply WHERE userID ='" . $userID . "'),
+    fixReplyRep = (SELECT SUM(IFNULL(fixReplyThUp,0)-IFNULL(fixReplyThDown,0)) FROM fixreply WHERE userID ='" . $userID . "'),
+    fixCommRep = (SELECT SUM(IFNULL(fixCommThUp,0)-IFNULL(fixCommThDown,0)) FROM fixcomm WHERE userID ='" . $userID . "')
+    WHERE userID ='" . $userID . "';";
+    include 'connect.php';
+    $stmt = $conn->prepare($update);
+    $stmt->execute();
+    if ($stmt->rowCount() > 0) {
+        $update2 = "UPDATE user SET commRep = 
+        (SELECT SUM(fixCommRep+fixReplyRep+gameCommRep+gameReplyRep) 
+        FROM rep_calcs WHERE userID ='" . $userID . "')
+        WHERE userID ='" . $userID . "';";
+        include 'connect.php';
+        $stmt = $conn->prepare($update2);
+        $stmt->execute();
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function updateRepFix($userID) {
+    $update = "UPDATE user SET fixRep = 
+    (SELECT SUM(fixThUp-fixThDown) FROM fix WHERE userID ='" . $userID . "')
+    WHERE userID = '" . $userID . "';";
+    include 'connect.php';
+    $stmt = $conn->prepare($update);
+    $stmt->execute();
+    if ($stmt->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 //This function is called from 'view/php/individual_games.php'
 function updatethumbsup($gameid) {
     $thumbsup = "UPDATE game SET gameThUp = gameThUp + 1 WHERE gameID ='" . $gameid . "'";
@@ -62,120 +100,141 @@ function updatethumbsdown($gameid) {
     }
 }
 
-function updatethumbsup_gamecomm($commID){
+function updatethumbsup_gamecomm($commID, $userID){
     $update = "UPDATE gamecomm SET gameCommThUp = gameCommThUp + 1 WHERE gamecommID ='" . $commID . "'";
     include 'connect.php';
     $stmt = $conn->prepare($update);
     $stmt->execute();
     if ($stmt->rowCount() > 0) {
+        updateRep($userID);
+//        $update2 = "UPDATE rep_calcs SET 
+//        gameCommRep = (SELECT SUM(IFNULL(gameCommThUp,0)-IFNULL(gameCommThDown,0)) FROM gamecomm WHERE userID ='" . $userID . "')
+//        WHERE userID ='" . $userID . "';";
+//        include 'connect.php';
+//        $stmt = $conn->prepare($update2);
+//        $stmt->execute();
         return true;
     } else {
         return false;
     }
 }
 
-function updatethumbsdown_gamecomm($commID){
+function updatethumbsdown_gamecomm($commID, $userID){
     $update = "UPDATE gamecomm SET gameCommThDown = gameCommThDown + 1 WHERE gamecommID ='" . $commID . "'";
     include 'connect.php';
     $stmt = $conn->prepare($update);
     $stmt->execute();
     if ($stmt->rowCount() > 0) {
+        updateRep($userID);
+//        $update2 = "UPDATE rep_calcs SET 
+//        gameCommRep = (SELECT SUM(IFNULL(gameCommThUp,0)-IFNULL(gameCommThDown,0)) FROM gamecomm WHERE userID ='" . $userID . "')
+//        WHERE userID ='" . $userID . "';";
+//        include 'connect.php';
+//        $stmt = $conn->prepare($update2);
         return true;
     } else {
         return false;
     }
 }
 
-function updatethumbsup_gamereply($commID){
+function updatethumbsup_gamereply($commID, $userID){
     $update = "UPDATE gamereply SET replyCommThUp = replyCommThUp + 1 WHERE gameReplyID ='" . $commID . "'";
     include 'connect.php';
     $stmt = $conn->prepare($update);
     $stmt->execute();
     if ($stmt->rowCount() > 0) {
+        updateRep($userID);
         return true;
     } else {
         return false;
     }
 }
 
-function updatethumbsdown_gamereply($commID) {
+function updatethumbsdown_gamereply($commID, $userID) {
     $update = "UPDATE gamereply SET replyCommThDown = replyCommThDown + 1 WHERE gameReplyID ='" . $commID . "'";
     include 'connect.php';
     $stmt = $conn->prepare($update);
     $stmt->execute();
     if ($stmt->rowCount() > 0) {
+        updateRep($userID);
         return true;
     } else {
         return false;
     }
 }
 
-function updatethumbsup_fix($commID){
+function updatethumbsup_fix($commID, $userID){
     $update = "UPDATE fix SET fixThUp = fixThUp + 1 WHERE fixID ='" . $commID . "'";
     include 'connect.php';
     $stmt = $conn->prepare($update);
     $stmt->execute();
     if ($stmt->rowCount() > 0) {
+        updateRepFix($userID);
         return true;
     } else {
         return false;
     }
 }
 
-function updatethumbsdown_fix($commID) {
+function updatethumbsdown_fix($commID, $userID) {
     $update = "UPDATE fix SET fixThDown = fixThDown + 1 WHERE fixID ='" . $commID . "'";
     include 'connect.php';
     $stmt = $conn->prepare($update);
     $stmt->execute();
     if ($stmt->rowCount() > 0) {
+        updateRepFix($userID);
         return true;
     } else {
         return false;
     }
 }
 
-function updatethumbsup_fixcomm($commID){
+function updatethumbsup_fixcomm($commID, $userID){
     $update = "UPDATE fixcomm SET fixCommThUp = fixCommThUp + 1 WHERE fixCommID ='" . $commID . "'";
     include 'connect.php';
     $stmt = $conn->prepare($update);
     $stmt->execute();
     if ($stmt->rowCount() > 0) {
+        updateRep($userID);
         return true;
     } else {
         return false;
     }
 }
 
-function updatethumbsdown_fixcomm($commID) {
+function updatethumbsdown_fixcomm($commID, $userID) {
     $update = "UPDATE fixcomm SET fixCommThDown = fixCommThDown + 1 WHERE fixCommID ='" . $commID . "'";
     include 'connect.php';
     $stmt = $conn->prepare($update);
     $stmt->execute();
     if ($stmt->rowCount() > 0) {
+        updateRep($userID);
         return true;
     } else {
         return false;
     }
 }
 
-function updatethumbsup_fixreply($commID){
+function updatethumbsup_fixreply($commID, $userID){
     $update = "UPDATE fixreply SET fixReplyThUp = fixReplyThUp + 1 WHERE fixReplyID ='" . $commID . "'";
     include 'connect.php';
     $stmt = $conn->prepare($update);
     $stmt->execute();
     if ($stmt->rowCount() > 0) {
+        updateRep($userID);
         return true;
     } else {
         return false;
     }
 }
 
-function updatethumbsdown_fixreply($commID) {
+function updatethumbsdown_fixreply($commID, $userID) {
     $update = "UPDATE fixreply SET fixReplyThDown = fixReplyThDown + 1 WHERE fixReplyID ='" . $commID . "'";
     include 'connect.php';
     $stmt = $conn->prepare($update);
     $stmt->execute();
     if ($stmt->rowCount() > 0) {
+        updateRep($userID);
         return true;
     } else {
         return false;
@@ -184,9 +243,10 @@ function updatethumbsdown_fixreply($commID) {
 
 //This function is to grab game comments and username
 function getGameComments($gameid) {
-    $comment = "SELECT user.username, gameComment, gameCommDateTime, gameCommThUp, gameCommThDown, gameComm.userID, gameID, gameCommID 
+    $comment = "SELECT user.username, user.avatarID, avatar.url, gameComment, gameCommDateTime, gameCommThUp, gameCommThDown, gameComm.userID, gameID, gameCommID 
     FROM gamecomm
     INNER JOIN user ON user.userID = gameComm.userID
+    INNER JOIN avatar ON avatar.avatarID = user.avatarID
     WHERE gameID ='" . $gameid . "'
     ORDER BY gameCommDateTime DESC";
     include 'connect.php';
@@ -197,9 +257,10 @@ function getGameComments($gameid) {
 
 //This function is to grab the game fixes and username
 function getFixes($gameID) {
-    $fix = "SELECT user.username, fixInfo, fixDateTime, fixThUp, fixThDown, fix.userID, gameID, fixID 
+    $fix = "SELECT user.username, user.avatarID, avatar.url, fixInfo, fixDateTime, fixThUp, fixThDown, fix.userID, gameID, fixID 
     FROM fix
     INNER JOIN user ON user.userID = fix.userID
+    INNER JOIN avatar ON avatar.avatarID = user.avatarID
     WHERE gameID ='" . $gameID . "'
     ORDER BY fixThUp DESC";
     include 'connect.php';
@@ -210,9 +271,10 @@ function getFixes($gameID) {
 
 //This function gets game reply comments
 function getGameReply($gamecommID) {
-    $comment = "SELECT user.username, gameReplyID, replyComment, replyCommDateTime, replyCommThUp, replyCommThDown, gamereply.userID, gameCommID 
+    $comment = "SELECT user.username, user.avatarID, avatar.url, gameReplyID, replyComment, replyCommDateTime, replyCommThUp, replyCommThDown, gamereply.userID, gameCommID 
     FROM gamereply
     INNER JOIN user ON user.userID = gamereply.userID
+    INNER JOIN avatar ON avatar.avatarID = user.avatarID
     WHERE gamecommID ='" . $gamecommID . "'
     ORDER BY replyCommDateTime DESC";
     include 'connect.php';
@@ -223,31 +285,39 @@ function getGameReply($gamecommID) {
 
 
 //This function is to grab all thumbs up and thumbs down info from the database for a particular user to calculate their Rep 
+//function getThumbs($userID) {
+//    $rep= "SELECT user.userID, user.username, SUM(IFNULL(a.commthumbs,0)+IFNULL(b.commthumbs,0)+IFNULL(c.commthumbs,0)+IFNULL(d.commthumbs,0)) AS 'commthumbs', 
+//    IFNULL(e.fixthumbs,0) AS 'fixthumbs'
+//    FROM user
+//    LEFT JOIN (
+//        SELECT userID, SUM(IFNULL(gameCommThUp,0)-IFNULL(gameCommThDown,0)) AS 'commthumbs'
+//        FROM gamecomm
+//        GROUP BY userID) a ON a.userID = user.userID
+//    LEFT JOIN (
+//        SELECT userID, SUM(IFNULL(fixCommThUp,0)-IFNULL(fixCommThDown,0)) AS 'commthumbs'
+//        FROM fixcomm
+//        GROUP BY userID) b ON b.userID = user.userID
+//    LEFT JOIN (
+//        SELECT userID, SUM(IFNULL(replyCommThUp,0)-IFNULL(replyCommThDown,0)) AS 'commthumbs'
+//        FROM gamereply
+//        GROUP BY userID) c ON c.userID = user.userID  
+//    LEFT JOIN (
+//        SELECT userID, SUM(IFNULL(fixReplyThUp,0)-IFNULL(fixReplyThDown,0)) AS 'commthumbs'
+//        FROM fixreply
+//        GROUP BY userID) d ON d.userID = user.userID    
+//    LEFT JOIN (
+//        SELECT userID, SUM(IFNULL(fixThUp,0)-IFNULL(fixThDown,0)) AS 'fixthumbs'
+//        FROM fix
+//        GROUP BY userID) e ON e.userID = user.userID
+//    WHERE user.userID ='" . $userID . "'";
+//    include 'connect.php';
+//    $stmt = $conn->prepare($rep);
+//    $result = $stmt->execute();
+//    return $stmt->fetch(PDO::FETCH_ASSOC);
+//}
+
 function getThumbs($userID) {
-    $rep= "SELECT user.userID, user.username, SUM(IFNULL(a.commthumbs,0)+IFNULL(b.commthumbs,0)+IFNULL(c.commthumbs,0)+IFNULL(d.commthumbs,0)) AS 'commthumbs', 
-    IFNULL(e.fixthumbs,0) AS 'fixthumbs'
-    FROM user
-    LEFT JOIN (
-        SELECT userID, SUM(IFNULL(gameCommThUp,0)-IFNULL(gameCommThDown,0)) AS 'commthumbs'
-        FROM gamecomm
-        GROUP BY userID) a ON a.userID = user.userID
-    LEFT JOIN (
-        SELECT userID, SUM(IFNULL(fixCommThUp,0)-IFNULL(fixCommThDown,0)) AS 'commthumbs'
-        FROM fixcomm
-        GROUP BY userID) b ON b.userID = user.userID
-    LEFT JOIN (
-        SELECT userID, SUM(IFNULL(replyCommThUp,0)-IFNULL(replyCommThDown,0)) AS 'commthumbs'
-        FROM gamereply
-        GROUP BY userID) c ON c.userID = user.userID  
-    LEFT JOIN (
-        SELECT userID, SUM(IFNULL(fixReplyThUp,0)-IFNULL(fixReplyThDown,0)) AS 'commthumbs'
-        FROM fixreply
-        GROUP BY userID) d ON d.userID = user.userID    
-    LEFT JOIN (
-        SELECT userID, SUM(IFNULL(fixThUp,0)-IFNULL(fixThDown,0)) AS 'fixthumbs'
-        FROM fix
-        GROUP BY userID) e ON e.userID = user.userID
-    WHERE user.userID ='" . $userID . "'";
+    $rep = "SELECT commRep, fixRep FROM user WHERE userID ='" . $userID . "'";
     include 'connect.php';
     $stmt = $conn->prepare($rep);
     $result = $stmt->execute();
@@ -296,9 +366,10 @@ function getFixCommentNumber($fixID) {
 }
 
 function getFixComments($fixID) {
-    $comment = "SELECT user.username, fixCommID, fixComment, fixCommDateTime, fixCommThUp, fixCommThDown, fixcomm.userID, fixID 
+    $comment = "SELECT user.username, user.avatarID, avatar.url, fixCommID, fixComment, fixCommDateTime, fixCommThUp, fixCommThDown, fixcomm.userID, fixID 
     FROM fixcomm
     INNER JOIN user ON user.userID = fixcomm.userID
+    INNER JOIN avatar ON avatar.avatarID = user.avatarID
     WHERE fixID ='" . $fixID . "'
     ORDER BY fixCommDateTime DESC";
     include 'connect.php';
@@ -317,9 +388,10 @@ function getFixCommReplyNumber($fixCommID) {
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 function getFixReplies($fixCommID) {
-    $comment = "SELECT user.username, fixReplyID, fixReply, fixReplyDateTime, fixReplyThUp, fixReplyThDown, fixreply.userID, fixcommID 
+    $comment = "SELECT user.username, user.avatarID, avatar.url, fixReplyID, fixReply, fixReplyDateTime, fixReplyThUp, fixReplyThDown, fixreply.userID, fixcommID 
     FROM fixreply
     INNER JOIN user ON user.userID = fixreply.userID
+    INNER JOIN avatar ON avatar.avatarID = user.avatarID
     WHERE fixCommID ='" . $fixCommID . "'
     ORDER BY fixReplyDateTime DESC";
     include 'connect.php';
@@ -381,6 +453,24 @@ function getAllUsers() {
     return $stmt->fetchAll(PDO::FETCH_ASSOC); 
 }
 
+function getOneUser($userID) {
+    $user = "SELECT user.userID, user.username, avatar.avatarID, avatar.url 
+    FROM user
+    INNER JOIN avatar ON avatar.avatarID = user.avatarID 
+    WHERE user.userID ='" . $userID . "';";
+    include 'connect.php';
+    $stmt = $conn->prepare($user);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC); 
+}
+
+function getImages() {
+    $image = "SELECT * FROM avatar;";
+    include 'connect.php';
+    $stmt = $conn->prepare($image);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 //This function sanitises input
 function sanitise_input($input_string) {
     include 'connect.php';
