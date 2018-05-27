@@ -39,55 +39,54 @@
         <button onclick="hideuserbutton();" id="hide">Hide all users <i class="fas fa-chevron-up"></i></button>
 <!--    </a>-->
     <div id="viewUsers">
-        <div class="col1">
-            <div class="tablehead">
-                <h3>Username</h3>
+        <div class="row">
+            <div class="col1">
+                <div class="tablehead">
+                    <h3>Username</h3>
+                </div>
             </div>
+            <div class="col2">
+                <div class="tablehead">
+                    <h3>User Create Date</h3>
+                </div>
+            </div>
+            <div class="col3">
+                <div class="tablehead">
+                    <h3>Account Status</h3>
+                </div>
+            </div>
+        </div>
             <?php
             $getallusers = getAllUsers();
             foreach($getallusers as $row) {
             ?>
-            <p><a href="admin_view_user.php?userID=<?php echo $row['userID'] ?>"><?php echo $row['username'] ?></a></p>
-            <?php
-            }
-            ?>
-        </div>
-        <div class="col2">
-            <div class="tablehead">
-                <h3>User Create Date</h3>
+        <div class="row">
+            <div class="col1">
+                <p><a href="admin_view_user.php?userID=<?php echo $row['userID'] ?>"><?php echo $row['username'] ?></a></p>
+
             </div>
-            <?php
-            foreach($getallusers as $row) {
-            ?>
+            <div class="col2">
                 <p><?php echo $row['userCreateDate'] ?></p>
-            <?php
-            }
-            ?>
-        </div>
-        <div class="col3">
-            <div class="tablehead">
-                <h3>Account Status</h3>
             </div>
-            <?php
-            foreach($getallusers as $row) {
-            ?>
-            <p> <?php 
-                if($row['acctStatus'] == 1) {
-                    echo 'Active';
-                } else if($row['acctStatus'] == 2) {
-                    echo 'Disabled';
-                } else if ($row['acctStatus'] == 3) {
-                    echo 'Admin';
-                }
-                ?>
-            </p>
-            <?php
-            }
-            ?>
+            <div class="col3">
+                <p> <?php 
+                    if($row['acctStatus'] == 1) {
+                        echo 'Active';
+                    } else if($row['acctStatus'] == 2) {
+                        echo 'Disabled';
+                    } else if ($row['acctStatus'] == 3) {
+                        echo 'Admin';
+                    }
+                    ?>
+                </p>
+            </div>
         </div>
+        <?php
+            }
+        ?>
     </div>
 </div>
-
+<script src="../js/admin.js" type="text/javascript"></script>
 <?php
     include 'footer.php';
 ?>

@@ -24,11 +24,11 @@
                     ?></span>
             </div>
             <div class="votefix">
-                <p class="green" onclick="updatethumb_fix('up', <?php echo $row['fixID'] ?>, <?php echo $row['userID'] ?>);">
+                <p class="green" onclick="updatethumb('fix', 'up', <?php echo $row['fixID'] ?>, <?php echo $row['userID'] ?>);">
                     <i class="fas fa-thumbs-up"></i>
                     <input type="number" disabled value="<?php echo $row['fixThUp'] ?>" id="fixup_<?php echo $row['fixID'] ?>"/>
                 </p>
-                <p class="orange" onclick="updatethumb_fix('down', <?php echo $row['fixID'] ?>, <?php echo $row['userID'] ?>);">
+                <p class="orange" onclick="updatethumb('fix', 'down', <?php echo $row['fixID'] ?>, <?php echo $row['userID'] ?>);">
                     <i class="fas fa-thumbs-down"></i>
                     <input type="number" disabled value="<?php echo $row['fixThDown'] ?>" id="fixdown_<?php echo $row['fixID'] ?>"/>
                 </p>
@@ -62,7 +62,13 @@
                 </p>
             </div>
             <div class="actualfix">
-                <?php echo $row['fixInfo']; ?>
+                <?php 
+                    if($row['deleted'] == true) {
+                        echo "<em>This fix was deleted by Motion Sickness Gaming administration</em>";
+                    } else {
+                        echo $row['fixInfo']; 
+                    }
+                ?>
             </div>
             
         </div>
@@ -115,14 +121,20 @@
                         ?></p>
                 </div>
                 <div class="actualcomment3">
-                    <?php echo $row1['fixComment']; ?>
+                    <?php 
+                        if($row1['deleted'] == true) {
+                            echo "<em>This comment was deleted by Motion Sickness Gaming administration</em>";
+                        } else {
+                            echo $row1['fixComment']; 
+                        }
+                    ?>
                 </div>                 
                 <div class="vote3">
-                    <p class="green" onclick="updatethumb_fixcomm('up', <?php echo $row1['fixCommID'] ?>, <?php echo $row1['userID'] ?>);">
+                    <p class="green" onclick="updatethumb('fixcomm', 'up', <?php echo $row1['fixCommID'] ?>, <?php echo $row1['userID'] ?>);">
                         <i class="fas fa-thumbs-up"></i>
                         <input type="number" disabled value="<?php echo $row1['fixCommThUp'] ?>" id="fixcommup_<?php echo $row1['fixCommID'] ?>"/>
                     </p>
-                    <p class="orange" onclick="updatethumb_fixcomm('down', <?php echo $row1['fixCommID'] ?>, <?php echo $row1['userID'] ?>);">
+                    <p class="orange" onclick="updatethumb('fixcomm', 'down', <?php echo $row1['fixCommID'] ?>, <?php echo $row1['userID'] ?>);">
                         <i class="fas fa-thumbs-down"></i>
                         <input type="number" disabled value="<?php echo $row1['fixCommThDown'] ?>" id="fixcommdown_<?php echo $row1['fixCommID'] ?>"/>
                     </p>
@@ -174,8 +186,6 @@
                     $getfixreply = getFixReplies($row1['fixCommID']); 
                     foreach($getfixreply as $row2) {
                     ?>
-
-
                     <div class="userinfo2">
                         <p>
                             <img class="avatar" src="<?php echo $row2['url']; ?>"/>
@@ -200,14 +210,20 @@
                             ?></p>
                     </div>
                     <div class="actualcomment2">
-                        <?php echo $row2['fixReply']; ?>
+                        <?php 
+                            if($row2['deleted'] == true) {
+                                echo "<em>This reply was deleted by Motion Sickness Gaming administration</em>";
+                            } else {
+                                echo $row2['fixReply']; 
+                            }
+                        ?>
                     </div>
                     <div class="vote2">
-                        <p class="green" onclick="updatethumb_fixreply('up', <?php echo $row2['fixReplyID'] ?>, <?php echo $row2['userID'] ?>);">
+                        <p class="green" onclick="updatethumb('fixreply', 'up', <?php echo $row2['fixReplyID'] ?>, <?php echo $row2['userID'] ?>);">
                             <i class="fas fa-thumbs-up"></i>
                             <input type="number" disabled value="<?php echo $row2['fixReplyThUp'] ?>" id="fixreplyup_<?php echo $row2['fixReplyID'] ?>"/>
                         </p>
-                        <p class="orange" onclick="updatethumb_fixreply('down', <?php echo $row2['fixReplyID'] ?>, <?php echo $row2['userID'] ?>);">
+                        <p class="orange" onclick="updatethumb('fixreply', 'down', <?php echo $row2['fixReplyID'] ?>, <?php echo $row2['userID'] ?>);">
                             <i class="fas fa-thumbs-down"></i>
                             <input type="number" disabled value="<?php echo $row2['fixReplyThDown'] ?>" id="fixreplydown_<?php echo $row2['fixReplyID'] ?>"/>
                         </p>

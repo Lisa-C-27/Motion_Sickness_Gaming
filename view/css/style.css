@@ -55,6 +55,9 @@
 }
 .gamevote {
     padding: 1%;
+/*    background-color: #fbfbfb;*/
+    text-align: center;
+    width: 300px;
 }
 .gamevote p {
     font-family: 'Source Sans Pro', sans-serif;
@@ -65,6 +68,10 @@
 .game-button a {
     color: white;
     text-decoration: none;
+}
+input.game[type=number] {
+    background-color: transparent;
+    padding-left: 1%;
 }
 .comment-container {
     width: 100%;
@@ -440,32 +447,39 @@ a.yellow:hover {
 
 div#viewUsers {
     display: none;
-    grid-template-columns: 30% 40% 30%;
-    background-color: white;
+}
+.usercomments {
+    margin-bottom: 3px;
 }
 .col1 {
     grid-column-start: 1;
     grid-column-end: 2;
-    border: 1px solid darkgrey;
+    
 }
 .col2 {
     grid-column-start: 2;
     grid-column-end: 3;
-    border-top: 1px solid darkgrey;
-    border-bottom: 1px solid darkgrey;
 }
 .col3 {
     grid-column-start: 3;
     grid-column-end: 4;
-    border: 1px solid darkgrey;
+    border-right: 1px solid darkgrey;
+}
+.col1, .col2, .col3 {
+    border-left: 1px solid darkgrey;
+    border-bottom: 1px solid darkgrey;
 }
 .col1 p, .col2 p, .col3 p {
-    padding-left: 1%;
-    border-bottom: 1px solid darkgrey;
     margin: 0;
+    padding-left: 3px;
+}
+.row {
+    display: grid;
+    grid-template-columns: 50% 30% 20%;
+    background-color: white;
+    margin-bottom: 0;
 }
 .tablehead {
-    border-bottom: 1px solid darkgrey;
     background-color: #EEAC4E;
 }
 .tablehead h3 {
@@ -481,7 +495,7 @@ div#viewUsers {
 }
 #stats {
     background-color: white;
-    width: 15%;
+    width: 200px;
 }
 .index {
     font-size: 25px;
@@ -493,10 +507,13 @@ input[type=number] {
     background-color: #fbfbfb;
 }
 .avatar-profile {
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     margin-top: 5px;
     margin-bottom: 10px;
+    padding: 3px;
+    border: 2px solid grey;
+    margin: 2px 0px 2px 2px;
 }
 .avatar {
     width: 25px;
@@ -507,7 +524,12 @@ input[type=number] {
 }
 #newAvatar {
     display: none;
-    background: rgba(255,255,255,0.5) 
+    background: rgba(255,255,255,0.5) ;
+    width: auto;
+}
+#upper-profile {
+    display: grid;
+    grid-template-columns: 50% 50%;
 }
 #avatar-profile-container {
     width: 160px;
@@ -518,8 +540,20 @@ input[type=number] {
     padding: 5px;
     box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
     margin-bottom: 5px;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+#reputation {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    background-color: #fbfbfb;
+    width: 270px;
+    height: 130px;
+    padding-left: 5px;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
 }
 .avatar-button {
+    margin-top: 5px;
     background-color: #EEAC4E;
     border: none;
     color: white;
@@ -532,3 +566,20 @@ input[type=number] {
     background-color:  #FCE54A;
     color: #002921;
 }
+#changepw {
+    display: none;
+    background-color: #fbfbfb;
+    width: 30%;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}
+.status {
+    background-color: #EEAC4E;
+    padding: 5px;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    margin-right: 3px;
+    margin-left: 1%;
+}
+.status:hover {
+    background-color:  #FCE54A;
+}
+

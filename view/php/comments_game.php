@@ -44,13 +44,21 @@ if (!empty($getcomments)) {
                         echo $mysqldate
                     ?></p>
             </div>
-            <div class="actualcomment"><?php echo $row['gameComment'] ?></div>
+            <div class="actualcomment">
+                <?php 
+                    if($row['deleted'] == true) {
+                        echo "<em>This comment was deleted by Motion Sickness Gaming administration</em>";
+                    } else {
+                        echo $row['gameComment']; 
+                    }
+                ?>
+            </div>
             <div class="vote">
-                <p class="green" onclick="updatethumb_gamecomm('up', <?php echo $row['gameCommID']; ?>, <?php echo $row['userID'] ?>);">
+                <p class="green" onclick="updatethumb('gamecomm', 'up', <?php echo $row['gameCommID']; ?>, <?php echo $row['userID'] ?>);">
                     <i class="fas fa-thumbs-up"></i>
                     <input type="number" disabled value="<?php echo $row['gameCommThUp']; ?>" id="up_<?php echo $row['gameCommID']; ?>"/>
                 </p>
-                <p class="orange" onclick="updatethumb_gamecomm('down', <?php echo $row['gameCommID'] ?>, <?php echo $row['userID'] ?>);">
+                <p class="orange" onclick="updatethumb('gamecomm', 'down', <?php echo $row['gameCommID'] ?>, <?php echo $row['userID'] ?>);">
                     <i class="fas fa-thumbs-down"></i>
                     <input type="number" disabled value="<?php echo $row['gameCommThDown'] ?>" id="down_<?php echo $row['gameCommID'] ?>"/>
                 </p>
@@ -137,15 +145,21 @@ if (!empty($getcomments)) {
                         ?></p>
                 </div>
                 <div class="actualcomment2">
-                    <?php echo $row2['replyComment'] ?>
+                    <?php 
+                        if($row2['deleted'] == true) {
+                            echo "<em>This reply was deleted by Motion Sickness Gaming administration</em>";
+                        } else {
+                            echo $row2['replyComment']; 
+                        }
+                    ?>
                 </div>
                 <div class="vote2">
-                    <p class="green" onclick="updatethumb_gamereply('up', <?php echo $row2['gameReplyID'] ?>, <?php echo $row2['userID'] ?>)">
+                    <p class="green" onclick="updatethumb('gamereply', 'up', <?php echo $row2['gameReplyID'] ?>, <?php echo $row2['userID'] ?>)">
                         <i class="fas fa-thumbs-up"></i>
                         <input type="number" disabled value="<?php echo $row2['replyCommThUp'] ?>" id="replyup_<?php echo $row2['gameReplyID'] ?>"/>
                        
                     </p>
-                    <p class="orange" onclick="updatethumb_gamereply('down', <?php echo $row2['gameReplyID'] ?>, <?php echo $row2['userID'] ?>)">
+                    <p class="orange" onclick="updatethumb('gamereply', 'down', <?php echo $row2['gameReplyID'] ?>, <?php echo $row2['userID'] ?>)">
                         <i class="fas fa-thumbs-down"></i>
                         <input type="number" disabled value="<?php echo $row2['replyCommThDown'] ?>" id="replydown_<?php echo $row2['gameReplyID'] ?>"/>
                         

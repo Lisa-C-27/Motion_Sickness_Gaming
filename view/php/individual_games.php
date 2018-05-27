@@ -12,9 +12,9 @@
     if(isset($_GET['fix']) && $_GET['fix'] == 'tab') {
 ?>
         <script>
-            $(function() {
+            window.onload = function() {
                 tabTwo();
-            });
+            }
         </script>
     <?php
     }
@@ -23,8 +23,16 @@
     ?>
 <script>
     //These variables are used in the functions updatethumbsup() and updatethumbsdown() within 'js/script.js'
-    var x = parseInt(<?php echo $gamedetails['gameThUp']; ?>);
-    var y = parseInt(<?php echo $gamedetails['gameThDown']; ?>);
+//    var x = parseInt(
+        <?php 
+//        echo $gamedetails['gameThUp']; 
+        ?>
+//    );
+//    var y = parseInt(
+        <?php 
+//        echo $gamedetails['gameThDown']; 
+        ?>
+//    );
 </script>
 <div class="container game-page"> 
     <div class="game-button">
@@ -36,6 +44,7 @@
     <?php
         include 'game_vote.php';
     ?>
+
 
     <div class="comment-container">
 
@@ -51,8 +60,8 @@
             ?>     
         </div>      
     </div>
-
 </div>
+<script src="../js/updatethumbs.js" type="text/javascript"></script>
 <?php
     include 'footer.php';
 ?>

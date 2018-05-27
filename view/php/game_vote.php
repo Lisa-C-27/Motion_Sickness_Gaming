@@ -1,19 +1,17 @@
 <div class="gamevote">
     <p>Does this game give you motion sickness?</p>
-        <form class="inline">
-            <input type="hidden" name="action_type" value="addgamethup"/>
-            <button type="button" id="game_yes" class="pure-button thumbs" onclick="updatethumbsup(<?php echo $_GET['gameID']; ?>)">
-                Yes 
-<!--                <i class="fas fa-thumbs-up"></i>-->
-            </button>
-            <span id="thup"><?php echo $gamedetails['gameThUp'];?></span>  
-        </form>
-        <form class="inline">
-            <input type="hidden" name="action_type" value="addgamethdown"/>
-            <button type="button" id="game_no" class="pure-button thumbs" onclick="updatethumbsdown(<?php echo $_GET['gameID']; ?>)">
-                No 
-<!--                <i class="fas fa-thumbs-down"></i>-->
-            </button>
-            <span id="thdown"><?php echo $gamedetails['gameThDown'];?></span>
-        </form>
+    <span class="gamevoting" onclick="updatethumb('game', 'up', <?php echo $_GET['gameID']; ?>, 'null');" title="<?php echo $gamedetails['gameThUp']; ?> community members voted that <?php echo $gamedetails['gameName'] ?> gave them motion sickness">
+        <button type="button" class="pure-button thumbs">
+            YES 
+            <i class="fas fa-check-circle"></i>
+        </button>
+        <input type="number" class="game" disabled value="<?php echo $gamedetails['gameThUp']; ?>" id="gameup_<?php echo $gamedetails['gameID']; ?>"/>
+    </span>
+    <span class="gamevoting" onclick="updatethumb('game','down', <?php echo $_GET['gameID']; ?>, 'null');" title="<?php echo $gamedetails['gameThDown']; ?> community members voted that <?php echo $gamedetails['gameName'] ?> did not give them motion sickness">
+        <button type="button" class="pure-button thumbs">
+            NO 
+            <i class="fas fa-times-circle"></i>
+        </button>
+        <input type="number" class="game" disabled value="<?php echo $gamedetails['gameThDown'] ?>" id="gamedown_<?php echo $gamedetails['gameID']; ?>"/>
+    </span>
 </div>

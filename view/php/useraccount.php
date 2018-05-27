@@ -9,19 +9,53 @@
     include 'nav.php';
     include '../../model/connect.php';
     include '../../model/dbfunctions.php';
+    if(isset($_GET['pw']) && $_GET['pw'] == 'update') {
+?>
+    <script>
+        window.onload = function() {
+        $("select").imagepicker();
+        $("#show").click();
+        }
+    </script>
+<?php
+    } else {
+?>
+    <script>
+        window.onload = function() {
+            $("select").imagepicker();
+        }    
+    </script>
+<?php
+    }
 ?>
 <div class="content game-page">
-    <p>This page is not finished.</p>
-    <p>This page will allow users to change their password, and possibly add an avatar or image</p>
-    <h2>Hi <?php echo $_SESSION['username']; ?></h2>
-    <h3>Welcome to your account page</h3>
+    <h1>Hi <?php echo $_SESSION['username']; ?></h1>
+    <h2>Welcome to your account page</h2>
     <?php
         $getuser = getOneUser($_SESSION['userid']); 
     ?>
-    <div id="avatar-profile-container">
-        <img class="avatar-profile" src="<?php echo $getuser['url']; ?>"/>
-        <div id="button">
-            <button type="button" class="avatar-button" onclick="selectAvatar();" id="showAvatars">Change Avatar</button>
+    <div id="upper-profile">
+        <div id="avatar-profile-container">
+            <img class="avatar-profile" src="<?php echo $getuser['url']; ?>"/>
+            <div id="button">
+                <button type="button" class="avatar-button" onclick="selectAvatar();" id="showAvatars">Change Avatar</button>
+            </div>
+        </div>
+        <div id="reputation">
+            <?php 
+                $getrep = getThumbs($_SESSION['userid']);
+            ?>
+            <h3>Reputation</h3>
+            <p><strong>Comments: </strong>
+                <?php 
+                    include 'rep_comments.php';
+                ?>
+            </p>
+            <p><strong>Fixes: </strong>
+                <?php 
+                    include 'rep_fix.php';
+                ?>
+            </p>
         </div>
     </div>
     <div id="newAvatar">
@@ -45,30 +79,35 @@
             </select>
             <input type="hidden" name="userID" value="<?php echo $_SESSION['userid'] ?>"/>
             <input type="hidden" name="username" value="<?php echo $_SESSION['username'] ?>"/>
-            <button type="submit" class="avatar-button" >Submit</button>
+            <button type="submit" class="pure-button" >Submit</button>
         </form>
     </div>
-    <?php 
-        $getrep = getThumbs($_SESSION['userid']);
-    ?>
-    <h3>Your Reputation</h3>
-    <p>Comments: 
-        <?php 
-            include 'rep_comments.php';
-        ?>
-    </p>
-    <p>Fixes: 
-        <?php 
-            include 'rep_fix.php';
-        ?>
-    </p>
-    <form>
-        <h4>Need to change password? Enter new password below</h4>
-        <label for="password">New Password: </label>
-        <input id="password"/>
-    </form>
+    
+    <h3>Need to change your password?</h3>
+    <button type="button" id="show" onclick="show_changepw();" class="avatar-button">Change Password</button>
+    <div id="changepw">
+        <form class="pure-form pure-form-aligned" method="post" action="../../controller/change_password.php">
+            <fieldset>
+                <div class="pure-control-group">
+<!--                    <label for="oldpassword">Current Password: </label>-->
+                    <input type="password" id="oldpassword" name="password" class="change_pw" placeholder="Current password"/>
+                </div>
+                <div class="pure-control-group">
+<!--                    <label for="password">New Password: </label>-->
+                    <input type="password" id="password" name="newpassword" pattern=".{7,30}" onchange="validateForm();" class="change_pw" placeholder="New password"/>
+                    <div id="error_register_pass" class="red"></div>
+                </div>
+                <input type="hidden" name="userID" value="<?php echo $_SESSION['userid'] ?>"/>
+                <input type="hidden" name="username" value="<?php echo $_SESSION['username'] ?>"/>
+                    <button type="submit" class="pure-button" >Submit</button>
+                <?php
+                    include 'error_section.php';
+                ?>
+            </fieldset>
+        </form>
+    </div>
 </div>
-<script>$("select").imagepicker();</script>
+
 <?php
     include 'footer.php';
 ?>

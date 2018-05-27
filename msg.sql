@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2018 at 10:34 AM
+-- Generation Time: May 27, 2018 at 05:27 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -75,9 +75,10 @@ CREATE TABLE `fix` (
 --
 
 INSERT INTO `fix` (`fixID`, `fixInfo`, `fixDateTime`, `fixThUp`, `fixThDown`, `userID`, `gameID`, `deleted`) VALUES
-(1, 'Go into options and change FOV setting to 90', '2018-05-07 04:28:55', 16, 1, 1, 1, 0),
+(1, 'Go into options and change FOV setting to 90', '2018-05-07 04:28:55', 20, 5, 1, 1, 0),
 (2, 'Maybe try this: ...\r\n.... another fix .....', '2018-05-09 07:21:01', 6, 0, 6, 1, 0),
-(3, 'askldjdf alskdjkas', '2018-05-16 03:36:28', 503, 2, 2, 1, 0);
+(3, 'askldjdf alskdjkas', '2018-05-16 03:36:28', 503, 2, 2, 1, 0),
+(4, 'test fix', '2018-05-26 02:50:04', 0, 0, 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -101,9 +102,9 @@ CREATE TABLE `fixcomm` (
 --
 
 INSERT INTO `fixcomm` (`fixCommID`, `fixComment`, `fixCommDateTime`, `fixCommThUp`, `fixCommThDown`, `userID`, `fixID`, `deleted`) VALUES
-(1, 'A comment on Admin\'s fix to Portal', '2018-05-07 22:35:25', 1, 2, 2, 1, 0),
-(4, 'New comment', '2018-05-09 05:36:02', 1, 0, 6, 1, 0),
-(5, 'Here is a comment', '2018-05-16 04:17:06', 540, 0, 2, 2, 0);
+(1, 'A comment on Admin\'s fix to Portal', '2018-05-07 22:35:25', 4, 4, 2, 1, 0),
+(4, 'New comment', '2018-05-09 05:36:02', 2, 1, 6, 1, 0),
+(5, 'Here is a comment', '2018-05-16 04:17:06', 540, 0, 2, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -127,7 +128,7 @@ CREATE TABLE `fixreply` (
 --
 
 INSERT INTO `fixreply` (`fixReplyID`, `fixReply`, `fixReplyDateTime`, `fixReplyThUp`, `fixReplyThDown`, `userID`, `fixcommID`, `deleted`) VALUES
-(1, 'This is a reply to Active\'s comment on Admin\'s fix for Portal', '2018-05-07 22:38:23', 1, 0, 4, 1, 0),
+(1, 'This is a reply to Active\'s comment on Admin\'s fix for Portal', '2018-05-07 22:38:23', 4, 3, 4, 1, 0),
 (2, 'Reply to comment', '2018-05-16 04:19:05', 1, 0, 2, 5, 0);
 
 -- --------------------------------------------------------
@@ -149,8 +150,8 @@ CREATE TABLE `game` (
 --
 
 INSERT INTO `game` (`gameID`, `gameName`, `gameThUp`, `gameThDown`, `gameDate`) VALUES
-(1, 'Portal', 17, 2, '2018-05-07 14:12:47'),
-(2, 'Portal 2', 0, 0, '2018-05-07 14:12:59'),
+(1, 'Portal', 21, 4, '2018-05-07 14:12:47'),
+(2, 'Portal 2', 0, 3, '2018-05-07 14:12:59'),
 (3, 'Half Life', 0, 0, '2018-05-07 14:13:12'),
 (4, 'Test Game', 0, 0, '2018-05-16 13:19:48');
 
@@ -176,8 +177,8 @@ CREATE TABLE `gamecomm` (
 --
 
 INSERT INTO `gamecomm` (`gameCommID`, `gameComment`, `gameCommDateTime`, `gameCommThUp`, `gameCommThDown`, `userID`, `gameID`, `deleted`) VALUES
-(1, 'This is a comment on the game Portal by user Admin', '2018-05-07 05:34:16', 13, 20, 1, 1, 0),
-(2, '<span style=\"font-weight: 700; text-align: center;\"><h3 style=\"text-align: left;\"><font color=\"#f79646\" style=\"\" face=\"Comic Sans MS\">Test comment</font></h3></span><div style=\"text-align: left;\"><span style=\"color: rgb(0, 41, 33); text-align: center;\"><font face=\"Comic Sans MS\">Inserted this comment using the text editor available for the comments, but then changed the sanitised data in the database to display this comment as intended</font></span></div><div><span style=\"color: rgb(0, 41, 33); text-align: center;\"><font face=\"Comic Sans MS\">I didn\'t want to remove my sanitisation but wanted to show that I could implement a Javascript component</font></span></div>', '2018-05-08 04:09:33', 13, 4, 1, 1, 0);
+(1, 'This is a comment on the game Portal by user Admin', '2018-05-07 05:34:16', 16, 21, 1, 1, 0),
+(2, '<span style=\"font-weight: 700; text-align: center;\"><h3 style=\"text-align: left;\"><font color=\"#f79646\" style=\"\" face=\"Comic Sans MS\">Test comment</font></h3></span><div style=\"text-align: left;\"><span style=\"color: rgb(0, 41, 33); text-align: center;\"><font face=\"Comic Sans MS\">Inserted this comment using the text editor available for the comments, but then changed the sanitised data in the database to display this comment as intended</font></span></div><div><span style=\"color: rgb(0, 41, 33); text-align: center;\"><font face=\"Comic Sans MS\">I didn\'t want to remove my sanitisation but wanted to show that I could implement a Javascript component</font></span></div>', '2018-05-08 04:09:33', 16, 9, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -201,7 +202,7 @@ CREATE TABLE `gamereply` (
 --
 
 INSERT INTO `gamereply` (`gameReplyID`, `replyComment`, `replyCommDateTime`, `replyCommThUp`, `replyCommThDown`, `userID`, `gameCommID`, `deleted`) VALUES
-(1, 'A reply to admin\'s comment on Portal', '2018-05-07 22:34:40', 8, 1, 2, 1, 0);
+(1, 'A reply to admin\'s comment on Portal', '2018-05-07 22:34:40', 11, 4, 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -224,7 +225,7 @@ CREATE TABLE `rep_calcs` (
 
 INSERT INTO `rep_calcs` (`repcalcsID`, `userID`, `fixCommRep`, `fixReplyRep`, `gameCommRep`, `gameReplyRep`) VALUES
 (1, 1, 0, 0, 2, 0),
-(2, 2, 539, 1, 0, 7),
+(2, 2, 540, 1, 0, 7),
 (3, 3, 0, 0, 0, 0),
 (4, 4, 0, 1, 0, 0),
 (5, 5, 0, 0, 0, 0),
@@ -253,8 +254,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`userID`, `username`, `password`, `userCreateDate`, `acctStatus`, `avatarID`, `commRep`, `fixRep`) VALUES
-(1, 'Admin', '$2y$10$trkkHLSlGpO0v6cVjA1IPuF.kohc8SZ4zGpuPlfoQrTybsHndPLBe', '2018-05-06 14:53:47', 3, 1, 2, 15),
-(2, 'Active', '$2y$10$3iEh/LXBqGh2T2ivqUBYx.lw.BxxGKs3M9o31ugB.xo5dw6tZAxn2', '2018-05-06 15:06:53', 1, 1, 547, 501),
+(1, 'Admin', '$2y$10$trkkHLSlGpO0v6cVjA1IPuF.kohc8SZ4zGpuPlfoQrTybsHndPLBe', '2018-05-06 14:53:47', 3, 13, 2, 15),
+(2, 'Active', '$2y$10$3iEh/LXBqGh2T2ivqUBYx.lw.BxxGKs3M9o31ugB.xo5dw6tZAxn2', '2018-05-06 15:06:53', 1, 11, 548, 501),
 (3, 'Disabled', '$2y$10$2vpM/NyD3bKC5YxwlHQEQ.iiPlt7j1gM5lTOwZIJlVbHr/FwgTPsK', '2018-05-06 15:07:19', 2, 1, 0, 0),
 (4, 'abc123', '$2y$10$8uC9HypnLqn.PksdbsvLi.CgVtntHGl3y4n1jT5/Pymm5pQbbUiHe', '2018-05-07 12:39:06', 1, 1, 1, 0),
 (5, 'test1', '$2y$10$EU/k0Hya4RDWcPy/l2IDyekZrBwEGZAnM7dvgM6gsy6qUxD7U7Jn.', '2018-05-09 13:26:41', 1, 1, 0, 0),
@@ -346,7 +347,7 @@ ALTER TABLE `avatar`
 -- AUTO_INCREMENT for table `fix`
 --
 ALTER TABLE `fix`
-  MODIFY `fixID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `fixID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `fixcomm`
 --
