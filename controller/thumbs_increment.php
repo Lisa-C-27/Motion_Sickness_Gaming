@@ -25,14 +25,14 @@ include '../model/dbfunctions.php';
 
 if($_GET['type'] == "fix") {
     if($_GET['direction'] == "up") {
-        $result = updatethumbs('fix', 'fixThUp', 'fixID', $_GET['commID'], $_GET['userID']);
+        $result = updatethumbs('fix', 'fixThUp', 'fixID', $_GET['commID'], $_GET['userID'], $_SESSION['userid'], 'up');
         if($result) {
             echo json_encode(Array('update'=>"success"));
         } else {
             echo json_encode(Array('update'=>"fail"));
         }
     } else if($_GET['direction'] == "down") {
-        $result = updatethumbs('fix', 'fixThDown', 'fixID', $_GET['commID'], $_GET['userID']);
+        $result = updatethumbs('fix', 'fixThDown', 'fixID', $_GET['commID'], $_GET['userID'], $_SESSION['userid'], 'down');
         if($result) {
             echo json_encode(Array('update'=>"success"));
         } else {
@@ -41,14 +41,14 @@ if($_GET['type'] == "fix") {
     }
 } else if($_GET['type'] == "comment") {
     if($_GET['direction'] == "up") {
-        $result = updatethumbs('gamecomm', 'gameCommThUp', 'gameCommID', $_GET['commID'], $_GET['userID']);
+        $result = updatethumbs('gamecomm', 'gameCommThUp', 'gameCommID', $_GET['commID'], $_GET['userID'], $_SESSION['userid'], 'up');
         if($result) {
             echo json_encode(Array('update'=>"success"));
         } else {
             echo json_encode(Array('update'=>"fail"));
         }
     } else if($_GET['direction'] == "down") {
-        $result = updatethumbs('gamecomm', 'gameCommThDown', 'gameCommID', $_GET['commID'], $_GET['userID']);
+        $result = updatethumbs('gamecomm', 'gameCommThDown', 'gameCommID', $_GET['commID'], $_GET['userID'], $_SESSION['userid'], 'down');
         if($result) {
             echo json_encode(Array('update'=>"success"));
         } else {
@@ -57,14 +57,14 @@ if($_GET['type'] == "fix") {
     }
 } else if($_GET['type'] == "reply") {
     if($_GET['direction'] == "up") {
-        $result = updatethumbs('gamereply', 'replyCommThUp', 'gameReplyID', $_GET['commID'], $_GET['userID']);
+        $result = updatethumbs('gamereply', 'replyCommThUp', 'gameReplyID', $_GET['commID'], $_GET['userID'], $_SESSION['userid'], 'up');
         if($result) {
             echo json_encode(Array('update'=>"success"));
         } else {
             echo json_encode(Array('update'=>"fail"));
         }
     } else if($_GET['direction'] == "down") {
-        $result = updatethumbs('gamereply', 'replyCommThDown', 'gameReplyID', $_GET['commID'], $_GET['userID']);
+        $result = updatethumbs('gamereply', 'replyCommThDown', 'gameReplyID', $_GET['commID'], $_GET['userID'], $_SESSION['userid'], 'down');
         if($result) {
             echo json_encode(Array('update'=>"success"));
         } else {
@@ -73,14 +73,14 @@ if($_GET['type'] == "fix") {
     }
 } else if($_GET['type'] == "fixcomment") {
     if($_GET['direction'] == "up") {
-        $result = updatethumbs('fixcomm', 'fixCommThUp', 'fixCommID',$_GET['commID'], $_GET['userID']);
+        $result = updatethumbs('fixcomm', 'fixCommThUp', 'fixCommID',$_GET['commID'], $_GET['userID'], $_SESSION['userid'], 'up');
         if($result) {
             echo json_encode(Array('update'=>"success"));
         } else {
             echo json_encode(Array('update'=>"fail"));
         }
     } else if($_GET['direction'] == "down") {
-        $result = updatethumbs('fixcomm', 'fixCommThDown', 'fixCommID',$_GET['commID'], $_GET['userID']);
+        $result = updatethumbs('fixcomm', 'fixCommThDown', 'fixCommID',$_GET['commID'], $_GET['userID'], $_SESSION['userid'], 'down');
         if($result) {
             echo json_encode(Array('update'=>"success"));
         } else {
@@ -89,14 +89,14 @@ if($_GET['type'] == "fix") {
     }
 } else if($_GET['type'] == "fixreply") {
     if($_GET['direction'] == "up") {
-        $result = updatethumbs('fixreply', 'fixReplyThUp', 'fixReplyID',$_GET['commID'], $_GET['userID']);
+        $result = updatethumbs('fixreply', 'fixReplyThUp', 'fixReplyID',$_GET['commID'], $_GET['userID'], $_SESSION['userid'], 'up');
         if($result) {
             echo json_encode(Array('update'=>"success"));
         } else {
             echo json_encode(Array('update'=>"fail"));
         }
     } else if($_GET['direction'] == "down") {
-        $result = updatethumbs('fixreply', 'fixReplyThDown', 'fixReplyID',$_GET['commID'], $_GET['userID']);
+        $result = updatethumbs('fixreply', 'fixReplyThDown', 'fixReplyID',$_GET['commID'], $_GET['userID'], $_SESSION['userid'], 'down');
         if($result) {
             echo json_encode(Array('update'=>"success"));
         } else {
@@ -105,14 +105,14 @@ if($_GET['type'] == "fix") {
     }
 } else if($_GET['type'] == "game") {
     if($_GET['direction'] == "up") {
-        $result = updatethumbs('game', 'gameThUp', 'gameID', $_GET['commID'], 'null');
+        $result = updatethumbs('game', 'gameThUp', 'gameID', $_GET['commID'], 'null', $_SESSION['userid'], 'up');
         if($result) {
             echo json_encode(Array('update'=>"success"));
         } else {
             echo json_encode(Array('update'=>"fail"));
         }
     } else if($_GET['direction'] == "down") {
-        $result = updatethumbs('game', 'gameThDown', 'gameID',$_GET['commID'], 'null');
+        $result = updatethumbs('game', 'gameThDown', 'gameID',$_GET['commID'], 'null', $_SESSION['userid'], 'down');
         if($result) {
             echo json_encode(Array('update'=>"success"));
         } else {

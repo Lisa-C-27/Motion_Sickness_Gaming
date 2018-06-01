@@ -1,6 +1,8 @@
 function updatethumb(type, direction, id, userID) {
     if(type == "gamecomm") {
         var $url = "../../controller/thumbs_increment.php?type=comment&direction="+direction+ "&commID="+id+ "&userID="+userID;
+        var disable = document.getElementById("hide1_"+id);
+        var disable1 = document.getElementById("hide2_"+id);
         if(direction == "up") {
             var div = document.getElementById("up_"+id);
         } else if (direction == "down") {
@@ -36,6 +38,8 @@ function updatethumb(type, direction, id, userID) {
         }
     } else if(type == "game") {
         var $url = "../../controller/thumbs_increment.php?type=game&direction="+direction+ "&commID="+id;
+        var disable = document.getElementById("disableup");
+        var disable1 = document.getElementById("disabledown");
         if(direction == "up") {
             var div = document.getElementById("gameup_"+id);
         } else if(direction == "down") {
@@ -49,6 +53,12 @@ function updatethumb(type, direction, id, userID) {
     datatype: 'json',
     success: function(res) {
         console.log(res);
+        disable.onclick = function() {
+            this.disabled = true;
+        }
+        disable1.onclick = function() {
+            this.disabled = true;
+        }
         div.value++;
     },
     error: function(err) {

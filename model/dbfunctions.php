@@ -101,23 +101,112 @@ function updateRepFix($userID) {
 //}
 
 
-function updatethumbs($table, $thumb, $idtype, $id, $userID) {
+function updatethumbs($table, $thumb, $idtype, $id, $userID, $userID2, $thumbtype) {
     $update = "UPDATE ".$table." SET ".$thumb." = ".$thumb." + 1 WHERE ".$idtype." ='" . $id . "'";
     include 'connect.php';
     $stmt = $conn->prepare($update);
     $stmt->execute();
     if ($stmt->rowCount() > 0) {
         if($userID == 'null') {
-            return true;
+            $insert = "INSERT INTO thumbs_record (userID, thumbtype, ".$idtype.") VALUES (:userID, :thumb, :id);";
+            include 'connect.php';
+            $stmt = $conn->prepare($insert);
+            $stmt->bindValue(':userID', $userID2);
+            $stmt->bindValue(':thumb', $thumbtype);
+            $stmt->bindValue(':id', $id);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                return true;
+            }else {
+                return false;
+            }
+        } else if($table == "fix") {
+            $update = "UPDATE user SET fixRep = 
+            (SELECT SUM(IFNULL(fixThUp,0)-IFNULL(fixThDown,0)) FROM fix WHERE userID ='" . $userID . "')
+            WHERE userID = '" . $userID . "';";
+            include 'connect.php';
+            $stmt = $conn->prepare($update);
+            $stmt->execute();
+//            if ($stmt->rowCount() > 0) {
+            $insert = "INSERT INTO thumbs_record (userID, thumbtype, ".$idtype.") VALUES (:userID, :thumb, :id);";
+            include 'connect.php';
+            $stmt = $conn->prepare($insert);
+            $stmt->bindValue(':userID', $userID2);
+            $stmt->bindValue(':thumb', $thumbtype);
+            $stmt->bindValue(':id', $id);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+//                return true;
+//            } else {
+//                return false;
+//            }
         } else {
-        updateRep($userID);
-        return true;
+            $update = "UPDATE rep_calcs SET 
+            gameCommRep = (SELECT SUM(IFNULL(gameCommThUp,0)-IFNULL(gameCommThDown,0)) FROM gamecomm WHERE userID ='" . $userID . "'),
+            gameReplyRep = (SELECT SUM(IFNULL(replyCommThUp,0)-IFNULL(replyCommThDown,0)) FROM gamereply WHERE userID ='" . $userID . "'),
+            fixReplyRep = (SELECT SUM(IFNULL(fixReplyThUp,0)-IFNULL(fixReplyThDown,0)) FROM fixreply WHERE userID ='" . $userID . "'),
+            fixCommRep = (SELECT SUM(IFNULL(fixCommThUp,0)-IFNULL(fixCommThDown,0)) FROM fixcomm WHERE userID ='" . $userID . "')
+            WHERE userID ='" . $userID . "';";
+            include 'connect.php';
+            $stmt = $conn->prepare($update);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                $update2 = "UPDATE user SET commRep = 
+                (SELECT SUM(fixCommRep+fixReplyRep+gameCommRep+gameReplyRep) 
+                FROM rep_calcs WHERE userID ='" . $userID . "')
+                WHERE userID ='" . $userID . "';";
+                include 'connect.php';
+                $stmt = $conn->prepare($update2);
+                $stmt->execute();
+                
+                $insert = "INSERT INTO thumbs_record (userID, thumbtype, ".$idtype.") VALUES (:userID, :thumb, :id);";
+                include 'connect.php';
+                $stmt = $conn->prepare($insert);
+                $stmt->bindValue(':userID', $userID2);
+                $stmt->bindValue(':thumb', $thumbtype);
+                $stmt->bindValue(':id', $id);
+                $stmt->execute();
+                if ($stmt->rowCount() > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+//            updateRep('" . $userID . "');
+//            insertThumb($userID2, $thumbtype, $idtype, $id;);
+            
+//        return true;
+        } else {
+            return false;
+        }
     }
     } else {
         return false;
     }
 }
 
+function insertThumb($userID, $thumbtype, $idtype, $id) {
+    $insert = "INSERT INTO thumbs_record (userID, thumbtype, ".$idtype.") VALUES (".$userID.", ".$thumbtype.", ".$id.");";
+    include 'connect.php';
+    $stmt = $conn->prepare($insert);
+    $stmt->execute();
+    if ($stmt->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function getuserThumbRecords($userID, $idtype, $id) {
+    $select = "SELECT * FROM thumbs_record WHERE userID ='" . $userID . "' AND ".$idtype." = '" . $id . "';";
+    include 'connect.php';
+    $stmt = $conn->prepare($select);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
 //function updatethumbsup_gamecomm($commID, $userID){
 //    $update = "UPDATE gamecomm SET gameCommThUp = gameCommThUp + 1 WHERE gamecommID ='" . $commID . "'";
 //    include 'connect.php';

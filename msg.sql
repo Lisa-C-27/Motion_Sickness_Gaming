@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2018 at 05:27 AM
+-- Generation Time: Jun 01, 2018 at 04:10 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -75,9 +75,9 @@ CREATE TABLE `fix` (
 --
 
 INSERT INTO `fix` (`fixID`, `fixInfo`, `fixDateTime`, `fixThUp`, `fixThDown`, `userID`, `gameID`, `deleted`) VALUES
-(1, 'Go into options and change FOV setting to 90', '2018-05-07 04:28:55', 20, 5, 1, 1, 0),
-(2, 'Maybe try this: ...\r\n.... another fix .....', '2018-05-09 07:21:01', 6, 0, 6, 1, 0),
-(3, 'askldjdf alskdjkas', '2018-05-16 03:36:28', 503, 2, 2, 1, 0),
+(1, 'Go into options and change FOV setting to 90', '2018-05-07 04:28:55', 1, 0, 1, 1, 0),
+(2, 'Maybe try this: ...\r\n.... another fix .....', '2018-05-09 07:21:01', 0, 1, 6, 1, 0),
+(3, 'askldjdf alskdjkas', '2018-05-16 03:36:28', 0, 1, 2, 1, 0),
 (4, 'test fix', '2018-05-26 02:50:04', 0, 0, 1, 2, 1);
 
 -- --------------------------------------------------------
@@ -102,9 +102,9 @@ CREATE TABLE `fixcomm` (
 --
 
 INSERT INTO `fixcomm` (`fixCommID`, `fixComment`, `fixCommDateTime`, `fixCommThUp`, `fixCommThDown`, `userID`, `fixID`, `deleted`) VALUES
-(1, 'A comment on Admin\'s fix to Portal', '2018-05-07 22:35:25', 4, 4, 2, 1, 0),
-(4, 'New comment', '2018-05-09 05:36:02', 2, 1, 6, 1, 0),
-(5, 'Here is a comment', '2018-05-16 04:17:06', 540, 0, 2, 2, 1);
+(1, 'A comment on Admin\'s fix to Portal', '2018-05-07 22:35:25', 0, 1, 2, 1, 0),
+(4, 'New comment', '2018-05-09 05:36:02', 1, 0, 6, 1, 0),
+(5, 'Here is a comment', '2018-05-16 04:17:06', 0, 0, 2, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -128,8 +128,8 @@ CREATE TABLE `fixreply` (
 --
 
 INSERT INTO `fixreply` (`fixReplyID`, `fixReply`, `fixReplyDateTime`, `fixReplyThUp`, `fixReplyThDown`, `userID`, `fixcommID`, `deleted`) VALUES
-(1, 'This is a reply to Active\'s comment on Admin\'s fix for Portal', '2018-05-07 22:38:23', 4, 3, 4, 1, 0),
-(2, 'Reply to comment', '2018-05-16 04:19:05', 1, 0, 2, 5, 0);
+(1, 'This is a reply to Active\'s comment on Admin\'s fix for Portal', '2018-05-07 22:38:23', 0, 0, 4, 1, 0),
+(2, 'Reply to comment', '2018-05-16 04:19:05', 0, 0, 2, 5, 0);
 
 -- --------------------------------------------------------
 
@@ -150,8 +150,8 @@ CREATE TABLE `game` (
 --
 
 INSERT INTO `game` (`gameID`, `gameName`, `gameThUp`, `gameThDown`, `gameDate`) VALUES
-(1, 'Portal', 21, 4, '2018-05-07 14:12:47'),
-(2, 'Portal 2', 0, 3, '2018-05-07 14:12:59'),
+(1, 'Portal', 0, 0, '2018-05-07 14:12:47'),
+(2, 'Portal 2', 0, 0, '2018-05-07 14:12:59'),
 (3, 'Half Life', 0, 0, '2018-05-07 14:13:12'),
 (4, 'Test Game', 0, 0, '2018-05-16 13:19:48');
 
@@ -177,8 +177,8 @@ CREATE TABLE `gamecomm` (
 --
 
 INSERT INTO `gamecomm` (`gameCommID`, `gameComment`, `gameCommDateTime`, `gameCommThUp`, `gameCommThDown`, `userID`, `gameID`, `deleted`) VALUES
-(1, 'This is a comment on the game Portal by user Admin', '2018-05-07 05:34:16', 16, 21, 1, 1, 0),
-(2, '<span style=\"font-weight: 700; text-align: center;\"><h3 style=\"text-align: left;\"><font color=\"#f79646\" style=\"\" face=\"Comic Sans MS\">Test comment</font></h3></span><div style=\"text-align: left;\"><span style=\"color: rgb(0, 41, 33); text-align: center;\"><font face=\"Comic Sans MS\">Inserted this comment using the text editor available for the comments, but then changed the sanitised data in the database to display this comment as intended</font></span></div><div><span style=\"color: rgb(0, 41, 33); text-align: center;\"><font face=\"Comic Sans MS\">I didn\'t want to remove my sanitisation but wanted to show that I could implement a Javascript component</font></span></div>', '2018-05-08 04:09:33', 16, 9, 1, 1, 0);
+(1, 'This is a comment on the game Portal by user Admin', '2018-05-07 05:34:16', 0, 0, 1, 1, 0),
+(2, '<span style=\"font-weight: 700; text-align: center;\"><h3 style=\"text-align: left;\"><font color=\"#f79646\" style=\"\" face=\"Comic Sans MS\">Test comment</font></h3></span><div style=\"text-align: left;\"><span style=\"color: rgb(0, 41, 33); text-align: center;\"><font face=\"Comic Sans MS\">Inserted this comment using the text editor available for the comments, but then changed the sanitised data in the database to display this comment as intended</font></span></div><div><span style=\"color: rgb(0, 41, 33); text-align: center;\"><font face=\"Comic Sans MS\">I didn\'t want to remove my sanitisation but wanted to show that I could implement a Javascript component</font></span></div>', '2018-05-08 04:09:33', 1, 0, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -202,7 +202,7 @@ CREATE TABLE `gamereply` (
 --
 
 INSERT INTO `gamereply` (`gameReplyID`, `replyComment`, `replyCommDateTime`, `replyCommThUp`, `replyCommThDown`, `userID`, `gameCommID`, `deleted`) VALUES
-(1, 'A reply to admin\'s comment on Portal', '2018-05-07 22:34:40', 11, 4, 2, 1, 1);
+(1, 'A reply to admin\'s comment on Portal', '2018-05-07 22:34:40', 0, 1, 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -224,13 +224,44 @@ CREATE TABLE `rep_calcs` (
 --
 
 INSERT INTO `rep_calcs` (`repcalcsID`, `userID`, `fixCommRep`, `fixReplyRep`, `gameCommRep`, `gameReplyRep`) VALUES
-(1, 1, 0, 0, 2, 0),
-(2, 2, 540, 1, 0, 7),
+(1, 1, 0, 0, 1, 0),
+(2, 2, -1, 0, 0, -1),
 (3, 3, 0, 0, 0, 0),
-(4, 4, 0, 1, 0, 0),
+(4, 4, 0, 0, 0, 0),
 (5, 5, 0, 0, 0, 0),
 (6, 6, 1, 0, 0, 0),
 (7, 7, 0, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `thumbs_record`
+--
+
+CREATE TABLE `thumbs_record` (
+  `thumbID` int(10) UNSIGNED NOT NULL,
+  `userID` int(10) UNSIGNED NOT NULL,
+  `thumbType` varchar(5) NOT NULL,
+  `fixID` int(10) UNSIGNED DEFAULT NULL,
+  `gameID` int(10) UNSIGNED DEFAULT NULL,
+  `fixCommID` int(10) UNSIGNED DEFAULT NULL,
+  `gameReplyID` int(10) UNSIGNED DEFAULT NULL,
+  `gameCommID` int(10) UNSIGNED DEFAULT NULL,
+  `fixReplyID` int(10) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `thumbs_record`
+--
+
+INSERT INTO `thumbs_record` (`thumbID`, `userID`, `thumbType`, `fixID`, `gameID`, `fixCommID`, `gameReplyID`, `gameCommID`, `fixReplyID`) VALUES
+(1, 2, 'down', 2, NULL, NULL, NULL, NULL, NULL),
+(2, 2, 'down', 3, NULL, NULL, NULL, NULL, NULL),
+(3, 2, 'up', 1, NULL, NULL, NULL, NULL, NULL),
+(4, 2, 'up', NULL, NULL, 4, NULL, NULL, NULL),
+(5, 2, 'down', NULL, NULL, 1, NULL, NULL, NULL),
+(6, 2, 'up', NULL, NULL, NULL, NULL, 2, NULL),
+(7, 2, 'down', NULL, NULL, NULL, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -254,12 +285,12 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`userID`, `username`, `password`, `userCreateDate`, `acctStatus`, `avatarID`, `commRep`, `fixRep`) VALUES
-(1, 'Admin', '$2y$10$trkkHLSlGpO0v6cVjA1IPuF.kohc8SZ4zGpuPlfoQrTybsHndPLBe', '2018-05-06 14:53:47', 3, 13, 2, 15),
-(2, 'Active', '$2y$10$3iEh/LXBqGh2T2ivqUBYx.lw.BxxGKs3M9o31ugB.xo5dw6tZAxn2', '2018-05-06 15:06:53', 1, 11, 548, 501),
+(1, 'Admin', '$2y$10$trkkHLSlGpO0v6cVjA1IPuF.kohc8SZ4zGpuPlfoQrTybsHndPLBe', '2018-05-06 14:53:47', 3, 13, 1, 1),
+(2, 'Active', '$2y$10$3iEh/LXBqGh2T2ivqUBYx.lw.BxxGKs3M9o31ugB.xo5dw6tZAxn2', '2018-05-06 15:06:53', 1, 11, 0, 0),
 (3, 'Disabled', '$2y$10$2vpM/NyD3bKC5YxwlHQEQ.iiPlt7j1gM5lTOwZIJlVbHr/FwgTPsK', '2018-05-06 15:07:19', 2, 1, 0, 0),
-(4, 'abc123', '$2y$10$8uC9HypnLqn.PksdbsvLi.CgVtntHGl3y4n1jT5/Pymm5pQbbUiHe', '2018-05-07 12:39:06', 1, 1, 1, 0),
+(4, 'abc123', '$2y$10$8uC9HypnLqn.PksdbsvLi.CgVtntHGl3y4n1jT5/Pymm5pQbbUiHe', '2018-05-07 12:39:06', 1, 1, 0, 0),
 (5, 'test1', '$2y$10$EU/k0Hya4RDWcPy/l2IDyekZrBwEGZAnM7dvgM6gsy6qUxD7U7Jn.', '2018-05-09 13:26:41', 1, 1, 0, 0),
-(6, 'newuser', '$2y$10$Wsz63/o7yDUiCUVbyWhpJOuIV/2zAJZrt0WYUyN7xHBAA4cZKxzWO', '2018-05-09 15:35:45', 1, 1, 1, 6),
+(6, 'newuser', '$2y$10$Wsz63/o7yDUiCUVbyWhpJOuIV/2zAJZrt0WYUyN7xHBAA4cZKxzWO', '2018-05-09 15:35:45', 1, 1, 1, 0),
 (7, 'newuser1', '$2y$10$gEFy7ue3EeVfaeaAvz8WRecDv5.031SjS2maBj48UTyBB7OoG3ypq', '2018-05-14 12:09:03', 1, 1, 0, 0);
 
 --
@@ -327,6 +358,19 @@ ALTER TABLE `rep_calcs`
   ADD KEY `userID` (`userID`);
 
 --
+-- Indexes for table `thumbs_record`
+--
+ALTER TABLE `thumbs_record`
+  ADD PRIMARY KEY (`thumbID`),
+  ADD KEY `fixCommID` (`fixCommID`),
+  ADD KEY `fixID` (`fixID`),
+  ADD KEY `fixReplyID` (`fixReplyID`),
+  ADD KEY `gameCommID` (`gameCommID`),
+  ADD KEY `gameID` (`gameID`),
+  ADD KEY `replyID` (`gameReplyID`),
+  ADD KEY `userID` (`userID`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -379,6 +423,11 @@ ALTER TABLE `gamereply`
 ALTER TABLE `rep_calcs`
   MODIFY `repcalcsID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
+-- AUTO_INCREMENT for table `thumbs_record`
+--
+ALTER TABLE `thumbs_record`
+  MODIFY `thumbID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
@@ -427,6 +476,18 @@ ALTER TABLE `gamereply`
 --
 ALTER TABLE `rep_calcs`
   ADD CONSTRAINT `rep_calcs_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `thumbs_record`
+--
+ALTER TABLE `thumbs_record`
+  ADD CONSTRAINT `thumbs_record_ibfk_1` FOREIGN KEY (`fixCommID`) REFERENCES `fixcomm` (`fixCommID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `thumbs_record_ibfk_2` FOREIGN KEY (`fixID`) REFERENCES `fix` (`fixID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `thumbs_record_ibfk_3` FOREIGN KEY (`fixReplyID`) REFERENCES `fixreply` (`fixReplyID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `thumbs_record_ibfk_4` FOREIGN KEY (`gameCommID`) REFERENCES `gamecomm` (`gameCommID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `thumbs_record_ibfk_5` FOREIGN KEY (`gameID`) REFERENCES `game` (`gameID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `thumbs_record_ibfk_6` FOREIGN KEY (`gameReplyID`) REFERENCES `gamereply` (`gameReplyID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `thumbs_record_ibfk_7` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user`

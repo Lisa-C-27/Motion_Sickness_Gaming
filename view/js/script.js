@@ -27,6 +27,33 @@ if (isMobile) {
 }
 });
 
+$(document).ready(function() {
+
+    if (localStorage.chkbx && localStorage.chkbx != '') {
+        $('#remember').attr('checked', 'checked');
+        $('#username').val(localStorage.usrname);
+        $('#password').val(localStorage.pass);
+    } else {
+        $('#remember').removeAttr('checked');
+        $('#username').val('');
+        $('#password').val('');
+    }
+
+//    $('#remember').click(function() {
+        $('#login').on('submit', function() {
+        if ($('#remember').is(':checked')) {
+            // save username and password
+            localStorage.usrname = $('#username').val();
+            localStorage.pass = $('#password').val();
+            localStorage.chkbx = $('#remember').val();
+        } else {
+            localStorage.usrname = '';
+            localStorage.pass = '';
+            localStorage.chkbx = '';
+        }
+    });
+});
+
 //This function is called from the 'php/games.php' and 'php/individual_games.php' modals
 function addgamemodal() { 
     document.getElementById("addgame").showModal(); 
@@ -266,9 +293,54 @@ function show_changepw() {
     } 
 }
 
+function loginreq(gameid) {
+//    alert("Please login to vote");
+    if (window.confirm('Please login to vote. If you click ok you will be redirected to the login page. If you you do not want this, please click cancel')) {
+        window.location.href='../php/login.php?gameID=' +gameid;
+    };
+}
 
+   
 
-        
+      (function (window, document) {
+      var menu = document.getElementById('menu'),
+          WINDOW_CHANGE_EVENT = ('onorientationchange' in window) ? 'orientationchange':'resize';
+      
+      function toggleHorizontal() {
+          [].forEach.call(
+              document.getElementById('menu').querySelectorAll('.custom-can-transform'),
+              function(el){
+                  el.classList.toggle('pure-menu-horizontal');
+              }
+          );
+      };
+      
+      function toggleMenu() {
+          // set timeout so that the panel has a chance to roll up
+          // before the menu switches states
+          if (menu.classList.contains('open')) {
+              setTimeout(toggleHorizontal, 500);
+          }
+          else {
+              toggleHorizontal();
+          }
+          menu.classList.toggle('open');
+          document.getElementById('toggle').classList.toggle('x');
+      };
+      
+      function closeMenu() {
+          if (menu.classList.contains('open')) {
+              toggleMenu();
+          }
+      }
+      
+      document.getElementById('toggle').addEventListener('click', function (e) {
+          toggleMenu();
+          e.preventDefault();
+      });
+      
+      window.addEventListener(WINDOW_CHANGE_EVENT, closeMenu);
+      })(this, this.document);
 
 
 

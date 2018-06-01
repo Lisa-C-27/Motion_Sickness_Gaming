@@ -12,34 +12,7 @@
 </div>
 -->
 
-<script>
-    $(function() {
 
-    if (localStorage.chkbx && localStorage.chkbx != '') {
-        $('#remember').attr('checked', 'checked');
-        $('#username').val(localStorage.usrname);
-        $('#password').val(localStorage.pass);
-    } else {
-        $('#remember').removeAttr('checked');
-        $('#username').val('');
-        $('#password').val('');
-    }
-
-//    $('#remember').click(function() {
-        $('#login').on('submit', function() {
-        if ($('#remember').is(':checked')) {
-            // save username and password
-            localStorage.usrname = $('#username').val();
-            localStorage.pass = $('#password').val();
-            localStorage.chkbx = $('#remember').val();
-        } else {
-            localStorage.usrname = '';
-            localStorage.pass = '';
-            localStorage.chkbx = '';
-        }
-    });
-    });
-</script>
 
 <div class="content-center">
     <form class="pure-form pure-form-stacked" method="post" action="../../controller/login_process.php" id="login">
@@ -66,6 +39,9 @@
         </fieldset>
     </form>
 </div>
+<script>
+
+</script>
 <?php
     include 'footer.php';
 ?>

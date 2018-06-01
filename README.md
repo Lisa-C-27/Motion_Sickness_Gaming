@@ -14,8 +14,8 @@ The website is to build a community for gamers who experience motion sickness wi
 - [x] RU's can comment on games that are in the library
 - [x] RU's can add possible in-game fixes for the games
 - [x] RU's can comment on these fixes
-- [x] Anyone can vote on a game as to whether it gives them motion sickness
-- [ ] Anyone can vote on the fixes as to whether it worked for them or not
-- [ ] Anyone can vote on RU's comments
-- [ ] Admin can delete comments
+- [x] Only RU's can vote on a game as to whether it gives them motion sickness
+- [x] Only RU's can vote on the fixes as to whether it worked for them or not
+- [x] Only RU's can vote on RU's comments
+- [x] Admin can delete comments
 - [x] RU's will have reputation based on votes (2 different types of reputation (fixes, comments))
