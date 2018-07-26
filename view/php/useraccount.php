@@ -28,20 +28,20 @@
 <?php
     }
 ?>
-<div class="content game-page">
+<div class="container page">
     <h1>Hi <?php echo $_SESSION['username']; ?></h1>
     <h2>Welcome to your account page</h2>
     <?php
         $getuser = getOneUser($_SESSION['userid']); 
     ?>
     <div id="upper-profile">
-        <div id="avatar-profile-container">
+        <div id="avatar-profile-container" class="center">
             <img class="avatar-profile" src="<?php echo $getuser['url']; ?>"/>
             <div id="button">
                 <button type="button" class="avatar-button" onclick="selectAvatar();" id="showAvatars">Change Avatar</button>
             </div>
         </div>
-        <div id="reputation">
+        <div id="reputation" class="center">
             <?php 
                 $getrep = getThumbs($_SESSION['userid']);
             ?>

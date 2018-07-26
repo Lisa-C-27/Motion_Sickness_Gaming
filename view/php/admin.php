@@ -10,7 +10,7 @@
     include '../../model/connect.php';
     include '../../model/dbfunctions.php';
 ?>
-<div class="content game-page">
+<div class="content page">
         <h1>Admin Panel</h1>
     <p>This page is for admin access only.</p>
     <p>This page is not finished yet</p>
@@ -42,17 +42,17 @@
         <div class="row">
             <div class="col1">
                 <div class="tablehead">
-                    <h3>Username</h3>
+                    <h3 class="nomargin">Username</h3>
                 </div>
             </div>
             <div class="col2">
                 <div class="tablehead">
-                    <h3>User Create Date</h3>
+                    <h3 class="nomargin">User Create Date</h3>
                 </div>
             </div>
             <div class="col3">
                 <div class="tablehead">
-                    <h3>Account Status</h3>
+                    <h3 class="nomargin">Account Status</h3>
                 </div>
             </div>
         </div>
@@ -62,14 +62,14 @@
             ?>
         <div class="row">
             <div class="col1">
-                <p><a href="admin_view_user.php?userID=<?php echo $row['userID'] ?>"><?php echo $row['username'] ?></a></p>
+                <p class="nomargin"><a href="admin_view_user.php?userID=<?php echo $row['userID'] ?>"><?php echo $row['username'] ?></a></p>
 
             </div>
             <div class="col2">
-                <p><?php echo $row['userCreateDate'] ?></p>
+                <p class="nomargin"><?php echo $row['userCreateDate'] ?></p>
             </div>
             <div class="col3">
-                <p> <?php 
+                <p class="nomargin"> <?php 
                     if($row['acctStatus'] == 1) {
                         echo 'Active';
                     } else if($row['acctStatus'] == 2) {

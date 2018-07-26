@@ -11,6 +11,7 @@
                 <ul class="pure-menu-list">
                     <li class="pure-menu-item"><a href="index.php" class="pure-menu-link">Home</a></li>
                     <li class="pure-menu-item"><a href="games.php" class="pure-menu-link">Games</a></li>
+                    <li class="pure-menu-item"><a href="blogs.php" class="pure-menu-link">Blog</a></li>
                     <li class="pure-menu-item"><a href="about.php" class="pure-menu-link">About</a></li>
                     <li class="pure-menu-item"><a href="contact.php" class="pure-menu-link">Contact</a></li>
                     <!--  If user is logged in display 'your account' -->

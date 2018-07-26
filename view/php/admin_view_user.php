@@ -11,7 +11,7 @@
     include '../../model/dbfunctions.php';
 ?>
 
-<div class="content game-page">
+<div class="content page">
     <h1>User details page</h1>
     <?php
         $getuser = getOneUser($_GET['userID']);

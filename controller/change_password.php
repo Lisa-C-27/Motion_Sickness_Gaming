@@ -15,8 +15,11 @@
     $result = $stmt->fetch();
    
     if (password_verify($password, $result['password'])){
-        $update = "UPDATE user SET(password) VALUES (:password) WHERE userID = '" . $userID . "';";
+        $update = "UPDATE user SET password = :password WHERE userID = :userID;";
+        include '../model/connect.php';
+        $stmt = $conn->prepare($update);
         $stmt->bindParam(':password', $newpassword, PDO::PARAM_STR);
+        $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
         $stmt->execute();
         
         $_SESSION['message'] = "Password updated successfully";

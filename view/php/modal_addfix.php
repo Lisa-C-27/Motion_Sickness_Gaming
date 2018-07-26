@@ -2,7 +2,7 @@
     // This checks if the user is logged in. If true then the Add Fix button will be displayed
         if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) { 
     ?>
-    <button type="button" class="pure-button inline" data-toggle="modal" data-target="#myModal">Add a fix</button>
+    <button type="button" class="pure-button" data-toggle="modal" data-target="#myModal">Add a fix</button>
     <?php
         };
 ?>
@@ -21,7 +21,7 @@
                     <fieldset>
                         <textarea id="fix" rows="10" cols="50" name="fix"></textarea>
                         <input type="hidden" name="gameID" value="<?php echo $_GET['gameID'] ?>"/>
-                        <input type="hidden" name="userID" value="<?php echo $_SESSION['userid'] ?>"/>
+                        <input type="hidden" name="userID" value="<?php if(isset($_SESSION['userid'])) { echo $_SESSION['userid']; } ?>"/>
                         <button type="submit" class="pure-button pure-button-primary" name="submit_fix">Add fix</button>
                     </fieldset>
                 </form>

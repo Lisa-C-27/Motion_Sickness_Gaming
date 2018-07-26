@@ -3,17 +3,6 @@
     include 'header.php';
     include 'nav.php';
 ?>
-<!--
-<div id="loader">
-<div class="loading"></div>
-</div>
-<div id="pageloader">
-    <div class="loading"></div>
-</div>
--->
-
-
-
 <div class="content-center">
     <form class="pure-form pure-form-stacked" method="post" action="../../controller/login_process.php" id="login">
         <fieldset>
@@ -32,6 +21,9 @@
             <?php
                 }
             ?>
+            <div>
+                <a href="forgot_password.php">Forgot password?</a>
+            </div>
             <button type="submit" class="pure-button pure-button-primary" name="login">Sign in</button>
         <?php
             include 'error_section.php';

@@ -8,7 +8,10 @@
 //    } else if($getrep['fixthumbs'] > 500) {
 //        echo 'Ultimate Fixer';
 //    }
-    if($getrep['fixRep'] < 1) {  
+    if($getrep['acctStatus'] == 3) {
+        echo 'Admin';
+    }
+    else if($getrep['fixRep'] < 1) {  
         //display nothing
     } else if($getrep['fixRep'] <= 100) {
         echo 'Beginner Fixer';

@@ -10,6 +10,8 @@ function updatethumb(type, direction, id, userID) {
         }
     } else if(type == "gamereply") {
         var $url = "../../controller/thumbs_increment.php?type=reply&direction="+direction+ "&commID="+id+ "&userID="+userID;
+        var disable = document.getElementById("hide3_"+id);
+        var disable1 = document.getElementById("hide4_"+id);
         if(direction == "up") {
            var div = document.getElementById("replyup_"+id);
         } else if (direction == "down") {
@@ -17,6 +19,8 @@ function updatethumb(type, direction, id, userID) {
         }
     } else if(type == "fix") {
         var $url = "../../controller/thumbs_increment.php?type=fix&direction="+direction+ "&commID="+id+ "&userID="+userID;
+        var disable = document.getElementById("hide5_"+id);
+        var disable1 = document.getElementById("hide6_"+id);
         if(direction == "up") {
             var div = document.getElementById("fixup_"+id);
         } else if(direction == "down") {
@@ -24,6 +28,8 @@ function updatethumb(type, direction, id, userID) {
         }
     } else if(type == "fixcomm") {
         var $url = "../../controller/thumbs_increment.php?type=fixcomment&direction="+direction+ "&commID="+id+ "&userID="+userID;
+        var disable = document.getElementById("hide7_"+id);
+        var disable1 = document.getElementById("hide8_"+id);
         if(direction == "up") {
             var div = document.getElementById("fixcommup_"+id);
         } else if(direction == "down") {
@@ -31,6 +37,8 @@ function updatethumb(type, direction, id, userID) {
         }
     } else if(type == "fixreply") {
         var $url = "../../controller/thumbs_increment.php?type=fixreply&direction="+direction+ "&commID="+id+ "&userID="+userID;
+        var disable = document.getElementById("hide9_"+id);
+        var disable1 = document.getElementById("hide10_"+id);
         if(direction == "up") {
             var div = document.getElementById("fixreplyup_"+id);
         } else if(direction == "down") {
@@ -66,165 +74,3 @@ function updatethumb(type, direction, id, userID) {
     }
 });
 }
-
-
-//
-//function updatethumb_gamecomm(direction, id, userID) {
-//    $url = "../../controller/thumbs_increment.php?type=comment&direction="+direction+ "&commID="+id+ "&userID="+userID;
-//    if(direction == "up") {
-//        $.ajax( {
-//        url: $url,
-//        method: 'get',
-//        datatype: 'json',
-//        success: function(res) {
-//            console.log(res);
-//            document.getElementById("up_"+id).value++;
-//        },
-//        error: function(err) {
-//            console.log(err);
-//        }
-//    });
-//    }
-//    if(direction == "down") {
-//        $.ajax( {
-//        url: $url,
-//        method: 'get',
-//        datatype: 'json',
-//        success: function(res) {
-//            console.log(res);
-//            document.getElementById("down_"+id).value++;
-//        },
-//        error: function(err) {
-//            console.log(err);
-//        }
-//    });
-//    }
-//}
-//
-//function updatethumb_gamereply(direction, id, userID) {
-//    $url = "../../controller/thumbs_increment.php?type=reply&direction="+direction+ "&commID="+id+ "&userID="+userID;
-//    if(direction == "up") {
-//        $.ajax( {
-//        url: $url,
-//        method: 'get',
-//        datatype: 'json',
-//        success: function(res) {
-//            console.log(res);
-//            document.getElementById("replyup_"+id).value++;
-//        },
-//        error: function(err) {
-//            console.log(err);
-//        }
-//    });
-//    }
-//    if(direction == "down") {
-//        $.ajax( {
-//        url: $url,
-//        method: 'get',
-//        datatype: 'json',
-//        success: function(res) {
-//            console.log(res);
-//            document.getElementById("replydown_"+id).value++;
-//        },
-//        error: function(err) {
-//            console.log(err);
-//        }
-//    });
-//    }
-//}
-//
-//function updatethumb_fix(direction, id, userID) {
-//    $url = "../../controller/thumbs_increment.php?type=fix&direction="+direction+ "&commID="+id+ "&userID="+userID;
-//    if(direction == "up") {
-//        $.ajax( {
-//        url: $url,
-//        method: 'get',
-//        datatype: 'json',
-//        success: function(res) {
-//            console.log(res);
-//            document.getElementById("fixup_"+id).value++;
-//        },
-//        error: function(err) {
-//            console.log(err);
-//        }
-//    });
-//    }
-//    if(direction == "down") {
-//        $.ajax( {
-//        url: $url,
-//        method: 'get',
-//        datatype: 'json',
-//        success: function(res) {
-//            console.log(res);
-//            document.getElementById("fixdown_"+id).value++;
-//        },
-//        error: function(err) {
-//            console.log(err);
-//        }
-//    });
-//    }
-//}
-//
-//function updatethumb_fixcomm(direction, id, userID) {
-//    $url = "../../controller/thumbs_increment.php?type=fixcomment&direction="+direction+ "&commID="+id+ "&userID="+userID;
-//    if(direction == "up") {
-//        $.ajax( {
-//        url: $url,
-//        method: 'get',
-//        datatype: 'json',
-//        success: function(res) {
-//            console.log(res);
-//            document.getElementById("fixcommup_"+id).value++;
-//        },
-//        error: function(err) {
-//            console.log(err);
-//        }
-//    });
-//    }
-//    if(direction == "down") {
-//        $.ajax( {
-//        url: $url,
-//        method: 'get',
-//        datatype: 'json',
-//        success: function(res) {
-//            console.log(res);
-//            document.getElementById("fixcommdown_"+id).value++;
-//        },
-//        error: function(err) {
-//            console.log(err);
-//        }
-//    });
-//    }
-//}
-//
-//function updatethumb_fixreply(direction, id, userID) {
-//    $url = "../../controller/thumbs_increment.php?type=fixreply&direction="+direction+ "&commID="+id+ "&userID="+userID;
-//    if(direction == "up") {
-//        $.ajax( {
-//        url: $url,
-//        method: 'get',
-//        datatype: 'json',
-//        success: function(res) {
-//            console.log(res);
-//            document.getElementById("fixreplyup_"+id).value++;
-//        },
-//        error: function(err) {
-//            console.log(err);
-//        }
-//    });
-//    }
-//    if(direction == "down") {
-//        $.ajax( {
-//        url: $url,
-//        method: 'get',
-//        datatype: 'json',
-//        success: function(res) {
-//            console.log(res);
-//            document.getElementById("fixreplydown_"+id).value++;
-//        },
-//        error: function(err) {
-//            console.log(err);
-//        }
-//    });
-//    }
-//}

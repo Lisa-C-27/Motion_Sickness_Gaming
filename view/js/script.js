@@ -29,14 +29,12 @@ if (isMobile) {
 
 $(document).ready(function() {
 
-    if (localStorage.chkbx && localStorage.chkbx != '') {
+    if (localStorage.chkbx && localStorage.chkbx !== '') {
         $('#remember').attr('checked', 'checked');
         $('#username').val(localStorage.usrname);
-        $('#password').val(localStorage.pass);
     } else {
         $('#remember').removeAttr('checked');
         $('#username').val('');
-        $('#password').val('');
     }
 
 //    $('#remember').click(function() {
@@ -44,11 +42,9 @@ $(document).ready(function() {
         if ($('#remember').is(':checked')) {
             // save username and password
             localStorage.usrname = $('#username').val();
-            localStorage.pass = $('#password').val();
             localStorage.chkbx = $('#remember').val();
         } else {
             localStorage.usrname = '';
-            localStorage.pass = '';
             localStorage.chkbx = '';
         }
     });
@@ -61,14 +57,14 @@ function addgamemodal() {
 
 //These functions are called from 'php/individual_games.php' to switch between game comments and fix comments. 
 function tabOne() {
-    document.getElementById("gamecomment").style.display = "block";
+    document.getElementById("gamecomments").style.display = "block";
     document.getElementById("fixcomment").style.display = "none";
     document.getElementById("tabone").style.background = "#FCE54A";
     document.getElementById("tabtwo").style.background = "#EEAC4E";
 }
 function tabTwo() {
-    document.getElementById("fixcomment").style.display = "grid";
-    document.getElementById("gamecomment").style.display = "none";
+    document.getElementById("fixcomment").style.display = "block";
+    document.getElementById("gamecomments").style.display = "none";
     document.getElementById("tabone").style.background = "#EEAC4E";
     document.getElementById("tabtwo").style.background = "#FCE54A";
 }
@@ -86,7 +82,7 @@ function togglereply($replyID) {
 function toggleviewreply($replyID) {
     var x = document.getElementById("replyview_" + $replyID);
     if (!x.style.display || x.style.display === "none") {
-        x.style.display = "grid";
+        x.style.display = "block";
     } else {
         x.style.display = "none";
     }
@@ -103,7 +99,7 @@ function togglefixreply($replyID) {
 function toggleviewfixcomm($replyID) {
     var x = document.getElementById("replyfixview_" + $replyID);
     if (!x.style.display || x.style.display === "none") {
-        x.style.display = "grid";
+        x.style.display = "block";
     } else {
         x.style.display = "none";
     }
@@ -121,7 +117,7 @@ function toggleaddfixcomment($replyID) {
 function togglefixcomment($replyID) {
     var x = document.getElementById("fixcomments_" + $replyID);
     if (!x.style.display || x.style.display === "none") {
-        x.style.display = "grid";
+        x.style.display = "block";
     } else {
         x.style.display = "none";
     } 
@@ -171,6 +167,39 @@ function checkuser()
         return false;
     }
 }
+function checkemail() {
+    var emailval = document.getElementById("email").value;
+    var email = document.getElementById("email");
+    var status = document.getElementById("email_status");
+    if(emailval) {
+        $.ajax({
+            type: 'get',
+            url: '../../controller/checkemail.php?email=' + emailval,
+            success: function (response) {
+                $( '#email_status' ).html(response);
+                
+                if(response=="Email is available")
+                {
+                email.style.borderColor = "green";
+                status.style.color = "green";
+                status.style.display = "block";
+                document.getElementById("error_register_user").innerHTML = ""
+                    return true;     
+                } else {
+                    console.log(response);
+                    email.style.borderColor = "red";
+                    status.style.display = "block";
+                    status.style.color = "red";
+                    document.getElementById("error_register_user").innerHTML = ""
+                    return false;	  
+                }
+            }
+        });
+    } else {
+        $( '#email_status' ).html("");
+        return false;
+    }
+}
 
 //This function is called from 'php/games.php' Add game modal onchange
 function checkgame() {
@@ -196,48 +225,6 @@ function checkgame() {
         return false;
      }
 }
-
-////This function is called from the 'php/individual_games.php' thumbs up for motion sickness
-//function updatethumbsup(thumb_id) {
-//    $.ajax( {
-//        url: '../../controller/thumbs_yes_increment.php?gameID=' + thumb_id,
-//        method: 'post',
-//        data: $('#game_yes').serialize(),
-//        datatype: 'json',
-//        success: function(res) {
-//            console.log(res);
-//            document.getElementById("loader").style.display = "none";
-//        },
-//        error: function(err) {
-//            console.log(err);
-//        }
-//        
-//    });
-//    //The variable x is created within view/php/individual_games.php
-//    document.getElementById("thup").innerHTML = (x+1);
-//    document.getElementById("game_yes").disabled = true;
-//    document.getElementById("game_no").disabled = true;
-//}
-//
-////This function is called from the 'php/individual_games.php' thumbs down for motion sickness
-//function updatethumbsdown(thumb_id) { 
-//    $.ajax( {
-//        url: '../../controller/thumbs_no_increment.php?gameID=' + thumb_id,
-//        method: 'post',
-//        data: $('#game_no').serialize(),
-//        datatype: 'json',
-//        success: function(res) {
-//            console.log(res);
-//        },
-//        error: function(err) {
-//            console.log(err);
-//        }
-//    });
-//    //The variable y is created within view/php/individual_games.php
-//    document.getElementById("thdown").innerHTML = (y+1);
-//    document.getElementById("game_yes").disabled = true;
-//    document.getElementById("game_no").disabled = true;
-//}
 
 function validateForm() {
     
@@ -298,50 +285,47 @@ function loginreq(gameid) {
     if (window.confirm('Please login to vote. If you click ok you will be redirected to the login page. If you you do not want this, please click cancel')) {
         window.location.href='../php/login.php?gameID=' +gameid;
     };
+}  
+
+(function (window, document) {
+    var menu = document.getElementById('menu'),
+    WINDOW_CHANGE_EVENT = ('onorientationchange' in window) ? 'orientationchange':'resize';
+    function toggleHorizontal() {
+        [].forEach.call(
+            document.getElementById('menu').querySelectorAll('.custom-can-transform'),
+            function(el){
+                el.classList.toggle('pure-menu-horizontal');
+            }
+        );
+    };
+    function toggleMenu() {
+        // set timeout so that the panel has a chance to roll up
+        // before the menu switches states
+        if (menu.classList.contains('open')) {
+            setTimeout(toggleHorizontal, 500);
+        }
+        else {
+            toggleHorizontal();
+        }
+        menu.classList.toggle('open');
+        document.getElementById('toggle').classList.toggle('x');
+    };
+    function closeMenu() {
+        if (menu.classList.contains('open')) {
+            toggleMenu();
+        }
+    }
+    document.getElementById('toggle').addEventListener('click', function (e) {
+        toggleMenu();
+        e.preventDefault();
+    });
+    window.addEventListener(WINDOW_CHANGE_EVENT, closeMenu);
+})(this, this.document);
+
+function removeSpace(gameID) {
+    var name = document.getElementById('urlname_' + gameID);
+    var newname = name.split(' ').join('_');
+    $(name).text(newname);
 }
-
-   
-
-      (function (window, document) {
-      var menu = document.getElementById('menu'),
-          WINDOW_CHANGE_EVENT = ('onorientationchange' in window) ? 'orientationchange':'resize';
-      
-      function toggleHorizontal() {
-          [].forEach.call(
-              document.getElementById('menu').querySelectorAll('.custom-can-transform'),
-              function(el){
-                  el.classList.toggle('pure-menu-horizontal');
-              }
-          );
-      };
-      
-      function toggleMenu() {
-          // set timeout so that the panel has a chance to roll up
-          // before the menu switches states
-          if (menu.classList.contains('open')) {
-              setTimeout(toggleHorizontal, 500);
-          }
-          else {
-              toggleHorizontal();
-          }
-          menu.classList.toggle('open');
-          document.getElementById('toggle').classList.toggle('x');
-      };
-      
-      function closeMenu() {
-          if (menu.classList.contains('open')) {
-              toggleMenu();
-          }
-      }
-      
-      document.getElementById('toggle').addEventListener('click', function (e) {
-          toggleMenu();
-          e.preventDefault();
-      });
-      
-      window.addEventListener(WINDOW_CHANGE_EVENT, closeMenu);
-      })(this, this.document);
-
-
 
 

@@ -77,20 +77,30 @@
             <img width="300" alt="File Icons" class="pure-img-responsive" src= "../img/arrows.png">
         </div>
         <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-3-5">
-            <h2 class="content-head content-head-ribbon">Most recently added game</h2>
             <?php 
-            $getgame = mostRecentGame();
-            $getfix = mostRecentFix();
+                $getgame = mostRecentGame();
+                $getfix = mostRecentFix();
+                $getblog = mostRecentBlog();
+                $blogurl = get_blogurl($getblog['blogID']);
+                $gameurl = gamelisturl($getgame['gameID']);
+                $fixurl = gamelisturl($getfix['gameID']);
             ?>
-            <a class="index" href="individual_games.php?gameID=<?php echo $getgame['gameID']; ?>">
+            <h2 class="content-head content-head-ribbon">Most recently added game</h2>
+            <a class="index" href="individual_games.php?gameID=<?php echo $getgame['gameID']; ?>&game=<?php echo $gameurl['gameName']; ?>">
                 <?php 
                 echo $getgame['gameName'];
             ?>
             </a>
             <h2 class="content-head content-head-ribbon">Most recently added fix</h2>
-            <a class="index" href="individual_games.php?gameID=<?php echo $getfix['gameID']; ?>">
+            <a class="index" href="individual_games.php?gameID=<?php echo $getfix['gameID']; ?>&game=<?php echo $fixurl['gameName']; ?>&fix=tab">
                 <?php 
                     echo $getfix['gameName'];
+                ?>
+            </a>
+            <h2 class="content-head content-head-ribbon">Most recently added blog post</h2>
+            <a class="index" href="blog.php?blogID=<?php echo $getblog['blogID']; ?>&title=<?php echo $blogurl['blogTitle']; ?>">
+                <?php 
+                    echo $getblog['blogTitle'];
                 ?>
             </a>
         </div>
@@ -107,6 +117,10 @@
                     <label for="password">Password</label>
                     <input id="password" type="password" placeholder="Password" name="userpass" pattern=".{7,30}" onchange="validateForm();">
                     <div id="error_register_pass" class="red"></div>
+                    <div>
+                        <input type="checkbox" id="agree" name="agree"/>
+                        I have read and agree to the <a target="_blank" href="terms_and_conditions.php">Terms and Conditions</a>
+                    </div>
                     <button type="submit" class="pure-button" name="registration_form">Register</button>
                     <?php
                         include 'error_section.php';

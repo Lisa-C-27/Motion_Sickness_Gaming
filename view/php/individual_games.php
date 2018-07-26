@@ -1,8 +1,4 @@
 <?php
-//  This page is incomplete. Still need to do the following:
-//  'Fix' thumbs up/down reading from database and updating database 
-//  Comments thumbs up/down both 'game' and 'game fix' reading from             database and updating database 
-
     session_start();
     include 'header.php';
     include 'nav.php';
@@ -21,22 +17,9 @@
 //This function is located in 'model/dbfunctions.php'
     $gamedetails = get_one_game($_GET['gameID']);   
     ?>
-<script>
-    //These variables are used in the functions updatethumbsup() and updatethumbsdown() within 'js/script.js'
-//    var x = parseInt(
-        <?php 
-//        echo $gamedetails['gameThUp']; 
-        ?>
-//    );
-//    var y = parseInt(
-        <?php 
-//        echo $gamedetails['gameThDown']; 
-        ?>
-//    );
-</script>
-<div class="container game-page"> 
+<div class="container page"> 
     <div class="game-button">
-        <h1 class="inline"><?php echo $gamedetails['gameName'];?></h1>
+        <h1><?php echo $gamedetails['gameName'];?></h1>
         <?php
             include 'modal_addfix.php';
         ?>
@@ -45,10 +28,36 @@
         include 'game_vote.php';
     ?>
 
-
-    <div class="comment-container">
-
-        
+    <div class="comment-container"> 
+        <?php
+            //If user is logged in then display comment container else display login ore register
+    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) { 
+?>
+    <div id="comment_game">
+        <form class="pure-form pure-form-stacked" id="gameComment" method="post" action="../../controller/addcomment.php">
+            <fieldset>
+                <p class="nomargin">Add a comment about the game:</p>
+                <textarea name="gamecomment" class="comment" id="gamecomment" onchange="validateForm();"></textarea>
+                <input type="hidden" name="userID" value="<?php echo $_SESSION['userid'] ?>"/>
+                <input type="hidden" name="gameID" value="<?php echo $_GET['gameID'] ?>"/>
+                <input type="hidden" name="action_type" value="addgamecomment"/>
+                <button type="submit" class="pure-button pure-button-primary">Comment</button>
+            </fieldset>
+            <?php
+                include 'error_section.php';
+            ?>            
+            <div id="gamecomment_error"></div>
+        </form>
+    </div>
+    <?php
+        } else {
+    ?>
+    <div id="comment_game">
+        <p>To vote, add a fix, comment or reply, please <a class="green" href="login.php?gameID=<?php echo $_GET['gameID'] ?>">Login</a> or <a class="green" href="register.php?gameID=<?php echo $_GET['gameID'] ?>">Register</a></p>
+    </div>
+    <?php
+        }
+    ?>
         <div class="pure-button-group tabs" role="group" aria-label="...">
             <button class="tab" onclick="tabOne();" id="tabone">Game Comments</button>
             <button class="tab" onclick="tabTwo();" id="tabtwo">Fixes and comments</button>

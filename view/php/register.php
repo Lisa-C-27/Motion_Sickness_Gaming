@@ -9,17 +9,19 @@
     <form class="pure-form pure-form-stacked" method="POST" action="../../controller/registration_process.php" name="registration">
         <legend>Register</legend>
         <label for="username">Username</label>
-        <input id="username" type="text" placeholder="Username" name="username" onchange="checkuser();" pattern="[a-zA-Z0-9_]{5,30}">
+        <input id="username" type="text" placeholder="Username" name="username" onchange="checkuser();" pattern="[a-zA-Z0-9_]{5,30}" <?php if(isset($_GET['username'])) { ?> value="<?php echo $_GET['username'] ?>" <?php
+        }?>/>
         <div id="error_register_user" class="red"></div>
         <div id="username_status"></div>
 <!--        checkuser() function is located in js/script.js-->
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Your Email" onchange="checkemail();" <?php if(isset($_GET['email'])) { echo 'value="'. $_GET['email'] .'"';
+        }?>/>
+        <div id="email_status"></div>
         <label for="password">Password</label>
         <input id="password" type="password" placeholder="Password" name="userpass" pattern=".{7,30}" onchange="validateForm();"> 
         <div id="error_register_pass" class="red"></div>
-<!--
-        <label for="date">Birth Date</label>
-        <input placeholder="Date of Birth" type="text" id="date"/>
--->
+
         <?php
             if(isset($_GET['gameID'])) { 
         ?>
@@ -27,20 +29,15 @@
         <?php
             }
         ?>
+        <div>
+            <input type="checkbox" id="agree" name="agree"/>
+            I have read and agree to the <a target="_blank" href="terms_and_conditions.php">Terms and Conditions</a>
+        </div>
         <button type="submit" class="pure-button pure-button-primary" name="registration_form">Register</button>
         <?php
             include 'error_section.php';
         ?>
     </form>
-<!--The datepicker-->
-<!--
-<script>
-    $(document).ready(function() {
-        const picker = datepicker('#date');
-    });
-</script>
-<script src="https://unpkg.com/js-datepicker@2.3.2/datepicker.min.js"></script>
--->
 </div>
 <?php
     include 'footer.php';

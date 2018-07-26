@@ -2,17 +2,17 @@
     <div class="row">
         <div class="col1">
             <div class="tablehead">
-                <h3>Game Replies</h3>
+                <h3 class="nomargin">Game Replies</h3>
             </div>
         </div>
         <div class="col2">
             <div class="tablehead">
-                <h3>Date Added</h3>
+                <h3 class="nomargin">Date Added</h3>
             </div>
         </div>
         <div class="col3">
             <div class="tablehead">
-                <h3>Action</h3>
+                <h3 class="nomargin">Action</h3>
             </div>
         </div>
     </div>
@@ -26,14 +26,14 @@
             <?php
                 if($row['deleted'] == true) {
             ?>
-            <p>
+            <p class="nomargin">
                 <?php echo $row['replyComment']; ?> 
                 <em class="orange">This reply was deleted</em>
             </p>
             <?php
                 } else {
             ?>
-            <p>
+            <p class="nomargin">
                 <?php echo $row['replyComment'] ?>
             </p>
             <?php
@@ -41,12 +41,12 @@
             ?>
         </div>
         <div class="col2">
-            <p>
+            <p class="nomargin">
                 <?php echo $row['replyCommDateTime']; ?>
             </p>
         </div>
         <div class="col3">
-            <p>
+            <p class="nomargin">
             <?php
                 if($row['deleted'] == true) {
             ?>  
@@ -67,13 +67,13 @@
     ?>
     <div class="row">
         <div class="col1">
-            <p>No replies to display</p>
+            <p class="nomargin">No replies to display</p>
         </div>
         <div class="col2">
-            <p>-</p>
+            <p class="nomargin">-</p>
         </div>
         <div class="col3">
-            <p>-</p>
+            <p class="nomargin">-</p>
         </div>
     </div>
         <?php

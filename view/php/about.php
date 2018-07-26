@@ -1,11 +1,9 @@
 <?php
-//This page is not complete. Need to add the following:
-//  Content and styling
     session_start();
     include 'header.php';
     include 'nav.php';
 ?>
-<div class="container about">
+<div class="container page">
     <h1>About Motion Sickness Gaming</h1>
     <h3>Author</h3>
     <p>Hi! My name is Lisa Clark and I developed this site for a project as part of my Diploma in Website Development. If this site becomes popular, then I will continue to add updates to this site. I will also probably add a donation button through Paypal and/or Ko-fi to keep the community going, because hosting and domains cost money.</p>
@@ -28,6 +26,8 @@
     <p>Upon sign up you automatically are set up with the default avatar. If you wish to change it please go to "Your Account" page and click on the "Change Avatar" button. You will then be able to choose from an assortment of avatars. At this stage I will not be adding the ability to upload your own avatars, but if the site gets more popular I will consider adding this feature.</p>
     <h3>Password</h3>
     <p>If you need to change your password, please visit "Your Account" page and click on the "Change password" button.</p>
+    <h3>Terms and Conditions</h3>
+    <p>If you wish to create an account with Motion Sickness Gaming, you will need to read and agree to the <a href="terms_and_conditions.php">Terms and Conditions</a></p>
 </div>
 <?php
     include 'footer.php';

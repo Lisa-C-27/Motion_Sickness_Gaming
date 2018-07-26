@@ -15,14 +15,14 @@
     <?php
     }
     ?>
-<div class="container game-page">
+<div class="container page">
     <div class="game-button"> 
-        <h1 class="inline">Games Library</h1>  
+        <h1>Games Library</h1>  
         <?php 
         // This checks if the user is logged in. If true then the Add Game button will be displayed
             if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) { 
         ?>   
-        <button type="button" class="pure-button inline" data-toggle="modal" data-target="#myModal2" id="modal">Add a game</button> 
+        <button type="button" class="pure-button" data-toggle="modal" data-target="#myModal2" id="modal">Add a game</button> 
         <?php
             }; ?>
     </div>
@@ -62,7 +62,11 @@
                 </div>
             </div>  
         </div>
-    </div>  
+    </div> 
+    <div class="library_info">
+        <h4>Click on a game to see comments and fixes about that game.</h4>
+        <h5>If you don't see a game in the list that gives you motion sickness, add it so that others can help you find a fix.</h5>
+    </div>
     <div class="games_message"> 
         <?php
             //if $_SESSION['message'] is not set then set it as nothing to eliminate an undeclared variable error
@@ -91,12 +95,35 @@ Would like headings of A,B,C etc with the relevant games within each div
         </div>
     </ul>
 -->
+            <?php 
+                $getgame = mostRecentGame();
+                $getfix = mostRecentFix();
+                $getblog = mostRecentBlog();
+                $blogurl = get_blogurl($getblog['blogID']);
+                $gameurl = gamelisturl($getgame['gameID']);
+                $fixurl = gamelisturl($getfix['gameID']);
+            ?>
+    <div class="recent">
+        <p>Most recently added game: 
+        <a class="index" href="individual_games.php?gameID=<?php echo $getgame['gameID']; ?>&game=<?php echo $gameurl['gameName']; ?>">
+            <?php 
+            echo $getgame['gameName'];
+        ?>
+        </a></p>
+        <p>Most recently added fix: 
+        <a class="index" href="individual_games.php?gameID=<?php echo $getfix['gameID']; ?>&game=<?php echo $fixurl['gameName']; ?>&fix=tab">
+            <?php 
+                echo $getfix['gameName'];
+            ?>
+        </a></p>
+    </div>
     <ul id="gamelist">
         <?php
             $allgames = gamelist(); //This function is located in model/dbfunctions.php
 
             foreach($allgames as $row) {
-                echo '<li><a href="individual_games.php?gameID='. $row['gameID'] . '">' . $row['gameName'] . '</a></li>';
+                $url = gamelisturl($row['gameID']);
+                echo '<li><a id="urlname_' . $row['gameID'] . '" href="individual_games.php?gameID='. $row['gameID'] . '&game='. $url['gameName'] . '">' . $row['gameName'] . '</a></li>';
         
             }
         ?>
