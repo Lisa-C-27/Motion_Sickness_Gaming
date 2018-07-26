@@ -2,6 +2,7 @@
 Motion Sickness Gaming<br>
 This was a originally a project for my Diploma in Website Development.<br>
 This is a forum-style website for gamers who experience motion sickness while playing games.<br>
+You can check out the website here: [Motion Sickness Gaming](https://motsickgaming.kandigalaxy.website)
 
 ## Users can do the following:
 - Create an account with a username, email and password
