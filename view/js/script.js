@@ -328,4 +328,19 @@ function removeSpace(gameID) {
     $(name).text(newname);
 }
 
-
+//function enableEdit(field) {
+//    if(field == 'username') {
+//        document.getElementById("editUsername").setAttribute("disabled", false);
+//    }
+//    else if(field == 'email') {
+//        document.getElementById("editUserEmail").setAttribute("disabled", false);
+//    }
+//}
+function editUsername() {
+    document.getElementById("showUsername").style.display = 'none';
+    document.getElementById("formEditUsername").style.display = 'block';
+}
+function editEmail() {
+    document.getElementById("showEmail").style.display = 'none';
+    document.getElementById("formEditEmail").style.display = 'block';
+}

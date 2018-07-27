@@ -1,10 +1,10 @@
 <?php
     session_start();
 //Checks if the user is logged in and the session username is equal to the $_GET username (so that other users cannot access other accounts user page)
-    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['username'] == $_GET['username']) {
-    } else {
-        header('Location: index.php');
-    }
+//    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['username'] == $_GET['username']) {
+//    } else {
+//        header('Location: index.php');
+//    }
     include 'header.php';
     include 'nav.php';
     include '../../model/connect.php';
@@ -29,11 +29,11 @@
     }
 ?>
 <div class="container page">
-    <h1>Hi <?php echo $_SESSION['username']; ?></h1>
-    <h2>Welcome to your account page</h2>
     <?php
         $getuser = getOneUser($_SESSION['userid']); 
     ?>
+    <h1>Hi <?php echo $getuser['username']; ?></h1>
+    <h2>Welcome to your account page</h2>
     <div id="upper-profile">
         <div id="avatar-profile-container" class="center">
             <img class="avatar-profile" src="<?php echo $getuser['url']; ?>"/>
@@ -82,6 +82,37 @@
             <button type="submit" class="pure-button" >Submit</button>
         </form>
     </div>
+    <h3>Account details</h3>
+    <p id="showUsername">
+        <span class="userpage">Username: </span>
+        <input class="userpageinput" type="text" disabled value="<?php echo $getuser['username']; ?>"/>
+        <button type="button" name="editUname" onclick="editUsername();">Edit</button>
+    </p>
+    <form id="formEditUsername" action="../../controller/edit_account.php" method="post">      
+        <span class="userpage">Username: </span>
+        <input class="userpageinput" id="username" type="text" value="<?php echo $getuser['username']; ?>" name="username" onkeyup="checkuser();" pattern="[a-zA-Z0-9_]{5,30}"/>
+<!--        checkuser() function is located in js/script.js-->     
+        <input type="hidden" name="userID" value="<?php echo $_SESSION['userid'] ?>"/>
+        <input type="hidden" name="action_type" value="edit_username"/>
+        <button type="submit" name="submit_type" value="submit">Submit</button>
+        <button type="submit" name="submit_type" value="cancel">Cancel</button>
+        <div id="error_register_user" class="red"></div>
+        <div id="username_status"></div>
+    </form>
+    <p id="showEmail">
+        <span class="userpage">Email: </span>
+        <input class="userpageinput" type="text" disabled value="<?php echo $getuser['email'] ?>"/>
+        <button type="button" name="editEmail" onclick="editEmail();">Edit</button>
+    </p>
+    <form id="formEditEmail" action="../../controller/edit_account.php" method="post">    
+        <span class="userpage">Email: </span>
+        <input class="userpageinput" type="email" id="email" name="email" onchange="checkemail();" value="<?php echo $getuser['email']; ?>"/>  
+        <input type="hidden" name="userID" value="<?php echo $_SESSION['userid'] ?>"/>
+        <input type="hidden" name="action_type" value="edit_email"/>
+        <button type="submit" name="submit_type" value="submit">Submit</button>
+        <button type="submit" name="submit_type" value="cancel">Cancel</button>
+        <div id="email_status"></div>
+    </form>
     
     <h3>Need to change your password?</h3>
     <button type="button" id="show" onclick="show_changepw();" class="avatar-button">Change Password</button>

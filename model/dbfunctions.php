@@ -377,7 +377,7 @@ function getAllUsers() {
 }
 
 function getOneUser($userID) {
-    $user = "SELECT user.userID, user.username, avatar.avatarID, avatar.url, user.acctStatus 
+    $user = "SELECT user.userID, user.username, avatar.avatarID, avatar.url, user.acctStatus, user.email 
     FROM user
     INNER JOIN avatar ON avatar.avatarID = user.avatarID 
     WHERE user.userID ='" . $userID . "';";

@@ -43,7 +43,7 @@ Generic classes
 /*
 toggle hidden classes
 */
-#fixcomment, .togglereplycomment, .replies, .fixComments, #hide, #changepw, #newAvatar {
+#fixcomment, .togglereplycomment, .replies, .fixComments, #hide, #changepw, #newAvatar, #formEditEmail, #formEditUsername {
     display: none;
 }
 
@@ -421,4 +421,11 @@ input[type=number] {
     border-bottom: 1px solid #EEAC4E;
     text-align: center;
     margin-top: 0.8%;
+}
+span.userpage {
+    display: inline-block;
+    width: 80px;
+}
+input.userpageinput {
+    width: 300px;
 }

@@ -7,8 +7,8 @@
     <form class="pure-form pure-form-stacked" method="post" action="../../controller/login_process.php" id="login">
         <fieldset>
             <legend>Sign In</legend>
-            <label for="username">Username</label>
-            <input id="username" type="text" placeholder="Username" name="username">
+            <label for="username">Username/Email</label>
+            <input id="username" type="text" placeholder="Enter Username or Email" name="username">
             <label for="password">Password</label>
             <input id="password" type="password" placeholder="Password" name="password">
             <label for="remember" class="pure-checkbox">

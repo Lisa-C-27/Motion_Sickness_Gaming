@@ -40,7 +40,7 @@
                         <fieldset>
                             <p>Before adding a game, please check that it isn't already in the library</p>
                             <label for="gamename">Name of game </label>
-                            <input id="gamename" type="text" placeholder="Type name of game here" name="gameName" onchange="checkgame();" value="<?php if(isset($_SESSION["gamename"])) { echo $_SESSION["gamename"];  } ?>">
+                            <input id="gamename" type="text" placeholder="Type name of game here" name="gameName" onchange="checkgame();">
                             <!-- checkgame() function is located in js/script.js file -->
                             <div id="game_status"></div>
                             <button type="submit" class="pure-button pure-button-primary" name="submit_game">Add game</button>

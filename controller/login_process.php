@@ -7,28 +7,11 @@
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-//    if(isset($_POST['remember'])) {
-        ?>
-<!--
-<script>
-        if (typeof(Storage) !== "undefined") {
-            localStorage.setItem("username1", "test");
-            localStorage.setItem("password1", "test");
-            
-            
-        } else {
-            document.getElementById("username").value = "not support";
-        }
-</script> 
--->
-<?php
-//    } 
  
     $username = !empty($_POST['username'])? sanitise_input(($_POST['username'])): null;
     $password = !empty($_POST['password'])? sanitise_input(($_POST['password'])): null;
 try{
-    $login_sql = "SELECT * FROM user WHERE username = '" . $username . "';";
+    $login_sql = "SELECT * FROM user WHERE username = '" . $username . "' OR email = '" . $username . "';";
     $stmt = $conn->prepare($login_sql);
     $stmt->execute();
     $result = $stmt->fetch();
