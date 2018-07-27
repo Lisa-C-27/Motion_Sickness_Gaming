@@ -19,7 +19,7 @@ You can check out the website here: [Motion Sickness Gaming](https://motsickgami
 - Allow users to edit their own comments/fixes
 - Allow users to change their email address and username - ADDED 27/07/18
 - Allow users to sign in with their username OR email address - ADDED 27/07/18
-- Currently when a user adds a comment, their 'enters' for new paragraphs don't show and displays as one big paragraph. Need to fix this
+- Currently when a user adds a comment, their 'enters' for new paragraphs don't show and displays as one big paragraph. Need to fix this - FIXED 27/07/18
 - Add 'double password' for registration, change password and recover password to pick up typing errors and prevent incorrect password being entered for users
 - Allow comments on blogs
 - Allow multiple levels of replies (currently only one level of replies allowed)
