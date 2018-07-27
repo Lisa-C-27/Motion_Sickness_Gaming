@@ -199,7 +199,7 @@ function getuserThumbRecords($userID, $idtype, $id) {
 
 //This function is to grab game comments and username
 function getGameComments($gameid) {
-    $comment = "SELECT user.username, user.avatarID, avatar.url, gameComment, gameCommDateTime, gameCommThUp, gameCommThDown, gamecomm.userID, gameID, gameCommID, deleted 
+    $comment = "SELECT user.username, user.avatarID, avatar.url, REPLACE(REPLACE(gameComment, char(12), '<br>'), CHAR(10), '<br>') as 'gameComment', gameCommDateTime, gameCommThUp, gameCommThDown, gamecomm.userID, gameID, gameCommID, deleted 
     FROM gamecomm
     INNER JOIN user ON user.userID = gamecomm.userID
     INNER JOIN avatar ON avatar.avatarID = user.avatarID
@@ -213,7 +213,7 @@ function getGameComments($gameid) {
 
 //This function is to grab the game fixes and username
 function getFixes($gameID) {
-    $fix = "SELECT user.username, user.avatarID, avatar.url, fixInfo, fixDateTime, fixThUp, fixThDown, fix.userID, gameID, fixID, deleted 
+    $fix = "SELECT user.username, user.avatarID, avatar.url, REPLACE(REPLACE(fixInfo, char(12), '<br>'), CHAR(10), '<br>') as 'fixInfo', fixDateTime, fixThUp, fixThDown, fix.userID, gameID, fixID, deleted 
     FROM fix
     INNER JOIN user ON user.userID = fix.userID
     INNER JOIN avatar ON avatar.avatarID = user.avatarID
@@ -227,7 +227,7 @@ function getFixes($gameID) {
 
 //This function gets game reply comments
 function getGameReply($gamecommID) {
-    $comment = "SELECT user.username, user.avatarID, avatar.url, gameReplyID, replyComment, replyCommDateTime, replyCommThUp, replyCommThDown, gamereply.userID, gameCommID, deleted 
+    $comment = "SELECT user.username, user.avatarID, avatar.url, gameReplyID, REPLACE(REPLACE(replyComment, char(12), '<br>'), CHAR(10), '<br>') as 'replyComment', replyCommDateTime, replyCommThUp, replyCommThDown, gamereply.userID, gameCommID, deleted 
     FROM gamereply
     INNER JOIN user ON user.userID = gamereply.userID
     INNER JOIN avatar ON avatar.avatarID = user.avatarID
@@ -289,7 +289,7 @@ function getFixCommentNumber($fixID) {
 }
 
 function getFixComments($fixID) {
-    $comment = "SELECT user.username, user.avatarID, avatar.url, fixCommID, fixComment, fixCommDateTime, fixCommThUp, fixCommThDown, fixcomm.userID, fixID, deleted 
+    $comment = "SELECT user.username, user.avatarID, avatar.url, fixCommID, REPLACE(REPLACE(fixComment, char(12), '<br>'), CHAR(10), '<br>') as 'fixComment', fixCommDateTime, fixCommThUp, fixCommThDown, fixcomm.userID, fixID, deleted 
     FROM fixcomm
     INNER JOIN user ON user.userID = fixcomm.userID
     INNER JOIN avatar ON avatar.avatarID = user.avatarID
@@ -311,7 +311,7 @@ function getFixCommReplyNumber($fixCommID) {
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 function getFixReplies($fixCommID) {
-    $comment = "SELECT user.username, user.avatarID, avatar.url, fixReplyID, fixReply, fixReplyDateTime, fixReplyThUp, fixReplyThDown, fixreply.userID, fixCommID, deleted 
+    $comment = "SELECT user.username, user.avatarID, avatar.url, fixReplyID, REPLACE(REPLACE(fixReply, char(12), '<br>'), CHAR(10), '<br>') as 'fixReply', fixReplyDateTime, fixReplyThUp, fixReplyThDown, fixreply.userID, fixCommID, deleted 
     FROM fixreply
     INNER JOIN user ON user.userID = fixreply.userID
     INNER JOIN avatar ON avatar.avatarID = user.avatarID
