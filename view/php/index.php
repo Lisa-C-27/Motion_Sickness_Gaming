@@ -114,6 +114,10 @@
                     <input id="username" type="text" placeholder="Username" name="username" onchange="checkuser();" pattern="[a-zA-Z0-9_]{5,30}">
                     <div id="error_register_user" class="red"></div>
                     <div id="username_status"></div>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Your Email" onchange="checkemail();" <?php if(isset($_GET['email'])) { echo 'value="'. $_GET['email'] .'"';
+                    }?>/>
+                    <div id="email_status"></div>
                     <label for="password">Password</label>
                     <input id="password" type="password" placeholder="Password" name="userpass" pattern=".{7,30}" onchange="validateForm();">
                     <div id="error_register_pass" class="red"></div>
