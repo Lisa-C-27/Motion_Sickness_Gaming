@@ -4,6 +4,9 @@
 $getcomments = getGameComments($_GET['gameID']);
 if (!empty($getcomments)) {
     foreach($getcomments as $row) {
+        if($row['user_deleted'] == true) {
+            
+        } else {
     ?>
     <div class="outer-container">
         <div class="databaseComments" id="#comment_<?php echo $row['gameCommID'] ?>">
@@ -97,6 +100,15 @@ if (!empty($getcomments)) {
                         ?>
                         </a>
                     </p>
+                    <p>
+                        <?php if($_SESSION['userid'] == $row['userID']) {
+                            ?>
+                        <a href="#" onclick="editComment('gamecomm', <?php echo $row['gameCommID'] ?>);">Edit</a> | 
+                        <a href="#" onclick="userdeletecomm('gamecomm', <?php echo $row['gameCommID'] ?>);">Delete</a>
+                        <?php
+                        }
+                        ?>
+                    </p>
                 </div>
             </div>
         
@@ -112,6 +124,19 @@ if (!empty($getcomments)) {
                         <button type="submit" class="pure-button pure-button-primary">Reply</button>
                     </fieldset>
                 </form>
+            </div>
+    <!--    //This div is hidden, but will display when the 'edit' link is clicked-->  
+            <div class="togglereplycomment" id="edit_<?php echo $row['gameCommID'] ?>">
+                <form class="pure-form pure-form-stacked" id="editGameComment" method="post" action="../../controller/editcomment.php">
+                    <fieldset>
+                        <textarea name="editgamecomment" class="comments"><?php echo $row['gameComment'] ?></textarea>
+                        <input type="hidden" name="userID" value="<?php if(isset($_SESSION['userid'])) { echo $_SESSION['userid']; } ?>"/>
+                        <input type="hidden" name="gamecommID" value="<?php echo $row['gameCommID'] ?>"/>
+                        <input type="hidden" name="gameID" value="<?php echo $_GET['gameID'] ?>"/>
+                        <input type="hidden" name="action_type" value="editgamecomment"/>
+                        <button type="submit" class="pure-button pure-button-primary">Update</button>
+                    </fieldset>
+                </form>
             </div> 
         </div>
         <?php
@@ -119,6 +144,7 @@ if (!empty($getcomments)) {
         ?>
     </div>
     <?php
+    }
     }
 } else {
     ?>

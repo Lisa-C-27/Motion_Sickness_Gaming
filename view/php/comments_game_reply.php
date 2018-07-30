@@ -2,6 +2,9 @@
 <div class="replies" id="replyview_<?php echo $row['gameCommID'] ?>">
     <?php
         foreach($getreply as $row2) {
+            if($row2['user_deleted'] == true) {
+            
+            } else {
     ?>
     <div class="comment-top">
         <div class="userinfo">     
@@ -57,8 +60,34 @@
                 }
             ?>
         </div>
+        <div class="reply">
+            <p>
+                <?php if($_SESSION['userid'] == $row2['userID']) {
+                    ?>
+                <a href="#" onclick="editComment('gamereply', <?php echo $row2['gameReplyID'] ?>);">Edit</a> | 
+                <a href="#" onclick="userdeletecomm('gamereply', <?php echo $row2['gameReplyID'] ?>);">Delete</a>
+                <?php
+                }
+                ?>
+            </p>
+        </div>
     </div>
+<!--    //This div is hidden, but will display when the 'edit' link is clicked-->  
+    <div class="togglereplycomment" id="editgamereply_<?php echo $row2['gameReplyID'] ?>">
+        <form class="pure-form pure-form-stacked" id="editGameComment" method="post" action="../../controller/editcomment.php">
+            <fieldset>
+                <textarea name="editgamecomment" class="comments"><?php echo $row2['replyComment'] ?></textarea>
+                <input type="hidden" name="userID" value="<?php if(isset($_SESSION['userid'])) { echo $_SESSION['userid']; } ?>"/>
+                <input type="hidden" name="gameReplyID" value="<?php echo $row2['gameReplyID'] ?>"/>
+                <input type="hidden" name="gameID" value="<?php echo $_GET['gameID'] ?>"/>
+                <input type="hidden" name="action_type" value="editgamereply"/>
+                <button type="submit" class="pure-button pure-button-primary">Update</button>
+            </fieldset>
+        </form>
+    </div> 
+
     <?php
+            }
     }
     ?>
 </div>

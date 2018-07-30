@@ -122,7 +122,76 @@ function togglefixcomment($replyID) {
         x.style.display = "none";
     } 
 }
+function editComment($type, $replyID) {
+    if($type == 'gamecomm') {
+        var x = document.getElementById("edit_" + $replyID);
+        if (!x.style.display || x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    } else if($type == 'gamereply') {
+        var x = document.getElementById("editgamereply_" + $replyID);
+        if (!x.style.display || x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    } else if($type == 'fix') {
+        var x = document.getElementById("editfix_" + $replyID);
+        if (!x.style.display || x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    } else if($type == 'fixcomm') {
+        var x = document.getElementById("editfixcomm_" + $replyID);
+        if (!x.style.display || x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    } else if($type == 'fixreply') {
+        var x = document.getElementById("editfixreply_" + $replyID);
+        if (!x.style.display || x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+}
 
+function userdeletecomm(type,id) {
+    var r = confirm("Are you sure you want to delete!");
+    if (r == true) { 
+        if (type == 'fix') {
+            var $url = "../../controller/delete.php?type=userfix&id=" + id;
+        } else if (type == 'fixcomm') {
+            var $url = "../../controller/delete.php?type=userfixcomm&id=" + id;
+        } else if(type == 'fixreply') {
+            var $url = "../../controller/delete.php?type=userfixreply&id=" + id;
+        } else if(type == 'gamecomm') {
+            var $url = "../../controller/delete.php?type=usergamecomm&id=" + id;
+        } else if(type == 'gamereply') {
+            var $url = "../../controller/delete.php?type=usergamereply&id=" + id;
+        }
+        $.ajax( {
+            url: $url,
+            method: 'get',
+            datatype: 'json',
+            success: function(res) {
+                console.log(res);
+                if (alert('Successfully deleted')) {}
+                else window.location.reload();
+                    ;
+            },
+            error: function(err) {
+                console.log(err);
+                alert('Error deleting');
+            }
+        });
+    }
+}
 //This function is called from the 'php/register.php' registration form
 function checkuser()
 {

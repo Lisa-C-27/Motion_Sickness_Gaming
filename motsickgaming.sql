@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2018 at 12:41 AM
+-- Generation Time: Jul 30, 2018 at 02:41 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `motsickgaming1`
+-- Database: `motsickgaming2`
 --
 
 -- --------------------------------------------------------
@@ -32,26 +32,6 @@ CREATE TABLE `avatar` (
   `avatarID` int(10) UNSIGNED NOT NULL,
   `url` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `avatar`
---
-
-INSERT INTO `avatar` (`avatarID`, `url`) VALUES
-(1, '../img/avatars/unknown.png'),
-(2, '../img/avatars/amazed.png'),
-(3, '../img/avatars/avatar.png'),
-(4, '../img/avatars/bluey.png'),
-(5, '../img/avatars/control.png'),
-(6, '../img/avatars/cool.png'),
-(7, '../img/avatars/dude.png'),
-(8, '../img/avatars/evil.png'),
-(9, '../img/avatars/orc.png'),
-(10, '../img/avatars/panda.png'),
-(11, '../img/avatars/penguin.png'),
-(12, '../img/avatars/sidedude.png'),
-(13, '../img/avatars/smiley.png'),
-(14, '../img/avatars/vampire.png');
 
 -- --------------------------------------------------------
 
@@ -81,7 +61,8 @@ CREATE TABLE `fix` (
   `fixThDown` int(10) UNSIGNED NOT NULL,
   `userID` int(10) UNSIGNED NOT NULL,
   `gameID` int(10) UNSIGNED NOT NULL,
-  `deleted` tinyint(1) NOT NULL
+  `deleted` tinyint(1) NOT NULL,
+  `user_deleted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -98,7 +79,8 @@ CREATE TABLE `fixcomm` (
   `fixCommThDown` int(10) UNSIGNED NOT NULL,
   `userID` int(10) UNSIGNED NOT NULL,
   `fixID` int(10) UNSIGNED NOT NULL,
-  `deleted` tinyint(1) NOT NULL
+  `deleted` tinyint(1) NOT NULL,
+  `user_deleted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -115,7 +97,8 @@ CREATE TABLE `fixreply` (
   `fixReplyThDown` int(10) UNSIGNED NOT NULL,
   `userID` int(10) UNSIGNED NOT NULL,
   `fixcommID` int(10) UNSIGNED NOT NULL,
-  `deleted` tinyint(1) NOT NULL
+  `deleted` tinyint(1) NOT NULL,
+  `user_deleted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -146,7 +129,8 @@ CREATE TABLE `gamecomm` (
   `gameCommThDown` int(10) UNSIGNED NOT NULL,
   `userID` int(10) UNSIGNED NOT NULL,
   `gameID` int(10) UNSIGNED NOT NULL,
-  `deleted` tinyint(1) NOT NULL
+  `deleted` tinyint(1) NOT NULL,
+  `user_deleted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -163,7 +147,8 @@ CREATE TABLE `gamereply` (
   `replyCommThDown` int(10) UNSIGNED NOT NULL,
   `userID` int(10) UNSIGNED NOT NULL,
   `gameCommID` int(10) UNSIGNED NOT NULL,
-  `deleted` tinyint(1) NOT NULL
+  `deleted` tinyint(1) NOT NULL,
+  `user_deleted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -348,32 +333,32 @@ ALTER TABLE `blog`
 -- AUTO_INCREMENT for table `fix`
 --
 ALTER TABLE `fix`
-  MODIFY `fixID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `fixID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `fixcomm`
 --
 ALTER TABLE `fixcomm`
-  MODIFY `fixCommID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `fixCommID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `fixreply`
 --
 ALTER TABLE `fixreply`
-  MODIFY `fixReplyID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `fixReplyID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `game`
 --
 ALTER TABLE `game`
-  MODIFY `gameID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `gameID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `gamecomm`
 --
 ALTER TABLE `gamecomm`
-  MODIFY `gameCommID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `gameCommID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `gamereply`
 --
 ALTER TABLE `gamereply`
-  MODIFY `gameReplyID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `gameReplyID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `password_recovery`
 --
@@ -383,17 +368,17 @@ ALTER TABLE `password_recovery`
 -- AUTO_INCREMENT for table `rep_calcs`
 --
 ALTER TABLE `rep_calcs`
-  MODIFY `repcalcsID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `repcalcsID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `thumbs_record`
 --
 ALTER TABLE `thumbs_record`
-  MODIFY `thumbID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `thumbID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `userID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- Constraints for dumped tables
 --

@@ -4,6 +4,9 @@
 <?php 
     $getfixcomm = getFixComments($row['fixID']); 
     foreach($getfixcomm as $row1) {
+        if($row1['user_deleted'] == true) {
+            
+        } else {
 ?>
         <div class="comment-top">
             <div class="userinfo">
@@ -86,6 +89,15 @@
                     ?>
                     </a>
                 </p>
+                <p>
+                    <?php if($_SESSION['userid'] == $row1['userID']) {
+                        ?>
+                    <a href="#" onclick="editComment('fixcomm', <?php echo $row1['fixCommID'] ?>);">Edit</a> | 
+                    <a href="#" onclick="userdeletecomm('fixcomm', <?php echo $row1['fixCommID'] ?>);">Delete</a>
+                    <?php
+                    }
+                    ?>
+                </p>
             </div>
         </div>               
 <!--Add a reply to comments on game fixes ----------------------
@@ -102,9 +114,23 @@
                 </fieldset>
             </form>
         </div>
+        <!--    //This div is hidden, but will display when the 'edit' link is clicked-->  
+        <div class="togglereplycomment" id="editfixcomm_<?php echo $row1['fixCommID'] ?>">
+            <form class="pure-form pure-form-stacked" id="editGameComment" method="post" action="../../controller/editcomment.php">
+                <fieldset>
+                    <textarea name="editgamecomment" class="comments"><?php echo $row1['fixComment'] ?></textarea>
+                    <input type="hidden" name="userID" value="<?php if(isset($_SESSION['userid'])) { echo $_SESSION['userid']; } ?>"/>
+                    <input type="hidden" name="fixCommID" value="<?php echo $row1['fixCommID'] ?>"/>
+                    <input type="hidden" name="gameID" value="<?php echo $_GET['gameID'] ?>"/>
+                    <input type="hidden" name="action_type" value="editfixcomm"/>
+                    <button type="submit" class="pure-button pure-button-primary">Update</button>
+                </fieldset>
+            </form>
+        </div> 
         <?php
             include 'comments_fix_reply.php';
             }
+    }
         ?>
     </div>
 </div>

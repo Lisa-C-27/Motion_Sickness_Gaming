@@ -15,8 +15,8 @@ You can check out the website here: [Motion Sickness Gaming](https://motsickgami
 - Receive reputation based on likes/dislikes they have received for their comments/fixes
 
 ## Changes that I am working on adding:
-- Allow users to delete their own comments/fixes
-- Allow users to edit their own comments/fixes
+- Allow users to delete their own comments/fixes - ADDED 30/07/18
+- Allow users to edit their own comments/fixes - ADDED 30/07/18
 - Allow users to change their email address and username - ADDED 27/07/18
 - Allow users to sign in with their username OR email address - ADDED 27/07/18
 - Currently when a user adds a comment, their 'enters' for new paragraphs don't show and displays as one big paragraph. Need to fix this - FIXED 27/07/18

@@ -3,6 +3,9 @@
     $getfixes = getFixes($_GET['gameID']);
     if (!empty($getfixes)) {
         foreach($getfixes as $row) {
+        if($row['user_deleted'] == true) {
+            
+        } else {
 ?>
 <!-- GAME FIXES ---------------------------------------------------->
     <div class="outer-container">
@@ -89,28 +92,52 @@
                         ?>
                         </a>
                     </p>
+                    <p>
+                        <?php if($_SESSION['userid'] == $row['userID']) {
+                            ?>
+                        <a href="#" onclick="editComment('fix', <?php echo $row['fixID'] ?>);">Edit</a> | 
+                        <a href="#" onclick="userdeletecomm('fix', <?php echo $row['fixID'] ?>);">Delete</a>
+                        <?php
+                        }
+                        ?>
+                    </p>
                 </div>
             </div>
+        </div>
     <!--Add comment for fix    ------------------------------------->
     <!-- This div is hidden, but will display when the 'reply' link is clicked-->
-            <div class="togglereplycomment" id="fixcomment_<?php echo $row['fixID'] ?>">
-                <form class="pure-form pure-form-stacked" id="fixComment" method="post" action="../../controller/addcomment.php">
-                    <fieldset>
-                        <textarea name="fixcomment" class="comments"></textarea>
-                        <input type="hidden" name="userID" value="<?php if(isset($_SESSION['userid'])) { echo $_SESSION['userid']; } ?>"/>
-                        <input type="hidden" name="fixID" value="<?php echo $row['fixID'] ?>"/>
-                        <input type="hidden" name="gameID" value="<?php echo $_GET['gameID'] ?>"/>
-                        <input type="hidden" name="action_type" value="addfixcomment"/>
-                        <button type="submit" class="pure-button pure-button-primary">Comment</button>
-                    </fieldset>
-                </form>
-            </div>
-        </div>  
+        <div class="togglereplycomment" id="fixcomment_<?php echo $row['fixID'] ?>">
+            <form class="pure-form pure-form-stacked" id="fixComment" method="post" action="../../controller/addcomment.php">
+                <fieldset>
+                    <textarea name="fixcomment" class="comments"></textarea>
+                    <input type="hidden" name="userID" value="<?php if(isset($_SESSION['userid'])) { echo $_SESSION['userid']; } ?>"/>
+                    <input type="hidden" name="fixID" value="<?php echo $row['fixID'] ?>"/>
+                    <input type="hidden" name="gameID" value="<?php echo $_GET['gameID'] ?>"/>
+                    <input type="hidden" name="action_type" value="addfixcomment"/>
+                    <button type="submit" class="pure-button pure-button-primary">Comment</button>
+                </fieldset>
+            </form>
+        </div>
+<!--    //This div is hidden, but will display when the 'edit' link is clicked-->  
+        <div class="togglereplycomment" id="editfix_<?php echo $row['fixID'] ?>">
+            <form class="pure-form pure-form-stacked" id="editGameComment" method="post" action="../../controller/editcomment.php">
+                <fieldset>
+                    <textarea name="editgamecomment" class="comments"><?php echo $row['fixInfo'] ?></textarea>
+                    <input type="hidden" name="userID" value="<?php if(isset($_SESSION['userid'])) { echo $_SESSION['userid']; } ?>"/>
+                    <input type="hidden" name="fixID" value="<?php echo $row['fixID'] ?>"/>
+                    <input type="hidden" name="gameID" value="<?php echo $_GET['gameID'] ?>"/>
+                    <input type="hidden" name="action_type" value="editfix"/>
+                    <button type="submit" class="pure-button pure-button-primary">Update</button>
+                </fieldset>
+            </form>
+        </div> 
+          
     <?php
         include 'comments_fix_comment.php';
     ?>                          
     </div>
     <?php
+        }
         }
         } else {
     ?>

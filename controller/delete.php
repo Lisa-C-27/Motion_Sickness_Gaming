@@ -74,4 +74,39 @@
         } else {
             echo json_encode(Array('update'=>"fail"));
         }
+    } else if($_GET['type'] == "usergamecomm") {
+        $result = user_delete_comm('gamecomm', 'gameCommID', $_GET['id']);
+        if($result) {
+            echo json_encode(Array('update'=>"success"));
+        } else {
+            echo json_encode(Array('update'=>"fail"));
+        }
+    } else if($_GET['type'] == "usergamereply") {
+        $result = user_delete_comm('gamereply', 'gameReplyID', $_GET['id']);
+        if($result) {
+            echo json_encode(Array('update'=>"success"));
+        } else {
+            echo json_encode(Array('update'=>"fail"));
+        }
+    } else if($_GET['type'] == "userfix") {
+        $result = user_delete_comm('fix', 'fixID', $_GET['id']);
+        if($result) {
+            echo json_encode(Array('update'=>"success"));
+        } else {
+            echo json_encode(Array('update'=>"fail"));
+        }
+    } else if($_GET['type'] == "userfixcomm") {
+        $result = user_delete_comm('fixcomm', 'fixCommID', $_GET['id']);
+        if($result) {
+            echo json_encode(Array('update'=>"success"));
+        } else {
+            echo json_encode(Array('update'=>"fail"));
+        }
+    } else if($_GET['type'] == "userfixreply") {
+        $result = user_delete_comm('fixreply', 'fixReplyID', $_GET['id']);
+        if($result) {
+            echo json_encode(Array('update'=>"success"));
+        } else {
+            echo json_encode(Array('update'=>"fail"));
+        }
     }
