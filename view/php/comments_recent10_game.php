@@ -1,7 +1,8 @@
 <div id="gamecomments">
 <?php
     
-$getcomments = getGameComments($_GET['gameID']);
+$getcomments = get10RecentComments($_GET['gameID']);
+
 if (!empty($getcomments)) {
     foreach($getcomments as $row) {
     ?>
@@ -69,7 +70,7 @@ if (!empty($getcomments)) {
                         if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) { 
                     ?>
         <!--            //On click will display reply comment container-->
-                            <a href="#comment_<?php echo $row['gameCommID'] ?>" onclick="togglereply(<?php echo $row['gameCommID'] ?>);">Reply</a>
+                            <a role="button" onclick="togglereply(<?php echo $row['gameCommID'] ?>);">Reply</a>
                     <?php
                         }
                         //Get number of replies 
@@ -77,7 +78,7 @@ if (!empty($getcomments)) {
                     ?>
                     <p>
         <!--    //displays number of replies as link-->
-                        <a href="#comment_<?php echo $row['gameCommID'] ?>" onclick="toggleviewreply(<?php echo $row['gameCommID'] ?>);">
+                        <a role="button" onclick="toggleviewreply(<?php echo $row['gameCommID'] ?>);">
                             <?php
                         if ($getreplies['replies'] == 0) {
                             echo "No replies";
@@ -101,8 +102,8 @@ if (!empty($getcomments)) {
                         <?php 
                         if(isset($_SESSION['userid'])) {            if($_SESSION['userid'] == $row['userID']) {
                         ?>
-                        <a href="#" onclick="editComment('gamecomm', <?php echo $row['gameCommID'] ?>);">Edit</a> | 
-                        <a href="#" onclick="userdeletecomm('gamecomm', <?php echo $row['gameCommID'] ?>);">Delete</a>
+                        <a role="button" onclick="editComment('gamecomm', <?php echo $row['gameCommID'] ?>);">Edit</a> | 
+                        <a role="button" onclick="userdeletecomm('gamecomm', <?php echo $row['gameCommID'] ?>);">Delete</a>
                         <?php
                         }
                         }
@@ -151,3 +152,13 @@ if (!empty($getcomments)) {
 }
 ?>
 </div>
+<?php
+    
+    if($count1['count'] > 10) {
+?>
+<div class="center">
+    <a href="individual_games.php?gameID=<?php echo $_GET['gameID']; ?>&showallcomments=yes" class="green">View more comments <i class="fas fa-chevron-down"></i></a>
+</div>
+<?php
+    }
+?>

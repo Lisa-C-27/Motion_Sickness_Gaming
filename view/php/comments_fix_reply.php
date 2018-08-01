@@ -3,9 +3,6 @@
     <?php 
     $getfixreply = getFixReplies($row1['fixCommID']); 
     foreach($getfixreply as $row2) {
-        if($row2['user_deleted'] == true) {
-            
-        } else {
     ?>
     <div class="comment-top">
         <div class="userinfo">
@@ -56,7 +53,7 @@
                 if($row2['deleted'] == true) {
                     echo "<em>This reply was deleted by Motion Sickness Gaming administration</em>";
                 } else {
-                    echo $row2['fixReply']; 
+                    echo $row2['newfixReply']; 
                 }
             ?>
         </div>
@@ -64,8 +61,8 @@
             <p>
                 <?php if($_SESSION['userid'] == $row2['userID']) {
                     ?>
-                <a href="#" onclick="editComment('fixreply', <?php echo $row2['fixReplyID'] ?>);">Edit</a> | 
-                <a href="#" onclick="userdeletecomm('fixreply', <?php echo $row2['fixReplyID'] ?>);">Delete</a>
+                <a role="button" onclick="editComment('fixreply', <?php echo $row2['fixReplyID'] ?>);">Edit</a> | 
+                <a role="button" onclick="userdeletecomm('fixreply', <?php echo $row2['fixReplyID'] ?>);">Delete</a>
                 <?php
                 }
                 ?>
@@ -86,7 +83,6 @@
         </form>
     </div> 
     <?php
-        }
     }
     ?>
 </div>

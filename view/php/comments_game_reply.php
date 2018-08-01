@@ -2,9 +2,6 @@
 <div class="replies" id="replyview_<?php echo $row['gameCommID'] ?>">
     <?php
         foreach($getreply as $row2) {
-            if($row2['user_deleted'] == true) {
-            
-            } else {
     ?>
     <div class="comment-top">
         <div class="userinfo">     
@@ -56,7 +53,7 @@
                 if($row2['deleted'] == true) {
                     echo "<em>This reply was deleted by Motion Sickness Gaming administration</em>";
                 } else {
-                    echo $row2['replyComment']; 
+                    echo $row2['newreplyComment']; 
                 }
             ?>
         </div>
@@ -64,8 +61,8 @@
             <p>
                 <?php if($_SESSION['userid'] == $row2['userID']) {
                     ?>
-                <a href="#" onclick="editComment('gamereply', <?php echo $row2['gameReplyID'] ?>);">Edit</a> | 
-                <a href="#" onclick="userdeletecomm('gamereply', <?php echo $row2['gameReplyID'] ?>);">Delete</a>
+                <a role="button" onclick="editComment('gamereply', <?php echo $row2['gameReplyID'] ?>);">Edit</a> | 
+                <a role="button" onclick="userdeletecomm('gamereply', <?php echo $row2['gameReplyID'] ?>);">Delete</a>
                 <?php
                 }
                 ?>
@@ -87,7 +84,6 @@
     </div> 
 
     <?php
-            }
     }
     ?>
 </div>

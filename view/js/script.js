@@ -16,17 +16,6 @@ $(document)
     $loading.hide();
   });
 
-//Checking if user is browsing from a mobile device
-$(document).ready(function() {
-var isMobile = /iPhone|iPad|iPod|Android|Windows Phone/i.test(navigator.userAgent);
-
-if (isMobile) {
-    console.log("You are using Mobile");
-} else {
-    console.log("You are using Desktop");
-}
-});
-
 $(document).ready(function() {
 
     if (localStorage.chkbx && localStorage.chkbx !== '') {
@@ -54,20 +43,6 @@ $(document).ready(function() {
 function addgamemodal() { 
     document.getElementById("addgame").showModal(); 
 } 
-
-//These functions are called from 'php/individual_games.php' to switch between game comments and fix comments. 
-function tabOne() {
-    document.getElementById("gamecomments").style.display = "block";
-    document.getElementById("fixcomment").style.display = "none";
-    document.getElementById("tabone").style.background = "#FCE54A";
-    document.getElementById("tabtwo").style.background = "#EEAC4E";
-}
-function tabTwo() {
-    document.getElementById("fixcomment").style.display = "block";
-    document.getElementById("gamecomments").style.display = "none";
-    document.getElementById("tabone").style.background = "#EEAC4E";
-    document.getElementById("tabtwo").style.background = "#FCE54A";
-}
 
 //These toggle functions are called to toggle reply and view replies on the game comments and fixes
 function togglereply($replyID) {
@@ -123,35 +98,35 @@ function togglefixcomment($replyID) {
     } 
 }
 function editComment($type, $replyID) {
-    if($type == 'gamecomm') {
-        var x = document.getElementById("edit_" + $replyID);
-        if (!x.style.display || x.style.display === "none") {
-            x.style.display = "block";
+    if($type == "gamecomm") {
+        var a = document.getElementById("edit_" + $replyID);
+        if (!a.style.display || a.style.display === "none") {
+            a.style.display = "block";
         } else {
-            x.style.display = "none";
+            a.style.display = "none";
         }
-    } else if($type == 'gamereply') {
-        var x = document.getElementById("editgamereply_" + $replyID);
-        if (!x.style.display || x.style.display === "none") {
-            x.style.display = "block";
+    } else if($type == "gamereply") {
+        var b = document.getElementById("editgamereply_" + $replyID);
+        if (!b.style.display || b.style.display === "none") {
+            b.style.display = "block";
         } else {
-            x.style.display = "none";
+            b.style.display = "none";
         }
-    } else if($type == 'fix') {
-        var x = document.getElementById("editfix_" + $replyID);
-        if (!x.style.display || x.style.display === "none") {
-            x.style.display = "block";
+    } else if($type == "fix") {
+        var c = document.getElementById("editfix_" + $replyID);
+        if (!c.style.display || c.style.display === "none") {
+            c.style.display = "block";
         } else {
-            x.style.display = "none";
+            c.style.display = "none";
         }
-    } else if($type == 'fixcomm') {
-        var x = document.getElementById("editfixcomm_" + $replyID);
-        if (!x.style.display || x.style.display === "none") {
-            x.style.display = "block";
+    } else if($type == "fixcomm") {
+        var d = document.getElementById("editfixcomm_" + $replyID);
+        if (!d.style.display || d.style.display === "none") {
+            d.style.display = "block";
         } else {
-            x.style.display = "none";
+            d.style.display = "none";
         }
-    } else if($type == 'fixreply') {
+    } else if($type == "fixreply") {
         var x = document.getElementById("editfixreply_" + $replyID);
         if (!x.style.display || x.style.display === "none") {
             x.style.display = "block";
@@ -397,14 +372,6 @@ function removeSpace(gameID) {
     $(name).text(newname);
 }
 
-//function enableEdit(field) {
-//    if(field == 'username') {
-//        document.getElementById("editUsername").setAttribute("disabled", false);
-//    }
-//    else if(field == 'email') {
-//        document.getElementById("editUserEmail").setAttribute("disabled", false);
-//    }
-//}
 function editUsername() {
     document.getElementById("showUsername").style.display = 'none';
     document.getElementById("formEditUsername").style.display = 'block';

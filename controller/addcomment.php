@@ -5,19 +5,35 @@ include '../model/dbfunctions.php';
 
 if($_REQUEST['action_type'] == 'addgamecomment') {
     if(!empty($_POST['gamecomment']) && $_POST['gamecomment'] != '<div><br></div>') {
-    $gamecomment = sanitise_input($_POST['gamecomment']);
-    $userID = sanitise_input($_POST['userID']);
-    $gameID = sanitise_input($_POST['gameID']);
-    $data = //set the variable $data within the insertData($table,$data) function to the following array
-        array(
-            'gameComment' => $gamecomment,
-            'userID' => $userID,
-            'gameID'=> $gameID
-        );
-    $table="gamecomm"; //table name in DB to insert data into
-    //function call from db_functions.php
-    insertComment($table,$data);
-    header('Location: ../view/php/individual_games.php?gameID='. $gameID . '');
+        if($_POST['type'] == 'comment') {
+            $gamecomment = sanitise_input($_POST['gamecomment']);
+            $userID = sanitise_input($_POST['userID']);
+            $gameID = sanitise_input($_POST['gameID']);
+            $data = //set the variable $data within the insertData($table,$data) function to the following array
+                array(
+                    'gameComment' => $gamecomment,
+                    'userID' => $userID,
+                    'gameID'=> $gameID
+                );
+            $table="gamecomm"; //table name in DB to insert data into
+            //function call from db_functions.php
+            insertComment($table,$data);
+            header('Location: ../view/php/individual_games.php?gameID='. $gameID . '');
+        } else if ($_POST['type'] == 'fix') {
+            $gamecomment = sanitise_input($_POST['gamecomment']);
+            $userID = sanitise_input($_POST['userID']);
+            $gameID = sanitise_input($_POST['gameID']);
+            $data = //set the variable $data within the insertData($table,$data) function to the following array
+                array(
+                    'fixInfo' => $gamecomment,
+                    'userID' => $userID,
+                    'gameID'=> $gameID
+                );
+            $table="fix"; //table name in DB to insert data into
+            //function call from db_functions.php
+            insertComment($table,$data);
+            header('Location: ../view/php/individual_games.php?gameID='. $gameID . '');
+        }
 } else if(empty($_POST['gamecomment']) || $_POST['gamecomment'] === '<div><br></div>'){
     $_SESSION['message'] = 'Please enter a comment';
     header('Location: ../view/php/individual_games.php?gameID='. $_POST['gameID'] . '');

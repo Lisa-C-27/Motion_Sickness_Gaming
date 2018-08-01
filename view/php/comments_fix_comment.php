@@ -4,9 +4,6 @@
 <?php 
     $getfixcomm = getFixComments($row['fixID']); 
     foreach($getfixcomm as $row1) {
-        if($row1['user_deleted'] == true) {
-            
-        } else {
 ?>
         <div class="comment-top">
             <div class="userinfo">
@@ -58,7 +55,7 @@
                         if($row1['deleted'] == true) {
                             echo "<em>This comment was deleted by Motion Sickness Gaming administration</em>";
                         } else {
-                            echo $row1['fixComment']; 
+                            echo $row1['newfixComment']; 
                         }
                     ?>
                 </p>
@@ -67,14 +64,14 @@
             <?php
                 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) { 
             ?>
-                <a href="#fixreply_<?php echo $row1['fixCommID'] ?>" onclick="togglefixreply(<?php echo $row1['fixCommID'] ?>);">Reply</a>
+                <a role="button" onclick="togglefixreply(<?php echo $row1['fixCommID'] ?>);">Reply</a>
             <?php
                 }
                 $getreplies = getFixCommReplyNumber($row1['fixCommID']);
             ?>
                 <p>
                 <!--    //displays number of replies as link-->
-                    <a href="#replyfixview_<?php echo $row1['fixCommID'] ?>" onclick="toggleviewfixcomm(<?php echo $row1['fixCommID'] ?>);">
+                    <a role="button" onclick="toggleviewfixcomm(<?php echo $row1['fixCommID'] ?>);">
                     <?php
                         if($getreplies['replies'] == 0) {
                             echo "No replies";
@@ -92,8 +89,8 @@
                 <p>
                     <?php if($_SESSION['userid'] == $row1['userID']) {
                         ?>
-                    <a href="#" onclick="editComment('fixcomm', <?php echo $row1['fixCommID'] ?>);">Edit</a> | 
-                    <a href="#" onclick="userdeletecomm('fixcomm', <?php echo $row1['fixCommID'] ?>);">Delete</a>
+                    <a role="button" onclick="editComment('fixcomm', <?php echo $row1['fixCommID'] ?>);">Edit</a> | 
+                    <a role="button" onclick="userdeletecomm('fixcomm', <?php echo $row1['fixCommID'] ?>);">Delete</a>
                     <?php
                     }
                     ?>
@@ -130,7 +127,6 @@
         <?php
             include 'comments_fix_reply.php';
             }
-    }
         ?>
     </div>
 </div>

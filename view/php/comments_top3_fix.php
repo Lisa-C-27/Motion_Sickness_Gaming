@@ -1,6 +1,6 @@
 <div id="fixcomment">
 <?php
-    $getfixes = getFixes($_GET['gameID']);
+    $getfixes = getTop3Fixes($_GET['gameID']);
     if (!empty($getfixes)) {
         foreach($getfixes as $row) {
 ?>
@@ -133,7 +133,7 @@
           
     <?php
         include 'comments_fix_comment.php';
-    ?>                          
+        ?>
     </div>
     <?php
         }
@@ -144,3 +144,12 @@
     }
     ?>  
 </div>
+<?php
+    if($count['count'] > 3) {
+?>
+<div class="center">
+    <a href="individual_games.php?gameID=<?php echo $_GET['gameID']; ?>&showallfixes=yes" class="green">View more fixes <i class="fas fa-chevron-down"></i></a>
+</div>
+<?php
+    }
+?>
