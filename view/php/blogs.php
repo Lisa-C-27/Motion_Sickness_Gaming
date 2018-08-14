@@ -25,9 +25,15 @@
         <a href="blog.php?blogID=<?php echo $row['blogID']; ?>&title=<?php echo $blogurl['blogTitle']; ?>">
             <div class="blogs_date">
                 <p><em>Date: </em>
-                <?php
-                    echo $row['datetime'];
-                ?>
+                
+
+                    <?php 
+            //                    echo $row['datetime'];
+            $phpdate = strtotime( $row['datetime'] );
+            $mysqldate = date( 'd F Y', $phpdate );
+            echo $mysqldate
+        ?>
+               
                 </p>
             </div>
             <div class="blogs_title">
@@ -35,13 +41,6 @@
                     <?php
                         echo $row['blogTitle'];
                     ?>
-                </p>
-            </div>
-            <div class="blogs_author">
-                <p><em>Author: </em>
-                <?php
-                    echo $row['username'];
-                ?> 
                 </p>
             </div>
         </a>

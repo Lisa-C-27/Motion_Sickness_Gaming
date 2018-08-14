@@ -233,6 +233,10 @@ function getCommentCount($gameID) {
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+function getAllCommentsReplies($gameID) {
+    
+}
+
 //This function is to grab the game fixes and username
 function getFixes($gameID) {
     $fix = "SELECT user.username, user.avatarID, avatar.url, REPLACE(REPLACE(fixInfo, char(12), '<br>'), CHAR(10), '<br>') as 'newfixInfo', fixInfo, fixDateTime, fixThUp, fixThDown, fix.userID, gameID, fixID, deleted, user_deleted
@@ -267,6 +271,13 @@ function getTop3Fixes($gameID) {
 //Get total number of fixes for a game
 function getFixCount($gameID) {
     $count = "SELECT COUNT(*) as 'count' FROM fix WHERE gameID ='" . $gameID . "' AND user_deleted = false;";
+    include 'connect.php';
+    $stmt = $conn->prepare($count);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+function getBlogCommCount($blogID) {
+    $count = "SELECT COUNT(*) as 'count' FROM blogcomm WHERE blogID ='" . $blogID . "' AND user_deleted = false;";
     include 'connect.php';
     $stmt = $conn->prepare($count);
     $stmt->execute();
@@ -376,7 +387,19 @@ function getFixReplies($fixCommID) {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
+function getBlogComments($blogID) {
+    $comment = "SELECT user.username, user.avatarID, avatar.url, blogcommID, REPLACE(REPLACE(comment, char(12), '<br>'), CHAR(10), '<br>') as 'newcomment', comment, datetime, blogcomm.userID, blogID, deleted, user_deleted 
+    FROM blogcomm
+    INNER JOIN user ON user.userID = blogcomm.userID
+    INNER JOIN avatar ON avatar.avatarID = user.avatarID
+    WHERE blogID ='" . $blogID . "'
+    AND user_deleted = false
+    ORDER BY datetime DESC";
+    include 'connect.php';
+    $stmt = $conn->prepare($comment);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 function getUsers() {
     $users = "SELECT count(*) as 'users' FROM user;";
     include 'connect.php';
@@ -537,5 +560,47 @@ function get_blogurl($blogID) {
     $stmt = $conn->prepare($blog);
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC); 
+}
+function activityDate($gameID) {
+    $date = "SELECT MAX(MaxDate) as 'date' FROM (
+	SELECT MAX(fixDateTime) AS 'MaxDate' FROM fix WHERE fix.gameID = '" . $gameID . "'
+	UNION
+	SELECT MAX(gameCommDateTime) AS 'MaxDate' FROM gamecomm WHERE gamecomm.gameID = '" . $gameID . "'
+	UNION
+	SELECT MAX(fixReplyDateTime) AS 'MaxDate' FROM fixreply WHERE fixreply.gameID = '" . $gameID . "'
+	UNION
+    SELECT MAX(fixCommDateTime) AS 'MaxDate' FROM fixcomm WHERE fixcomm.gameID = '" . $gameID . "'
+    UNION
+    SELECT MAX(replyCommDateTime) AS 'MaxDate' FROM gamereply WHERE gamereply.gameID = '" . $gameID . "'
+    ) as x;";
+    include 'connect.php';
+    $stmt = $conn->prepare($date);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+function allCommentsReplies($gameID) {
+    $count = "SELECT game.gameID, SUM(IFNULL(a.newcount,0)+IFNULL(b.newcount,0)+IFNULL(c.newcount,0)+IFNULL(d.newcount,0)) AS 'newcount'
+    FROM game
+    LEFT JOIN (
+        SELECT gameID, COUNT(*) AS 'newcount'
+        FROM gamecomm
+        GROUP BY gameID) a ON a.gameID = game.gameID
+    LEFT JOIN (
+        SELECT gameID, COUNT(*) AS 'newcount'
+        FROM gamereply
+        GROUP BY gameID) b ON b.gameID = game.gameID
+    LEFT JOIN (
+        SELECT gameID, COUNT(*) AS 'newcount'
+        FROM fixcomm
+        GROUP BY gameID) c ON c.gameID = game.gameID
+    LEFT JOIN (
+        SELECT gameID, COUNT(*) AS 'newcount'
+        FROM fixreply
+        GROUP BY gameID) d ON d.gameID = game.gameID  
+    WHERE game.gameID = '" . $gameID . "';";
+    include 'connect.php';
+    $stmt = $conn->prepare($count);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 ?>

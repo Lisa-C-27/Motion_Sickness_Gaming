@@ -20,6 +20,11 @@
             <input type="hidden" name="gameID" value="<?php echo $_GET['gameID']; ?>"/>
             <?php
                 }
+                if(isset($_GET['blogID'])) { 
+            ?>
+            <input type="hidden" name="blogID" value="<?php echo $_GET['blogID']; ?>"/>
+            <?php
+                }
             ?>
             <div>
                 <a href="forgot_password.php">Forgot password?</a>

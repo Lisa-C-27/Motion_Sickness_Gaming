@@ -87,11 +87,13 @@
                     </a>
                 </p>
                 <p>
-                    <?php if($_SESSION['userid'] == $row1['userID']) {
-                        ?>
+                    <?php if(isset($_SESSION['userid'])) {
+                        if($_SESSION['userid'] == $row1['userID']) {
+                    ?>
                     <a role="button" onclick="editComment('fixcomm', <?php echo $row1['fixCommID'] ?>);">Edit</a> | 
                     <a role="button" onclick="userdeletecomm('fixcomm', <?php echo $row1['fixCommID'] ?>);">Delete</a>
                     <?php
+                    }
                     }
                     ?>
                 </p>

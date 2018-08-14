@@ -122,9 +122,28 @@ Would like headings of A,B,C etc with the relevant games within each div
             $allgames = gamelist(); //This function is located in model/dbfunctions.php
 
             foreach($allgames as $row) {
+                $count = getFixCount($row['gameID']);
+                $count1 = allCommentsReplies($row['gameID']);
+                $date = activityDate($row['gameID']);
+                
+                $phpdate = strtotime( $date['date'] );
+                $mysqldate = date( 'd F Y', $phpdate );
                 $url = gamelisturl($row['gameID']);
-                echo '<li><a id="urlname_' . $row['gameID'] . '" href="individual_games.php?gameID='. $row['gameID'] . '&game='. $url['gameName'] . '">' . $row['gameName'] . '</a></li>';
-        
+                echo '<a class="gameurl" id="urlname_' . $row['gameID'] . '" href="individual_games.php?gameID='. $row['gameID'] . '&game='. $url['gameName'] . '">
+                <div class="gameforum">
+                <div class="gamename">' . $row['gameName'] . '
+                </div>
+                <div class="fixcount">Fixes: (' . $count['count'] . ')</div> <div class="commcount">Comments/Replies: (' . $count1['newcount'] . ')</div> 
+                <div class="activity">Last activity: ';
+                if(!empty($date['date'])) {
+                    echo $mysqldate;
+                } else {
+                    echo '-- --- ----';
+                }
+                echo '  
+                </div>
+                </div>
+                </a>';
             }
         ?>
     </ul>

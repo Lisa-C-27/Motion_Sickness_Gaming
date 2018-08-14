@@ -49,7 +49,8 @@ if($_REQUEST['action_type'] == 'addgamereplycomment') {
         array(
             'replyComment' => $gamecomment,
             'userID' => $userID,
-            'gameCommID'=> $gamecommID
+            'gameCommID'=> $gamecommID,
+            'gameID' => $gameID
         );
     $table="gamereply"; //table name in DB to insert data into
     //function call from db_functions.php
@@ -70,7 +71,8 @@ if($_REQUEST['action_type'] == 'addfixreplycomment') {
         array(
             'fixReply' => $fixcomment,
             'userID' => $userID,
-            'fixcommID'=> $fixcommID
+            'fixcommID'=> $fixcommID,
+            'gameID' => $gameID
         );
     $table="fixreply"; //table name in DB to insert data into
     //function call from db_functions.php
@@ -90,7 +92,8 @@ if($_REQUEST['action_type'] == 'addfixcomment') { if(!empty($_POST['fixcomment']
         array(
             'fixComment' => $fixcomment,
             'userID' => $userID,
-            'fixID'=> $fixID
+            'fixID'=> $fixID,
+            'gameID' => $gameID
         );
     $table="fixcomm"; //table name in DB to insert data into
     //function call from db_functions.php
@@ -99,6 +102,25 @@ if($_REQUEST['action_type'] == 'addfixcomment') { if(!empty($_POST['fixcomment']
 } else {
     $_SESSION['message'] = "Please enter a comment";
     header('Location: ../view/php/individual_games.php?gameID='. $_POST['gameID'] . '&fix=tab');
+}
+}
+if($_REQUEST['action_type'] == 'addblogcomment') { if(!empty($_POST['blogcomment'])){
+    $blogcomment = sanitise_input($_POST['blogcomment']);
+    $userID = sanitise_input($_POST['userID']);
+    $blogID = sanitise_input($_POST['blogID']);
+    $data = //set the variable $data within the insertData($table,$data) function to the following array
+        array(
+            'comment' => $blogcomment,
+            'userID' => $userID,
+            'blogID' => $blogID
+        );
+    $table="blogcomm"; //table name in DB to insert data into
+    //function call from db_functions.php
+    insertComment($table,$data);
+    header('Location: ../view/php/blog.php?blogID='. $blogID . '');
+} else {
+    $_SESSION['message'] = "Please enter a comment";
+    header('Location: ../view/php/blog.php?blogID='. $_POST['blogID'] . '');
 }
 }
 ?>

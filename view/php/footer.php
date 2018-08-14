@@ -1,6 +1,8 @@
 
-    <div class="footer l-box is-center">
-        Motion Sickness Gaming - Copyright &#169; Lisa Clark 2018. All rights reserved.
+    <div class="footer l-box">
+        <div class="left"></div>
+        <div class="middle">Motion Sickness Gaming - Copyright &#169; Lisa Clark 2018. All rights reserved.</div>
+        <div class="right">Follow me: <a href="https://twitter.com/kandigalaxy"><i class="fab fa-twitter"></i></a><a href="https://www.instagram.com/motion_sickness_gaming/"><i class="fab fa-instagram"></i></a></div>
     </div>
 </div> <!-- Closes 'content-wrapper' -->
 

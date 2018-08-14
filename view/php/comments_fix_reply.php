@@ -59,12 +59,14 @@
         </div>
         <div class="reply">
             <p>
-                <?php if($_SESSION['userid'] == $row2['userID']) {
-                    ?>
+                <?php if(isset($_SESSION['userid'])) {
+                    if($_SESSION['userid'] == $row2['userID']) {
+                ?>
                 <a role="button" onclick="editComment('fixreply', <?php echo $row2['fixReplyID'] ?>);">Edit</a> | 
                 <a role="button" onclick="userdeletecomm('fixreply', <?php echo $row2['fixReplyID'] ?>);">Delete</a>
                 <?php
                 }
+            }
                 ?>
             </p>
         </div>

@@ -14,7 +14,7 @@ Generic classes
 .page {
     background: #fbfbfb;
     min-height: 900px;
-    padding-bottom: 80px;
+    padding-bottom: 100px;
 }
 .yellow {
     color: #FCE54A;
@@ -79,6 +79,9 @@ Other classes
 }
 .gamecomment {
     width: 70%;  
+}
+.gamecomment p {
+    padding-left: 1%;
 }
 .reply {
     width: 20%;
@@ -154,6 +157,7 @@ input[type=number] {
     top: 50%;
     left: 50%;
     z-index: -1;
+    margin-bottom: 100px;
     -webkit-transform: translate(-50%, -50%);
         -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
@@ -379,6 +383,8 @@ input[type=number] {
 .blogs_container {
     border-bottom: 1px solid #EEAC4E;
     padding-left: 20px;
+    -webkit-transition: background-color 0.7s ease;
+    -o-transition: background-color 0.7s ease;
     transition: background-color 0.7s ease;
     margin-bottom: 0.5%;
 }
@@ -403,9 +409,11 @@ input[type=number] {
     padding-left: 15px;
 }
 .author {
-    margin-top: 5%;
+    margin-top: 2%;
 }
 .blog_outer {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     border-bottom: 1px solid #EEAC4E;
     padding-bottom: 1%;
@@ -438,6 +446,8 @@ input.userpageinput {
     color: #EEAC4E;
 }
 .radios {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     text-align: left;
 }
@@ -462,4 +472,70 @@ input.userpageinput {
 }
 #gamecomment {
     margin-top: 10px;
+}
+.left {
+    width: 20%;
+}
+.middle {
+    width: 60%;
+    text-align: center;
+}
+.right {
+    width: 20%;
+    text-align: right;
+    font-size: 20px;
+    color: #FCE54A;
+}
+.right i {
+    margin-left: 10px;
+}
+.right a {
+    margin-left: 10px;
+    color: #FCE54A;
+}
+.footer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+.gameforum {
+    display: flex;
+    background-color: #EEAC4E;
+    border-bottom: 1px solid #002921;
+    padding: 1%;
+    color: #002921;;
+}
+.gameforum:hover {
+    color: white;
+}
+.gameforum a:hover {
+    text-decoration: none;
+}
+.gamename {
+    width: 50%;
+}
+.commcount, .activity {
+    width: 20%;
+}
+.fixcount {
+    width: 10%;
+}    
+.gameurl:hover {
+    text-decoration: none;
+}
+@media (max-width: 600px) {
+    .footer, .comment-top {
+        display: block;
+    }
+    .left {
+        width: 0%;
+    }
+    .middle, .userinfo, .vote {
+        width: 100%;
+    }
+    .right {
+        width: 100%;
+        text-align: center;
+        font-size: 16px;
+    }
 }

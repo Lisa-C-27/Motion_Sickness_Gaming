@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 30, 2018 at 02:41 PM
+-- Generation Time: Aug 14, 2018 at 03:16 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `motsickgaming2`
+-- Database: `motsickgaming3`
 --
 
 -- --------------------------------------------------------
@@ -45,6 +45,22 @@ CREATE TABLE `blog` (
   `blog` longtext NOT NULL,
   `authorID` int(10) UNSIGNED NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blogcomm`
+--
+
+CREATE TABLE `blogcomm` (
+  `blogcommID` int(10) UNSIGNED NOT NULL,
+  `blogID` int(10) UNSIGNED NOT NULL,
+  `userID` int(10) UNSIGNED NOT NULL,
+  `comment` text NOT NULL,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted` tinyint(1) NOT NULL,
+  `user_deleted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -79,6 +95,7 @@ CREATE TABLE `fixcomm` (
   `fixCommThDown` int(10) UNSIGNED NOT NULL,
   `userID` int(10) UNSIGNED NOT NULL,
   `fixID` int(10) UNSIGNED NOT NULL,
+  `gameID` int(10) UNSIGNED NOT NULL,
   `deleted` tinyint(1) NOT NULL,
   `user_deleted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -97,6 +114,7 @@ CREATE TABLE `fixreply` (
   `fixReplyThDown` int(10) UNSIGNED NOT NULL,
   `userID` int(10) UNSIGNED NOT NULL,
   `fixcommID` int(10) UNSIGNED NOT NULL,
+  `gameID` int(10) UNSIGNED NOT NULL,
   `deleted` tinyint(1) NOT NULL,
   `user_deleted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -147,6 +165,7 @@ CREATE TABLE `gamereply` (
   `replyCommThDown` int(10) UNSIGNED NOT NULL,
   `userID` int(10) UNSIGNED NOT NULL,
   `gameCommID` int(10) UNSIGNED NOT NULL,
+  `gameID` int(10) UNSIGNED NOT NULL,
   `deleted` tinyint(1) NOT NULL,
   `user_deleted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -234,6 +253,14 @@ ALTER TABLE `blog`
   ADD KEY `authorID` (`authorID`);
 
 --
+-- Indexes for table `blogcomm`
+--
+ALTER TABLE `blogcomm`
+  ADD PRIMARY KEY (`blogcommID`),
+  ADD KEY `blogID` (`blogID`),
+  ADD KEY `userID` (`userID`);
+
+--
 -- Indexes for table `fix`
 --
 ALTER TABLE `fix`
@@ -247,7 +274,8 @@ ALTER TABLE `fix`
 ALTER TABLE `fixcomm`
   ADD PRIMARY KEY (`fixCommID`),
   ADD KEY `fk_fixID_1` (`fixID`),
-  ADD KEY `fk_userID_3` (`userID`);
+  ADD KEY `fk_userID_3` (`userID`),
+  ADD KEY `gameID` (`gameID`);
 
 --
 -- Indexes for table `fixreply`
@@ -255,7 +283,8 @@ ALTER TABLE `fixcomm`
 ALTER TABLE `fixreply`
   ADD PRIMARY KEY (`fixReplyID`),
   ADD KEY `fixcommID` (`fixcommID`),
-  ADD KEY `userID` (`userID`);
+  ADD KEY `userID` (`userID`),
+  ADD KEY `gameID` (`gameID`);
 
 --
 -- Indexes for table `game`
@@ -330,20 +359,25 @@ ALTER TABLE `avatar`
 ALTER TABLE `blog`
   MODIFY `blogID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT for table `blogcomm`
+--
+ALTER TABLE `blogcomm`
+  MODIFY `blogcommID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `fix`
 --
 ALTER TABLE `fix`
-  MODIFY `fixID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `fixID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `fixcomm`
 --
 ALTER TABLE `fixcomm`
-  MODIFY `fixCommID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `fixCommID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `fixreply`
 --
 ALTER TABLE `fixreply`
-  MODIFY `fixReplyID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `fixReplyID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `game`
 --
@@ -353,12 +387,12 @@ ALTER TABLE `game`
 -- AUTO_INCREMENT for table `gamecomm`
 --
 ALTER TABLE `gamecomm`
-  MODIFY `gameCommID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `gameCommID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `gamereply`
 --
 ALTER TABLE `gamereply`
-  MODIFY `gameReplyID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `gameReplyID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `password_recovery`
 --
@@ -373,7 +407,7 @@ ALTER TABLE `rep_calcs`
 -- AUTO_INCREMENT for table `thumbs_record`
 --
 ALTER TABLE `thumbs_record`
-  MODIFY `thumbID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `thumbID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `user`
 --
@@ -390,6 +424,13 @@ ALTER TABLE `blog`
   ADD CONSTRAINT `blog_ibfk_1` FOREIGN KEY (`authorID`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `blogcomm`
+--
+ALTER TABLE `blogcomm`
+  ADD CONSTRAINT `blogcomm_ibfk_1` FOREIGN KEY (`blogID`) REFERENCES `blog` (`blogID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `blogcomm_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `fix`
 --
 ALTER TABLE `fix`
@@ -400,6 +441,7 @@ ALTER TABLE `fix`
 -- Constraints for table `fixcomm`
 --
 ALTER TABLE `fixcomm`
+  ADD CONSTRAINT `fixcomm_ibfk_1` FOREIGN KEY (`gameID`) REFERENCES `game` (`gameID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_fixID` FOREIGN KEY (`fixID`) REFERENCES `fix` (`fixID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_userID_3` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -408,7 +450,8 @@ ALTER TABLE `fixcomm`
 --
 ALTER TABLE `fixreply`
   ADD CONSTRAINT `fixreply_ibfk_1` FOREIGN KEY (`fixcommID`) REFERENCES `fixcomm` (`fixCommID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fixreply_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fixreply_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fixreply_ibfk_3` FOREIGN KEY (`gameID`) REFERENCES `game` (`gameID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `gamecomm`

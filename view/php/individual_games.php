@@ -47,7 +47,7 @@
         } else {
     ?>
     <div id="comment_game">
-        <p>To vote, add a fix, comment or reply, please <a class="green" href="login.php?gameID=<?php echo $_GET['gameID'] ?>">Login</a> or <a class="green" href="register.php?gameID=<?php echo $_GET['gameID'] ?>">Register</a></p>
+        <p>To vote, add a fix, comment or reply, please <a href="login.php?gameID=<?php echo $_GET['gameID'] ?>">Login</a> or <a href="register.php?gameID=<?php echo $_GET['gameID'] ?>">Register</a></p>
     </div>
     <?php
         }

@@ -28,7 +28,12 @@
         <input type="hidden" name="gameID" value="<?php echo $_GET['gameID']; ?>"/>
         <?php
             }
-        ?>
+            if(isset($_GET['blogID'])) { 
+            ?>
+            <input type="hidden" name="blogID" value="<?php echo $_GET['blogID']; ?>"/>
+            <?php
+                }
+            ?>
         <div>
             <input type="checkbox" id="agree" name="agree"/>
             I have read and agree to the <a target="_blank" href="terms_and_conditions.php">Terms and Conditions</a>

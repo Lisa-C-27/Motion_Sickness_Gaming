@@ -92,11 +92,12 @@
                         </a>
                     </p>
                     <p>
-                        <?php if($_SESSION['userid'] == $row['userID']) {
-                            ?>
+                        <?php if(isset($_SESSION['userid'])) {      if($_SESSION['userid'] == $row['userID']) {
+                        ?>
                         <a role="button" onclick="editComment('fix', <?php echo $row['fixID'] ?>);">Edit</a> | 
                         <a role="button" onclick="userdeletecomm('fix', <?php echo $row['fixID'] ?>);">Delete</a>
                         <?php
+                            }
                         }
                         ?>
                     </p>

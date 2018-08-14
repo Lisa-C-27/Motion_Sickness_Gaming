@@ -36,7 +36,10 @@ try{
                 if(!empty($_POST['gameID'])) {
                     $gameID = $_POST['gameID'];
                     header('location: ../view/php/individual_games.php?gameID='.$gameID);
-                } else {
+                } if(!empty($_POST['blogID'])) {
+                    $blogID = $_POST['blogID'];
+                    header('location: ../view/php/blog.php?blogID='.$blogID);
+            } else {
                     header('location: ../view/php/index.php');
                 }
             //If a disabled account tries to login it will display that the account is disabled
